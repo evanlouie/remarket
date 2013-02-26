@@ -5,7 +5,7 @@ class Account_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		if (Session::has('id')) 
+		if (Auth::check()) 
 		{	
 			$id = Session::get('id');
 			$account = Account::find($id);
@@ -126,23 +126,18 @@ class Account_Controller extends Base_Controller {
 	{
 		if (Input::has('email') && Input::has('password'))
 		{
-			$account = where_email(Input::get('email'));
-			if ($account)
+			$cred = array(
+				'username'=>Input::get('email'), 
+				'password'=>Input::get('password'));
+			if (Auth::attempt($cred))
 			{
-				if(Hash::check(Input::get('password'), $account->password))
-				{
-					Session::flush();
-					Session::put('id', $account->id);
-					return Redirect::to('account');
-				}
-				else 
-				{
-					die('Password Incorrect');
-				}
+				$account = Account::where_email(Input::get('email'))->first();
+				Session::put('id', $account->id);
+				return Redirect::to('account');
 			}
-			else
+			else 
 			{
-				die("No registered account to that email address");
+				echo "invalid username or password"
 			}
 		}
 		else
@@ -153,7 +148,7 @@ class Account_Controller extends Base_Controller {
 
 	public function action_logout()
 	{
-		Session::flush();
+		Auth::logout();
 		return Redirect::to('home');
 	}
 }
