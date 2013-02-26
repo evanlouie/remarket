@@ -79,7 +79,7 @@ class Account_Controller extends Base_Controller {
 	{
 		if (Input::has('id'))
 		{
-			$account = Account:find('id');
+			$account = Account::find('id');
 			$account->delete();
 			Session::flush();
 			return Redirect::to('home');
@@ -122,5 +122,38 @@ class Account_Controller extends Base_Controller {
 		}
 		
 	}
+	public function action_login()
+	{
+		if (Input::has('email') && Input::has('password'))
+		{
+			$account = where_email(Input::get('email'));
+			if ($account)
+			{
+				if(Hash::check(Input::get('password'), $account->password))
+				{
+					Session::flush();
+					Session::put('id', $account->id);
+					return Redirect::to('account');
+				}
+				else 
+				{
+					die('Password Incorrect');
+				}
+			}
+			else
+			{
+				die("No registered account to that email address");
+			}
+		}
+		else
+		{
+			// SHOW LOGIN SCREEN
+		}
+	}
 
+	public function action_logout()
+	{
+		Session::flush();
+		return Redirect::to('home');
+	}
 }

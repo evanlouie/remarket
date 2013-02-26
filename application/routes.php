@@ -38,10 +38,14 @@
 // 	return Redirect::to('home');
 // 	// return View::make('home.index');
 // });
-Route::get('', 'home@index');
+Route::get('/', 'home@index');
+Route::get('account/login', 'account@login');
+Route::get('account/logout', 'account@logout');
 Route::get('account/(:num)', 'account@id');
 Route::get('account/(:any)', 'account@email');
 Route::get('listing/(:num)', 'listing@id');
+Route::get('image/(:num)', 'image@id');
+Route::get('location/(:num)', 'location@id');
 
 
 /*
