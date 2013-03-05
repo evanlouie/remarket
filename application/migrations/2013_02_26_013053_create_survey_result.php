@@ -14,7 +14,7 @@ class Create_Survey_Result {
 		{
 			$table->increments('id');
 			$table->string('material_type');
-			$table->string('estimated_weiht');
+			$table->string('estimated_weight');
 			$table->float('monetary_value');
 			$table->integer('exchange_success');
 		});

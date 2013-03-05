@@ -137,7 +137,7 @@ class Account_Controller extends Base_Controller {
 			}
 			else 
 			{
-				echo "invalid username or password"
+				echo "invalid username or password";
 			}
 		}
 		else

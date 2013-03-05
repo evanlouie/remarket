@@ -18,9 +18,9 @@ class Create_Listing {
 			$table->string('category');
 			$table->integer('quantity');
 			$table->float('price');
-			$table->timestamp('date_expiry');
-			$table->timestamp('date_available');
-			$table->timestamp('date_unavailable');
+			$table->date('date_expiry');
+			$table->date('date_available');
+			$table->date('date_unavailable');
 			$table->timestamps();
 			$table->integer('location_id')->unsigned();
 		});
