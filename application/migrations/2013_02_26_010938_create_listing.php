@@ -15,7 +15,7 @@ class Create_Listing {
 			$table->increments('id');
 			$table->string('title');
 			$table->text('description');
-			$table->string('category');
+			$table->integer('category_id')->unsigned();
 			$table->integer('quantity');
 			$table->float('price');
 			$table->date('date_expiry');

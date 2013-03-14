@@ -13,12 +13,12 @@ class Insert_Listings {
 		$locations = Location::all();
 		foreach($locations as $loc)
 		{
-			for($i=0; $i<5; $i++)
+			for($i=0; $i<2; $i++)
 			{
 				$l = new Listing;
 				$l->title = $i;
 				$l->description = "THSI IFS AWIFAWOEIJFAWIEJFWEIFJ";
-				$l->category = "fake category";
+				$l->category_id = "1";
 				$l->price = 123.12;
 				$l->date_expiry = "1000-01-01 00:00:00";
 				$l->date_available = "2013-07-27 00:00:00";

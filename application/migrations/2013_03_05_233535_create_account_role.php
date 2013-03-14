@@ -14,8 +14,6 @@ class Create_Account_Role {
 			$table->increments('id');
 			$table->integer('account_id')->unsigned();
 			$table->integer('role_id')->unsigned();
-			$table->foreign('account_id')->references('id')->on('accounts');
-			$table->foreign('role_id')->references('role_id')->on('roles');
 		});
 	}
 

@@ -13,5 +13,9 @@ class Listing extends Eloquent {
 	{
 		return $this->belongs_to('Location');
 	}
+	public function categorie()
+	{
+		return $this->belongs_to('Categorie');
+	}
 
 }
