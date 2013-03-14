@@ -15,9 +15,23 @@ class Listing_Controller extends Base_Controller {
 		$listing = Listing::find($id);
 		if ($listing)
 		{
-			var_dump($listing);
-			var_dump($listing->images());
-			var_dump($listing->location());
+			$imageArray = array();
+
+			$images = $listing->images()->get();
+			foreach($images as $image) {
+				array_push($imageArray, $image);
+			}
+			$listing->images = $imageArray;
+			$loc = $listing->location()->first();
+			$account = Account::find($loc->account_id);
+			$listing->email = $account->email;
+			$listing->date_available = substr($listing->date_available, 0, 10);
+			$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
+
+
+			$view = View::make('listing.index')->with('title', $listing->title)->with('listing', $listing);
+
+			return $view;
 		}
 		else
 		{
@@ -56,27 +70,45 @@ class Listing_Controller extends Base_Controller {
 		}
 		
 	}
-	public function action_delete()
+	public function action_delete($id)
 	{
+		// if (Session::has('id')) 
+		// {
+		// 	$account = Session::get('id');
+		// 	if (Input::has('id')) 
+		// 	{
+		// 		$id = Input::get('id');
+		// 		if ($listing = Listing::find($id))
+		// 		{
+		// 			$images = Image::where_listing_id($listing->id);
+		// 			foreach($images as $image)
+		// 			{
+		// 				$image->delete();
+		// 			}
+		// 			$listing->delete();
+		// 		}
+		// 		else
+		// 		{
+		// 			die("Invalid Listing ID");
+		// 		}
+		// 	}
+			
+		// }
 		if (Session::has('id')) 
 		{
 			$account = Session::get('id');
-			if (Input::has('id')) 
+			if ($listing = Listing::find($id))
 			{
-				$id = Input::get('id');
-				if ($listing = Listing::find($id))
+				$images = Image::where_listing_id($listing->id);
+				foreach($images as $image)
 				{
-					$images = Image::where_listing_id($listing->id);
-					foreach($images as $image)
-					{
-						$image->delete();
-					}
-					$listing->delete();
+					$image->delete();
 				}
-				else
-				{
-					die("Invalid Listing ID");
-				}
+				$listing->delete();
+			}
+			else
+			{
+				die("Invalid Listing ID");
 			}
 			
 		}

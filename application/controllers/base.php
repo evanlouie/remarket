@@ -14,4 +14,14 @@ class Base_Controller extends Controller {
 		return Response::error('404');
 	}
 
+	public function __construct() 
+	{
+		Asset::add('bootstrap', 'css/bootstrap.min.css');
+		Asset::add('bootstrap-responsive', 'css/bootstrap-responsive.css');
+		Asset::add('common', 'css/common.css');
+		// Asset::add('style', 'css/style.css');
+		Asset::add('fontawsome', 'css/fontawesome.css');
+		Asset::add('jquery', 'js/jquery-1.9.1.js');
+	}
+
 }

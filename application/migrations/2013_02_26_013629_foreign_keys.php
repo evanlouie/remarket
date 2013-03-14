@@ -11,16 +11,16 @@ class Foreign_Keys {
 	{
 		//
 		Schema::table('wishlistitems', function($table) {
-			$table->foreign('account_id')->references('id')->on('accounts');
+			$table->foreign('account_id')->references('id')->on('accounts')->on_delete('cascade');
 		});
 		Schema::table('locations', function($table) {
-			$table->foreign('account_id')->references('id')->on('accounts');
+			$table->foreign('account_id')->references('id')->on('accounts')->on_delete('cascade');
 		});
 		Schema::table('listings', function($table) {
-			$table->foreign('location_id')->references('id')->on('locations');
+			$table->foreign('location_id')->references('id')->on('locations')->on_delete('cascade');
 		});
 		Schema::table('images', function($table) {
-			$table->foreign('listing_id')->references('id')->on('listings');
+			$table->foreign('listing_id')->references('id')->on('listings')->on_delete('cascade');
 		});
 	}
 

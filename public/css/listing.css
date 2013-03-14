@@ -1,0 +1,49 @@
+body {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar {
+  height: 151px;
+}
+.navbar .navbar-inner {
+  border: none;
+  background: rgba(76, 76, 76, 0) url('/img/source.jpg') no-repeat 0px 0px;
+  background-size: auto;
+  height: 151px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.navbar .navbar-inner .navbar-form {
+  margin: 10px 0px 0px 0px;
+}
+.navbar .navbar-inner .navbar-form .btn-primary {
+  margin: 0px;
+}
+.navbar .navbar-inner .navbar-form .btn-danger {
+  margin: 0px;
+}
+.navbar .navbar-inner .brand.cke_focus {
+  text-shadow: none;
+  font-family:"helvetica";
+  font-weight: bold;
+  font-size: 39px;
+  color: #ffffff;
+  line-height: 39.984375px;
+  margin: 0px;
+}
+.container-fluid {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.container-fluid .row-fluid .span6 .btn-success {
+  margin-top: 50px;
+  margin-bottom: 25px;
+  width: 320px;
+}
+.container-fluid .row-fluid .span6 div.div-1 {
+  margin: 0px 0px 20px 0px;
+  height: 300px;
+}
+.container-fluid div .span12 {
+  height: 90px;
+}

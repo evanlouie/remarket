@@ -13,4 +13,9 @@ class Account extends Eloquent {
 		return $this->has_many('WishlistItem');
 	}
 
+	public function role()
+	{
+		return $this->has_one('Role');
+	}
+
 }

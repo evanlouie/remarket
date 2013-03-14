@@ -59,14 +59,18 @@ class Account_Controller extends Base_Controller {
 	{
 		if (Input::has('email') && Input::has('password'))
 		{
-			$email = Input::get('email');
-			$password = Hash::make(Input::get('password'));
-
-			$account = new Account;
-			$account->email = $email;
-			$account->password = $password;
-			$account->save();
-			return true;
+			$size = Account::where_email(Input::get('email'));
+			if($size->count()==0)
+			{
+				$email = Input::get('email');
+				$password = Hash::make(Input::get('password'));
+				$account = new Account;
+				$account->email = $email;
+				$account->password = $password;
+				$account->save();
+				return Redirect::to('account');
+			}
+			else echo "email already registered";
 		}
 		else 
 		{
@@ -93,14 +97,16 @@ class Account_Controller extends Base_Controller {
 
 	public function action_edit()
 	{
-		if (Input::has('email') && Input::has('password')) 
+		if (Input::has('email') && Input::has('password') && Input::has('oldpassword')) 
 		{
+
 			$email = Input::get('email');
 			$password = Input::get('password');
 			$password = Hash::make($password);
+			$oldpassword = Input::get('oldpassword');
 			$account = Account::find(Session::get('id'));
 			
-			if ($account)
+			if ($account && Hash::check($oldpassword, $account->password))
 			{
 				$account->email = $email;
 				$account->password = $password;
@@ -110,15 +116,11 @@ class Account_Controller extends Base_Controller {
 			{
 				echo "Error:", "session data does not match recods; please make sure cookies are enabled";
 			}
-
-				
 		}
 		else 
 		{
-			
 			// Show Edit Account Settings Form
 			return Redirect::to('account/');
-
 		}
 		
 	}
@@ -143,12 +145,33 @@ class Account_Controller extends Base_Controller {
 		else
 		{
 			// SHOW LOGIN SCREEN
+			echo "LOIGN SCREEN";
 		}
 	}
-
 	public function action_logout()
 	{
 		Auth::logout();
 		return Redirect::to('home');
+	}
+
+	public function action_mylistings()
+	{
+		if(Auth::check())
+		{
+			if(Session::has('id'))
+			{
+				$id = Session::get('id');
+				$account = Account::find($id);
+				$locations = $account->locations()->get();
+				foreach ($locations as $location)
+				{
+					$listings = $location->listings()->get();
+					foreach($listings as $listing) 
+					{
+						var_dump($listing);	
+					}
+				}
+			}
+		}
 	}
 }
