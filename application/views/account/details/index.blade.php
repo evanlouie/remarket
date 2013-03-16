@@ -3,7 +3,7 @@
 
 @section('header')
   @include('partials.header');
-  {{ HTML::style('css/browseListing.css')}}
+  {{ HTML::style('css/accountDetails.css')}}
 @endsection
 
 @section('loginbar')
@@ -11,7 +11,8 @@
 @endsection
 
 @section('content')
-  @include('listing.browse.content')
+  @include('account.partials.sidebar')
+  @include('account.details.content')
 @endsection
 
 @section('footer')
