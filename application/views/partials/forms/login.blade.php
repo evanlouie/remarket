@@ -1,6 +1,6 @@
 @if (Auth::check()) 
 <div class='pull-right'>
-	<a class="btn btn-primary" href="/account/">My Account</a>
+	<a class="btn btn-primary" href="/account/myListings">My Account</a>
 	<a class="btn btn-danger" href="/account/logout/">Logout</a>
 </div>
 @else
