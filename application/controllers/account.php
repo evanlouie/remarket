@@ -13,7 +13,7 @@ class Account_Controller extends Base_Controller {
 			// SHOW ACOUNT INFORMATION
 			var_dump($account);
 			var_dump($account->locations());
-			var_dump($account->wishlistitems());
+			// var_dump($account->wishlistitems());
 		} 
 		else 
 		{
@@ -32,7 +32,7 @@ class Account_Controller extends Base_Controller {
 		{
 			var_dump($account);
 			var_dump($account->locations());
-			var_dump($account->wishlistitems());
+			// var_dump($account->wishlistitems());
 		}
 		else 
 		{
@@ -47,7 +47,7 @@ class Account_Controller extends Base_Controller {
 		{
 			var_dump($account);
 			var_dump($account->locations());
-			var_dump($account->wishlistitems());
+			// var_dump($account->wishlistitems());
 		}
 		else
 		{
