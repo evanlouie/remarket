@@ -11,8 +11,7 @@
     <div class="container-fluid container-fluid-2">
       <div class="row-fluid">
         <span class="span6 span6-2">
-          <?php var_dump($listing)?>
-<form action="/listing/edit" method='post'>
+<form action="/listing/edit/{{$listing->id}}" method='post'>
         <h4 class="heading pull-right heading-1">Price</h4>
         <h4 class="heading pull-left heading-2 heading-5">Title</h4>
         <input class="textinput span9 textinput-1" type="text" name="title" placeholder="Title" value="{{$listing->title}}">
@@ -64,7 +63,7 @@
         <h4 class="heading">Description</h4>
         <textarea class="span12" placeholder="Enter a brief description of your listing here." name="description">{{$listing->description}}</textarea>
           <a class="btn btn-danger pull-left" href="/account/">Cancel Update</a>
-          <button class="btn btn-primary pull-right">Update Listing</button>
+          <input class="btn btn-success pull-right" type='submit'/>
           <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
           <!-- @include('partials.forms.fileUpload') -->
 

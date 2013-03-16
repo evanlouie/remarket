@@ -211,6 +211,40 @@ class Listing_Controller extends Base_Controller {
 	{
 		if (Auth::check() && Session::has('id')) 
 		{
+			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
+				&& Input::has('date_available') && Input::has('date_unavailable'))
+				{
+					$listing = Listing::find($id);
+					$location;
+					if(Input::has('location_id'))
+					{
+						$location = Location::find(Input::get('location_id'));
+					}
+					if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
+					{
+						$location = new Location;
+						$location->address = Input::get('address');
+						$location->city = Input::get('city');
+						$location->postal_code = Input::get('postal_code');
+						$location->account_id = $account->id;
+						$location->save();
+						$location = Location::where_address_and_city_and_postal_code(Input::get('address'), Input::get('city'), Input::get('postal_code'))->first();
+					}
+					$listing->title = Input::get('title');
+					$listing->description = Input::get('description');
+					$listing->category_id = Input::get('category_id');
+					$listing->quantity = 1;
+					$listing->price = Input::get('price');
+					$listing->date_expiry = "1999-07-27-00-00-00";
+					$listing->date_available = Input::get('date_available');
+					$listing->date_unavailable = Input::get('date_unavailable');
+					$listing->location_id = $location->id;
+					$listing->timestamp();
+					$listing->save();
+					// var_dump($_POST);
+					// var_dump($listing);
+					return Redirect::to('/listing/$id');
+				}
 			$account = Account::find(Session::get('id'));
 			$listing = Listing::find($id);
 			$location = Location::find($listing->location_id);
@@ -218,7 +252,7 @@ class Listing_Controller extends Base_Controller {
 			$categories = Categorie::all();
 
 			$price = $listing->price;
-			
+
 			// if ($location->account_id == $account->id)
 			// {
 				// var_dump($categories);
