@@ -141,8 +141,10 @@ class Listing_Controller extends Base_Controller {
 				$listing->price = Input::get('price');
 				// $listing->date_expiry = Input::get('date_expiry');
 				$listing->date_expiry = "1999-07-27-00-00-00";
-				$listing->date_available = Input::get('date_available');
-				$listing->date_unavailable = Input::get('date_unavailable');
+				$date_available = Input::get('date_available');
+				$date_unavailable = Input::get('date_unavailable');
+				$listing->date_available = $date_available."-00-00-00";
+				$listing->date_unavailable = $date_unavailable."-00-00-00";
 				$listing->location_id = $location->id;
 				$listing->save();
 				return Redirect::to('account');
@@ -235,15 +237,17 @@ class Listing_Controller extends Base_Controller {
 					$listing->category_id = Input::get('category_id');
 					$listing->quantity = 1;
 					$listing->price = Input::get('price');
-					$listing->date_expiry = "1999-07-27-00-00-00";
-					$listing->date_available = Input::get('date_available');
-					$listing->date_unavailable = Input::get('date_unavailable');
+					// $listing->date_expiry = "1999-07-27-00-00-00";
+					$date_available = Input::get('date_available');
+					$date_unavailable = Input::get('date_unavailable');
+					$listing->date_available = $date_available."-00-00-00";
+					$listing->date_unavailable = $date_unavailable."-00-00-00";
 					$listing->location_id = $location->id;
 					$listing->timestamp();
 					$listing->save();
 					// var_dump($_POST);
 					// var_dump($listing);
-					return Redirect::to('/listing/$id');
+					return Redirect::to("/listing/$id");
 				}
 			$account = Account::find(Session::get('id'));
 			$listing = Listing::find($id);

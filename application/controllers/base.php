@@ -21,7 +21,9 @@ class Base_Controller extends Controller {
 		Asset::add('common', 'css/common.css');
 		// Asset::add('style', 'css/style.css');
 		Asset::add('fontawsome', 'css/fontawesome.css');
+		Asset::add('flickcss', 'css/flick/jquery-ui-1.10.2.custom.css');
 		Asset::add('jquery', 'js/jquery-1.9.1.js');
+		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
 	}
 
 }

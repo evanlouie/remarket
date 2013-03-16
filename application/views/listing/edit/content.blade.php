@@ -11,15 +11,14 @@
     <div class="container-fluid container-fluid-2">
       <div class="row-fluid">
         <span class="span6 span6-2">
-<form action="/listing/edit/{{$listing->id}}" method='post'>
+<form action="/listing/edit/{{ $listing->id }}" method='post'>
         <h4 class="heading pull-right heading-1">Price</h4>
         <h4 class="heading pull-left heading-2 heading-5">Title</h4>
         <input class="textinput span9 textinput-1" type="text" name="title" placeholder="Title" value="{{$listing->title}}">
         <input class="textinput span3 textinput-1" type="text" name="price" placeholder="Price" value="${{$listing->price}}">
         <h4 class="heading heading-3 heading-4">Listing Availability</h4>
-        <input class="textinput span6 span6-1" type="text" name="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
-        <input class="textinput span6 span6-1" type="text" name="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_expiry,0,-9)}}">
-      
+        <input class="textinput span6 span6-1" type="text" name="date_available" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
+        <input class="textinput span6 span6-1" type="text" name="date_unavailable" id="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_unavailable,0,-9)}}">
       <h4 class="heading heading-4">Category</h4>
       <select class="pull-left pull-left-1" name="category_id">
           @foreach ($categories as $c)
@@ -53,7 +52,9 @@
               $('#city').prop('disabled', false);
               $('#postal_code').prop('disabled', false);
             }
-          })
+          });
+          $('#date_available').datepicker({dateFormat: 'yy-mm-dd'});
+          $('#date_unavailable').datepicker({dateFormat: 'yy-mm-dd'});
         </script>
     </span>
   </div>
