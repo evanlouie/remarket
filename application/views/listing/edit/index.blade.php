@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  @include('listing.create.content')
+  @include('listing.edit.content')
 @endsection
 
 @section('footer')

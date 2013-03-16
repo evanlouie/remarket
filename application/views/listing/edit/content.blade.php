@@ -1,24 +1,25 @@
-<div class="container-fluid container-fluid-1">
-  <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <h1 class="heading"> <strong>Post New Listing</strong> 
-        </h1>
-      </span>
+    <div class="container-fluid container-fluid-1">
+      <div class="container">
+        <div class="row-fluid">
+          <span class="span12">
+            <h1 class="heading"> <strong>Edit Listing</strong> 
+            </h1>
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="container-fluid container-fluid-2">
-  <div class="row-fluid">
-    <span class="span6 span6-2">
-      <form action="/listing/create" method='post'>
+    <div class="container-fluid container-fluid-2">
+      <div class="row-fluid">
+        <span class="span6 span6-2">
+          <?php var_dump($listing)?>
+<form action="/listing/edit" method='post'>
         <h4 class="heading pull-right heading-1">Price</h4>
         <h4 class="heading pull-left heading-2 heading-5">Title</h4>
-        <input class="textinput span9 textinput-1" type="text" name="title" placeholder="Title">
-        <input class="textinput span3 textinput-1" type="text" name="price" placeholder="Price">
+        <input class="textinput span9 textinput-1" type="text" name="title" placeholder="Title" value="{{$listing->title}}">
+        <input class="textinput span3 textinput-1" type="text" name="price" placeholder="Price" value="${{$listing->price}}">
         <h4 class="heading heading-3 heading-4">Listing Availability</h4>
-        <input class="textinput span6 span6-1" type="text" name="date_available" placeholder="Date available from">
-        <input class="textinput span6 span6-1" type="text" name="date_unavailable" placeholder="Date listing expires">
+        <input class="textinput span6 span6-1" type="text" name="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
+        <input class="textinput span6 span6-1" type="text" name="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_expiry,0,-9)}}">
       
       <h4 class="heading heading-4">Category</h4>
       <select class="pull-left pull-left-1" name="category_id">
@@ -30,7 +31,7 @@
     <span class="span6">
         <h4 class="heading heading-5">Location</h4>
         <select name="location_id" id='location-select'>
-          <option value="0">Select a location</option>
+          <option value="{{$listing->location_id}}">test</option>
           @foreach ($locations as $l)
           <option value="{{$l->id}}">{{ $l->address }}, {{ $l->city }}</option>
           @endforeach
@@ -61,14 +62,14 @@
     <div class="row-fluid">
       <span class="span12">
         <h4 class="heading">Description</h4>
-        <textarea class="span12" placeholder="Enter a brief description of your listing here." name="description"></textarea>
-          <a class="btn btn-danger pull-left" href="/account/">Cancel Listing</a>
-          <button class="btn btn-primary pull-right">Post Listing</button>
+        <textarea class="span12" placeholder="Enter a brief description of your listing here." name="description">{{$listing->description}}</textarea>
+          <a class="btn btn-danger pull-left" href="/account/">Cancel Update</a>
+          <button class="btn btn-primary pull-right">Update Listing</button>
           <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
           <!-- @include('partials.forms.fileUpload') -->
 
         </form>
-      </span>
+
+        </span>
+      </div>
     </div>
-  </div>
-</div>

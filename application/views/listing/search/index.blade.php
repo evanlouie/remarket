@@ -3,7 +3,7 @@
 
 @section('header')
   @include('partials.header');
-  {{ HTML::style('css/listingCreate.css')}}
+  {{ HTML::style('css/listingSearch.css')}}
 @endsection
 
 @section('loginbar')
@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  @include('listing.create.content')
+  @include('listing.search.content')
 @endsection
 
 @section('footer')

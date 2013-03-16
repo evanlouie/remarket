@@ -7,39 +7,45 @@ class Listing_Controller extends Base_Controller {
 	{
 		 // && Input::has('minP') && Input::has('maxP') && Input::has('category')
 		$listings;
-		if(Input::has('q') || Input::has('minP') || Input::has('maxP') || Input::has('city') || Input::has('category'))
+		if(Input::has('q') || Input::has('minP') || Input::has('maxP') || Input::has('city') || Input::has('category_id'))
 		{	
 			$from = 'FROM listings WHERE ';
 			if(Input::has('city')) {
 				$city = Input::get('city');
 				$from ='FROM listings, locations WHERE locations.city="$city" AND listings.location_id = locations.id AND';
 			}
-			$query = "	SELECT * $from";
+			$query = "SELECT * $from";
 
-			$keywords = explode(" ", Input::get('q'));
-			foreach($keywords as $word)
+			if(Input::has('q')) 
 			{
-				$query.="(listings.title LIKE '%$word%' ";
-				$query.="OR listings.description LIKE '%$word%') ";
+				$keywords = explode(" ", Input::get('q'));
+				foreach($keywords as $word)
+				{
+					$query.="(listings.title LIKE '%$word%' ";
+					$query.="OR listings.description LIKE '%$word%') AND";
+				}
 			}
 			if (Input::has('minP')) 
 			{
 				$minP = Input::get('minP');
-				$query.= "AND listings.price > $minP ";
+				$query.= " listings.price >= $minP AND";
 			}
 			if (Input::has('maxP'))
 			{
 				$maxP = Input::get('maxP');
-				$query.= "AND listings.price < $maxP ";
+				$query.= " listings.price <= $maxP AND";
 			}
-			if (Input::has('category') && Input::get('category')!="all")
+			if (Input::has('category_id') && Input::get('category_id')!="all")
 			{
-				$category = Input::get('category');
-				$query.= "AND listings.category_id = $category'";
+				$category_id = Input::get('category_id');
+				$query.= " listings.category_id = '$category_id'";
+			}
+			if (substr($query, -3) == 'AND')
+			{
+				$query = substr($query, 0, -4);
 			}
 
 			$listings = DB::query($query);
-			// var_dump($query);
 
 		} 
 		else
@@ -48,15 +54,22 @@ class Listing_Controller extends Base_Controller {
 			
 			
 		}
+		$cats = Categorie::all();
 		foreach ($listings as $listing)
+		{
+			foreach($cats as $c)
 			{
-				$location = Location::find($listing->location_id)->address;
-				$listing->location = $location;
+				if ($listing->category_id == $c->id)
+				{
+					$listing->category = $c->title;
+				}
 			}
+			$location = Location::find($listing->location_id)->address;
+			$listing->location = $location;
+		}
 
-		$categories = Categorie::order_by('id', 'desc')->get();
-		// var_dump($categories);
-		$view = View::make('listing.browse.index')->with('title', 'Search')->with('listings', $listings)->with('categories', $categories);
+		$categories = Categorie::all();
+		$view = View::make('listing.search.index')->with('title', 'Search')->with('listings', $listings)->with('categories', $categories);
 		return $view;	
 			
 	}
@@ -98,7 +111,7 @@ class Listing_Controller extends Base_Controller {
 			$account = Account::find(Session::get('id'));
 
 
-			if(Input::has('title') && Input::has('description') && Input::has('category') && Input::has('price') 
+			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 			{
 				$location;
@@ -122,12 +135,12 @@ class Listing_Controller extends Base_Controller {
 				$listing = new Listing;
 				$listing->title = Input::get('title');
 				$listing->description = Input::get('description');
-				$listing->category = Input::get('category');
+				$listing->category_id = Input::get('category_id');
 				// $listing->quantity = Input::get('quantity');
 				$listing->quantity = 1;
 				$listing->price = Input::get('price');
 				// $listing->date_expiry = Input::get('date_expiry');
-				$listing->date_expiry = "1999-07-27-11-11-11";
+				$listing->date_expiry = "1999-07-27-00-00-00";
 				$listing->date_available = Input::get('date_available');
 				$listing->date_unavailable = Input::get('date_unavailable');
 				$listing->location_id = $location->id;
@@ -135,9 +148,9 @@ class Listing_Controller extends Base_Controller {
 				return Redirect::to('account');
 			}
 			else
-			{
+			{	$categories = Categorie::all();
 				$locations = $account->locations()->get();
-				$view = View::make('listing.create.index')->with('title', 'Create a Posting')->with('locations', $locations);
+				$view = View::make('listing.create.index')->with('title', 'Create a Posting')->with('locations', $locations)->with('categories', $categories);
 				var_dump($_POST);
 				return $view;
 
@@ -192,6 +205,41 @@ class Listing_Controller extends Base_Controller {
 			
 		}
 		
+	}
+
+	public function action_edit($id) 
+	{
+		if (Auth::check() && Session::has('id')) 
+		{
+			$account = Account::find(Session::get('id'));
+			$listing = Listing::find($id);
+			$location = Location::find($listing->location_id);
+			$locations = $account->locations()->get();
+			$categories = Categorie::all();
+
+			$price = $listing->price;
+			
+			// if ($location->account_id == $account->id)
+			// {
+				// var_dump($categories);
+				$view = View::make('listing.edit.index')->with('title', 'Edit Listing')
+								->with('listing', $listing)
+								->with('location', $location)
+								->with('locations', $locations)
+								->with('account', $account)
+								->with('categories', $categories);
+				return $view;
+			// }
+			// else
+			// {
+			// 	return Response::error('403');
+			// }
+			
+		}
+		else
+		{
+			return Redirect::to('/');
+		}
 	}
 
 }
