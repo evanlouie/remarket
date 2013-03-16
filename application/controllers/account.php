@@ -120,7 +120,8 @@ class Account_Controller extends Base_Controller {
 		else 
 		{
 			// Show Edit Account Settings Form
-			return Redirect::to('account/');
+			$view = View::make('account.details.index')->with('title', 'Change Account Details');
+			return $view;
 		}
 		
 	}
