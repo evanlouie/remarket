@@ -97,6 +97,15 @@ class Account_Controller extends Base_Controller {
 
 	public function action_edit()
 	{
+		$account;
+		if (Session::has('id')) 
+		{
+			$account = Account::find(Session::get('id'));
+		}
+		else 
+		{
+			return Redirect::to('/');
+		}
 		if (Input::has('email') && Input::has('emailConfirm') && Input::has('oldpassword')) 
 		{
 			$email = Input::get('email');
@@ -214,6 +223,7 @@ class Account_Controller extends Base_Controller {
 		}
 		else 
 		{
+			// $account = Account::find(Session::get('id'));
 			// Show Edit Account Settings Form
 			$view = View::make('account.details.index')
 			->with('title', 'Change Account Details')
@@ -222,6 +232,9 @@ class Account_Controller extends Base_Controller {
 		}
 		
 	}
+
+
+
 	public function action_login()
 	{
 		if (Input::has('email') && Input::has('password'))

@@ -48,8 +48,10 @@
                 if ($account->expirationEmail) {
                   $checked="checked";
                 }
+
                 ?>
-                <input type="checkbox" value="1" name="expirationEmail" {{$checked}}>
+                <?php var_dump($checked); ?> 
+                <input type="checkbox" value="1" name="expirationEmail" checked>
                 <span>Notify me if my listing is about to expire.</span>
               </label>
             </div>
