@@ -150,7 +150,7 @@ class Account_Controller extends Base_Controller {
 				$error = "Passwords do not match.";
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('error', $error);
+				->with('error', $error)
 				->with('account', $account);
 				return $view;
 			}
@@ -167,7 +167,7 @@ class Account_Controller extends Base_Controller {
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
 				->with('confirmation', $confirmation)
-				->with('account', $account);;
+				->with('account', $account);
 				return $view;
 			}
 			else
@@ -177,7 +177,7 @@ class Account_Controller extends Base_Controller {
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
 				->with('error', $error)
-				->with('account', $account);;
+				->with('account', $account);
 				return $view;
 			}
 		} 
@@ -194,7 +194,10 @@ class Account_Controller extends Base_Controller {
 			}
 			$account->save();
 			$confirmation = 'Your email settings have been update';
-			$view = View::make('account.details.index')->with('title', 'Change Account Details')->with('confirmation', $confirmation);
+			$view = View::make('account.details.index')
+			->with('title', 'Change Account Details')
+			->with('confirmation', $confirmation)
+			->with('account', $account);
 			return $view;
 		} 
 		else if (Input::has('expirationEmail') || Input::has('flagEmail') || Input::has('wishlistEmail')
@@ -203,13 +206,18 @@ class Account_Controller extends Base_Controller {
 		{
 			// Error - Missing fields
 			$error = "You're missing some fields.";
-			$view = View::make('account.details.index')->with('title', 'Change Account Details')->with('error', $error);
+			$view = View::make('account.details.index')
+			->with('title', 'Change Account Details')
+			->with('error', $error)
+			->with('account', $account);
 			return $view;
 		}
 		else 
 		{
 			// Show Edit Account Settings Form
-			$view = View::make('account.details.index')->with('title', 'Change Account Details');
+			$view = View::make('account.details.index')
+			->with('title', 'Change Account Details')
+			->with('account', $account);
 			return $view;
 		}
 		
