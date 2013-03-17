@@ -240,7 +240,7 @@ class Listing_Controller extends Base_Controller {
 					$listing->save();
 					// var_dump($_POST);
 					// var_dump($listing);
-					return Redirect::to("/listing/");
+					return Redirect::to("/account/");
 				}
 			$account = Account::find(Session::get('id'));
 			$listing = Listing::find($id);
