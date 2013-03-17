@@ -208,6 +208,7 @@ class Listing_Controller extends Base_Controller {
 	{
 		if (Auth::check() && Session::has('id')) 
 		{
+			$account = Account::find(Session::get('id'));
 			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 				{
