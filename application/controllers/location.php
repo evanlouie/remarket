@@ -52,6 +52,21 @@ class Location_Controller extends Base_Controller {
 			die('session id not found');
 		}
 	}
+
+	public function action_edit($id)
+	{
+		if(Auth::check() && Session::has('id'))
+		{
+			// echo "test";
+			$location = Location::find($id);
+			$account = Account::find(Session::get('id'));
+			if($location->account_id == $account->id) 
+			{
+				var_dump($location);	
+			}
+
+		}
+	}
 	
 	public function action_remove()
 	{
