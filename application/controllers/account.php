@@ -277,11 +277,12 @@ class Account_Controller extends Base_Controller {
 				foreach ($locations as $location)
 				{
 					$listings = $location->listings()->get();
-					foreach($listings as $listing) 
-					{
-						var_dump($listing);	
-					}
 				}
+
+				$view = View::make('account.manage_listings.index')
+				->with('title', 'My Listings')
+				->with('listings', $listings);
+				return $view;
 			}
 		}
 	}
