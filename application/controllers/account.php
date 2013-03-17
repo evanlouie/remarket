@@ -278,7 +278,10 @@ class Account_Controller extends Base_Controller {
 				foreach ($locations as $location)
 				{
 					foreach ($location->listings()->get() as $listing)
-					array_push( $listings, $listing );
+					{
+						$listing->location = $listing->location()->first();
+						array_push( $listings, $listing );
+					}
 				}
 
 				$view = View::make('account.manage_listings.index')

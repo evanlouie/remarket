@@ -22,7 +22,7 @@
         <tr>
           <td><a href="/listing/edit/{{$listing->id}}">{{$listing->title}}</a></td>
           <td class="td-1">{{$listing->location->address}}</td>
-          <td>{{ var_dump($listing->categorie()->get()) }}</td>
+          <td>{{ $listing->location->address }}, {{ $listing->location->city }}, {{ $listing->location->postal_code }}</td>
           <td>{{substr($listing->date_unavailable, 0, -9)}}</td>
           <td><a href="/listing/edit/{{$listing->id}}" class="btn btn-primary btn-small">Edit</a></td>
           <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
