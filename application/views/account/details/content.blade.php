@@ -86,7 +86,13 @@
   </div>
 </div>
 <script>
-  $('#warning').on('click', function() {
-    confirm( 'Are you sure you want to quit?' );
-  })
+  $(document).on('click', '#warning', function() {
+    id = $(this).attr('id');
+    confirm = confirm( 'Are you sure you want to delete your account?' );
+    if(confirm == true) { window.location = "/location/delete/" + id; }
+    else {
+      delete window.confirm;
+    }
+  });
+  $('#details').attr('class', 'active');
 </script>

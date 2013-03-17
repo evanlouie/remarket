@@ -274,14 +274,34 @@ class Account_Controller extends Base_Controller {
 				$id = Session::get('id');
 				$account = Account::find($id);
 				$locations = $account->locations()->get();
+				$listings = array();
 				foreach ($locations as $location)
 				{
-					$listings = $location->listings()->get();
+					foreach ($location->listings()->get() as $listing)
+					array_push( $listings, $listing );
 				}
 
 				$view = View::make('account.manage_listings.index')
 				->with('title', 'My Listings')
 				->with('listings', $listings);
+				return $view;
+			}
+		}
+	}
+
+	public function action_mylocations()
+	{
+		if(Auth::check())
+		{
+			if(Session::has('id'))
+			{
+				$id = Session::get('id');
+				$account = Account::find($id);
+				$locations = $account->locations()->get();
+
+				$view = View::make('account.manage_locations.index')
+				->with('title', 'My Locations')
+				->with('locations', $locations);
 				return $view;
 			}
 		}

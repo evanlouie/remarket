@@ -1,6 +1,6 @@
 <div class="container container-1">
   <div class="container">
-    <h1 class="heading pull-left">My Listings</h1>
+    <h1 class="heading pull-left">My Location</h1>
   </div>
 </div>
 <div class="row-fluid">
@@ -25,7 +25,7 @@
           <td>{{ var_dump($listing->categorie()->get()) }}</td>
           <td>{{substr($listing->date_unavailable, 0, -9)}}</td>
           <td><a href="/listing/edit/{{$listing->id}}" class="btn btn-primary btn-small">Edit</a></td>
-          <td><a id="warning" href="/listing/delete/{{$listing->id}}" class="btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
+          <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
         </tr>
         @endforeach
       </tbody>
@@ -33,7 +33,13 @@
   </span>
 </div>
 <script>
-  $('#warning').on('click', function() {
-    if(confirm( 'Are you sure you want to delete this listing?' )){};
-  })
+  $(document).on('click', '.warning', function() {
+    id = $(this).attr('id');
+    confirm = confirm( 'Are you sure you want to delete this listing?' );
+    if(confirm == true) { window.location = "/listing/delete/" + id; }
+    else {
+      delete window.confirm;
+    }
+  });
+  $('#myListings').attr('class', 'active');
 </script>

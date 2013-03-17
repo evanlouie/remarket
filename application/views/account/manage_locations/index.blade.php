@@ -11,7 +11,6 @@
 @endsection
 
 @section('content')
-  @include('account.partials.sidebar')
   @include('account.manage_locations.content')
 @endsection
 

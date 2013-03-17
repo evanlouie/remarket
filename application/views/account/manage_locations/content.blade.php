@@ -1,36 +1,43 @@
-<div class="container-fluid container-fluid-1">
+<div class="container container-1">
   <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <h1 class="heading"> <strong>Welcome to REMARKET</strong> 
-        </h1>
-        <p>
-          <span>Reduce, reuse, recycle, REMARKET.</span>
-        </p>
-      </span>
-    </div>
+    <h1 class="heading pull-left">My Listings</h1>
   </div>
 </div>
-<div class="container-fluid container-fluid-2">
-  <div>
-    <div class="row-fluid">
-      <span class="span12">
-        @include('partials.forms.search')
-      </span>
-    </div>
-    <span></span>
-  </div>
-  <div class="row-fluid">
-    <span class="span9">
-      <div class="hero-unit">
-        <p>[ Here we would like to put some information about the initiative ]</p>
-        <div class="btns">
-          <a href="#" class="btn btn-primary btn-large">Learn More</a>
-        </div>
-      </div>
-    </span>
-    <span class="span3">
-      @include('partials.forms.signup') 
-    </span>
-  </div>
+<div class="row-fluid">
+  {{ render( 'account.partials.sidebar' ) }}
+  <span class="span9">
+    <table class="table table-hover table-stiped">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>City</th>
+          <th>Postal Code</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($locations as $location)
+        <tr>
+          <td><a href="/location/edit/{{$location->id}}">{{$location->address}}</a></td>
+          <td>{{$location->city}}</td>
+          <td>{{$location->postal_code}}</td>
+          <td><a href="/location/edit/{{$location->id}}" class="btn btn-primary btn-small">Edit</a></td>
+          <td><a id="{{ $location->id }}" class="warning btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </span>
 </div>
+<script>
+  $(document).on('click', '.warning', function() {
+    id = $(this).attr('id');
+    confirm = confirm( 'Are you sure you want to delete this location?' );
+    if(confirm == true) { window.location = "/location/delete/" + id; }
+    else {
+      delete window.confirm;
+    }
+  });
+  $('#myLocations').attr('class', 'active');
+</script>
