@@ -15,6 +15,10 @@
 @endif
 <div class="container-fluid">
   <div class="row-fluid">
+      <a href="/account/delete" id="warning" class="span12 btn btn-large btn-danger" style="height:150px;">Delete Account</a>
+      <br><br><br><br><br><br><br><br><br>
+  </div>
+  <div class="row-fluid">
     {{ render( 'account.partials.sidebar' ) }}
     <span class="span3">
       <form method="post">
@@ -45,7 +49,7 @@
             <div class="well">
               <label class="checkbox">
                 <?php $checked = '';
-                if ($account->expirationEmail) {
+                if ($account->expirationemail) {
                   $checked="checked";
                 }
                 echo "<input type='checkbox' value='1' name='expirationEmail' $checked >"
@@ -56,7 +60,7 @@
             <div class="well">
               <label class="checkbox">
                 <?php $checked = '';
-                if ($account->flagEmail) {
+                if ($account->flagemail) {
                   $checked="checked";
                 }
                 echo "<input type='checkbox' value='1' name='flagEmail' $checked >"
@@ -67,7 +71,7 @@
             <div class="well">
               <label class="checkbox">
                 <?php $checked = '';
-                if ($account->wishlistEmail) {
+                if ($account->wishlistemail) {
                   $checked="checked";
                 }
                 echo "<input type='checkbox' value='1' name='wishlistEmail' $checked >"
@@ -81,3 +85,8 @@
     </span>
   </div>
 </div>
+<script>
+  $('#warning').on('click', function() {
+    confirm( 'Are you sure you want to quit?' );
+  })
+</script>
