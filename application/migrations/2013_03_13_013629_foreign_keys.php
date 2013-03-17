@@ -27,10 +27,6 @@ class Foreign_Keys {
 			$table->foreign('wishlistitem_id')->references('id')->on('wishlistitems')->on_delete('cascade');
 			$table->foreign('listing_id')->references('id')->on('listings')->on_delete('cascade');
 		});
-		Schema::table('account_roles', function($table) {
-			$table->foreign('account_id')->references('id')->on('accounts');
-			$table->foreign('role_id')->references('role_id')->on('roles');
-		});
 	}
 
 	/**

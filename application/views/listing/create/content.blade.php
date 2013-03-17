@@ -17,8 +17,8 @@
         <input class="textinput span9 textinput-1" type="text" name="title" placeholder="Title">
         <input class="textinput span3 textinput-1" type="text" name="price" placeholder="Price">
         <h4 class="heading heading-3 heading-4">Listing Availability</h4>
-        <input class="textinput span6 span6-1" type="text" name="date_available" placeholder="Date available from">
-        <input class="textinput span6 span6-1" type="text" name="date_unavailable" placeholder="Date listing expires">
+        <input class="textinput span6 span6-1" type="text" id="date_available" name="date_available" placeholder="Date available from">
+        <input class="textinput span6 span6-1" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
       
       <h4 class="heading heading-4">Category</h4>
       <select class="pull-left pull-left-1" name="category_id">
@@ -53,7 +53,9 @@
               $('#city').prop('disabled', false);
               $('#postal_code').prop('disabled', false);
             }
-          })
+          });
+          $('#date_available').datepicker({dateFormat: 'yy-mm-dd'});
+          $('#date_unavailable').datepicker({dateFormat: 'yy-mm-dd'});
         </script>
     </span>
   </div>

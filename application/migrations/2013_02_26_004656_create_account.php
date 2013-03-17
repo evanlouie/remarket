@@ -14,7 +14,11 @@ class Create_Account {
 			$table->increments('id');
 			$table->string('email')->unique();
 			$table->string('password');
-			$table->integer('wishlist_frequency');
+			// $table->integer('wishlist_frequency');
+			$table->boolean('expirationEmail')->default(false);
+			$table->boolean('flagEmail')->default(false);
+			$table->boolean('wishlistEmail')->default(true);
+			$table->boolean('admin')->default(false);
 		});
 	}
 

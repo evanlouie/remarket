@@ -1,6 +1,6 @@
 <?php
 
-class Create_Survey_Result {
+class Createflag {
 
 	/**
 	 * Make changes to the database.
@@ -10,12 +10,10 @@ class Create_Survey_Result {
 	public function up()
 	{
 		//
-		Schema::create('surveyresults', function($table)
-		{
+		Schema::create('flags', function($table) {
 			$table->increments('id');
-			$table->string('material_type');
-			$table->float('monetary_value');
-			$table->integer('exchange_success');
+			$table->integer('account_id')->unsigned();
+			$table->integer('listing_id')->unsigned();
 		});
 	}
 
@@ -26,7 +24,8 @@ class Create_Survey_Result {
 	 */
 	public function down()
 	{
-		Schema::drop('surveyresults');
+		//
+		Schema::drop('flags');
 	}
 
 }
