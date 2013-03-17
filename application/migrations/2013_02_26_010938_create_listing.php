@@ -16,9 +16,7 @@ class Create_Listing {
 			$table->string('title');
 			$table->text('description');
 			$table->integer('category_id')->unsigned();
-			$table->integer('quantity');
 			$table->decimal('price', 10, 2);
-			$table->date('date_expiry');
 			$table->date('date_available');
 			$table->date('date_unavailable');
 			$table->timestamps();

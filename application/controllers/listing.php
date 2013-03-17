@@ -136,11 +136,7 @@ class Listing_Controller extends Base_Controller {
 				$listing->title = Input::get('title');
 				$listing->description = Input::get('description');
 				$listing->category_id = Input::get('category_id');
-				// $listing->quantity = Input::get('quantity');
-				$listing->quantity = 1;
 				$listing->price = Input::get('price');
-				// $listing->date_expiry = Input::get('date_expiry');
-				$listing->date_expiry = "1999-07-27-00-00-00";
 				$date_available = Input::get('date_available');
 				$date_unavailable = Input::get('date_unavailable');
 				$listing->date_available = $date_available."-00-00-00";
@@ -235,9 +231,7 @@ class Listing_Controller extends Base_Controller {
 					$listing->title = Input::get('title');
 					$listing->description = Input::get('description');
 					$listing->category_id = Input::get('category_id');
-					$listing->quantity = 1;
 					$listing->price = Input::get('price');
-					// $listing->date_expiry = "1999-07-27-00-00-00";
 					$date_available = Input::get('date_available');
 					$date_unavailable = Input::get('date_unavailable');
 					$listing->date_available = $date_available."-00-00-00";
