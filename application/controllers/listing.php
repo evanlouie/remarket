@@ -189,6 +189,7 @@ class Listing_Controller extends Base_Controller {
 			if ($listing = Listing::find($id))
 			{
 				$listing->delete();
+				return Redirect::to('/account');
 			}
 			else
 			{
