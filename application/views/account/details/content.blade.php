@@ -48,8 +48,8 @@
                 if ($account->expirationEmail) {
                   $checked="checked";
                 }
+                echo "<input type='checkbox' value='1' name='expirationEmail' $checked >"
                 ?>
-                <input type="checkbox" value="1" name="expirationEmail" {{$checked}}>
                 <span>Notify me if my listing is about to expire.</span>
               </label>
             </div>
@@ -59,8 +59,8 @@
                 if ($account->flagEmail) {
                   $checked="checked";
                 }
+                echo "<input type='checkbox' value='1' name='flagEmail' $checked >"
                 ?>
-                <input type="checkbox" value="1" name="flagEmail" {{$checked}}>
                 <span class="cke_focus">Notify me if my listings become flagged.</span>
               </label>
             </div>
@@ -70,8 +70,8 @@
                 if ($account->wishlistEmail) {
                   $checked="checked";
                 }
+                echo "<input type='checkbox' value='1' name='wishlistEmail' $checked >"
                 ?>
-                <input type="checkbox" value="1" name="wishlistEmail" {{$checked}}>
                 <span class="cke_focus">Notify me weekly if there are new listings that match my wishlist.</span>
               </label>
             </div>
