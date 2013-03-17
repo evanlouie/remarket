@@ -81,9 +81,9 @@ class Account_Controller extends Base_Controller {
 
 	public function action_delete() 
 	{
-		if (Input::has('id'))
+		if (Session::has('id'))
 		{
-			$account = Account::find('id');
+			$account = Account::find(Session::get('id'));
 			$account->delete();
 			Session::flush();
 			return Redirect::to('home');
