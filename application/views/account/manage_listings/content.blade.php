@@ -1,36 +1,24 @@
-<div class="container-fluid container-fluid-1">
-  <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <h1 class="heading"> <strong>Welcome to REMARKET</strong> 
-        </h1>
-        <p>
-          <span>Reduce, reuse, recycle, REMARKET.</span>
-        </p>
-      </span>
-    </div>
-  </div>
-</div>
-<div class="container-fluid container-fluid-2">
-  <div>
-    <div class="row-fluid">
-      <span class="span12">
-        @include('partials.forms.search')
-      </span>
-    </div>
-    <span></span>
-  </div>
-  <div class="row-fluid">
-    <span class="span9">
-      <div class="hero-unit">
-        <p>[ Here we would like to put some information about the initiative ]</p>
-        <div class="btns">
-          <a href="#" class="btn btn-primary btn-large">Learn More</a>
-        </div>
-      </div>
-    </span>
-    <span class="span3">
-      @include('partials.forms.signup') 
-    </span>
-  </div>
-</div>
+<span class="span9">
+  <table class="table table-hover table-stiped">
+    <thead>
+      <tr>
+        <th class="cke_focus cke_focus-1">Title</th>
+        <th class="cke_focus cke_focus-2">Price</th>
+        <th class="cke_focus cke_focus-3">Category</th>
+        <th class="cke_focus cke_focus-4">Location</th>
+        <th class="th-1">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($listings as $listing)
+      <tr>
+        <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
+        <td>${{$listing->price}}</td>
+        <td>wood</td>
+        <td class="td-1">{{$listing->location}}</td>
+        <td>12/12/12</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</span>

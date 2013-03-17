@@ -22,6 +22,9 @@ class Base_Controller extends Controller {
 		// Asset::add('style', 'css/style.css');
 		Asset::add('fontawsome', 'css/fontawesome.css');
 		Asset::add('jquery', 'js/jquery-1.9.1.js');
+		if(Session::has('id')) {
+			$account = Account::find(Session::get('id'));
+		}
 	}
 
 }

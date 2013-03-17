@@ -97,25 +97,114 @@ class Account_Controller extends Base_Controller {
 
 	public function action_edit()
 	{
-		if (Input::has('email') && Input::has('password') && Input::has('oldpassword')) 
+		if (Input::has('email') && Input::has('emailConfirm') && Input::has('oldpassword')) 
 		{
-
 			$email = Input::get('email');
-			$password = Input::get('password');
-			$password = Hash::make($password);
+			$emailConfirm = Input::get('emailConfirm');
+			
+			// Check that emails match
+			if( $email != $emailConfirm ) {
+				// Error - Email fields do not match
+				$error = "Emails do not match.";
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('error', $error)
+				->with('account', $account);
+				return $view;
+			}
+			
 			$oldpassword = Input::get('oldpassword');
 			$account = Account::find(Session::get('id'));
-			
+			// Check password
 			if ($account && Hash::check($oldpassword, $account->password))
 			{
+				// Success - Update email and show confirmation
 				$account->email = $email;
-				$account->password = $password;
 				$account->save();
+				$confirmation = 'Your new email is ' . $email;
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('confirmation', $confirmation)
+				->with('account', $account);
+				return $view;
 			}
 			else
 			{
-				echo "Error:", "session data does not match recods; please make sure cookies are enabled";
+				// Error - Password does not match
+				$error = "Password does not match this account.";
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('error', $error)
+				->with('account', $account);
+				return $view;
 			}
+		} 
+		else if (Input::has('password') && Input::has('passwordConfirm') && Input::has('oldpassword')) 
+		{
+			$password = Input::get('password');
+			$passwordConfirm = Input::get('passwordConfirm');
+			
+			// Check that passwords match
+			if( $password != $passwordConfirm ) {
+				// Error - Password fields do not match
+				$error = "Passwords do not match.";
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('error', $error);
+				->with('account', $account);
+				return $view;
+			}
+			
+			$oldpassword = Input::get('oldpassword');
+			$account = Account::find(Session::get('id'));
+			// Check password
+			if ($account && Hash::check($oldpassword, $account->password))
+			{
+				// Success - Update password and show confirmation
+				$account->password = Hash::make($password);
+				$account->save();
+				$confirmation = 'Your password has been changed';
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('confirmation', $confirmation)
+				->with('account', $account);;
+				return $view;
+			}
+			else
+			{
+				// Error - Password does not match
+				$error = "Your old password was incorrect.";
+				$view = View::make('account.details.index')
+				->with('title', 'Change Account Details')
+				->with('error', $error)
+				->with('account', $account);;
+				return $view;
+			}
+		} 
+		else if (Input::has('expirationEmail') || Input::has('flagEmail') || Input::has('wishlistEmail')) 
+		{
+			if( Input::has('expirationEmail') ) {
+				$account->expirationEmail = Input::get('expirationEmail');
+			}
+			if( Input::has('flagEmail') ) {
+				$account->flagEmail = Input::get('flagEmail');
+			}
+			if( Input::has('wishlistEmail') ) {
+				$account->wishlistEmail = Input::get('wishlistEmail');
+			}
+			$account->save();
+			$confirmation = 'Your email settings have been update';
+			$view = View::make('account.details.index')->with('title', 'Change Account Details')->with('confirmation', $confirmation);
+			return $view;
+		} 
+		else if (Input::has('expirationEmail') || Input::has('flagEmail') || Input::has('wishlistEmail')
+					|| Input::has('password') || Input::has('passwordConfirm') || Input::has('oldpassword')
+					|| Input::has('email') || Input::has('emailConfirm') )
+		{
+			// Error - Missing fields
+			$error = "You're missing some fields.";
+			$view = View::make('account.details.index')->with('title', 'Change Account Details')->with('error', $error);
+			return $view;
 		}
 		else 
 		{
