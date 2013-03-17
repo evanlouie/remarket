@@ -92,8 +92,7 @@ class Listing_Controller extends Base_Controller {
 			$listing->email = $account->email;
 			$listing->date_available = substr($listing->date_available, 0, 10);
 			$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
-
-
+			var_dump(Listing::find('1')->categorie()->first());
 			$view = View::make('listing.index')->with('title', $listing->title)->with('listing', $listing);
 
 			return $view;
@@ -241,7 +240,7 @@ class Listing_Controller extends Base_Controller {
 					$listing->save();
 					// var_dump($_POST);
 					// var_dump($listing);
-					return Redirect::to("/listing/$id");
+					return Redirect::to("/listing/");
 				}
 			$account = Account::find(Session::get('id'));
 			$listing = Listing::find($id);
@@ -251,8 +250,8 @@ class Listing_Controller extends Base_Controller {
 
 			$price = $listing->price;
 
-			// if ($location->account_id == $account->id)
-			// {
+			if ($location->account_id == $account->id)
+			{
 				// var_dump($categories);
 				$view = View::make('listing.edit.index')->with('title', 'Edit Listing')
 								->with('listing', $listing)
@@ -261,11 +260,11 @@ class Listing_Controller extends Base_Controller {
 								->with('account', $account)
 								->with('categories', $categories);
 				return $view;
-			// }
-			// else
-			// {
-			// 	return Response::error('403');
-			// }
+			}
+			else
+			{
+				return Response::error('403');
+			}
 			
 		}
 		else
