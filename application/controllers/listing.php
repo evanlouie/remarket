@@ -183,16 +183,11 @@ class Listing_Controller extends Base_Controller {
 		// 	}
 			
 		// }
-		if (Session::has('id')) 
+		if (Session::has('id') && Auth::check()) 
 		{
 			$account = Session::get('id');
 			if ($listing = Listing::find($id))
 			{
-				$images = Image::where_listing_id($listing->id);
-				foreach($images as $image)
-				{
-					$image->delete();
-				}
 				$listing->delete();
 			}
 			else
