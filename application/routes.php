@@ -39,6 +39,7 @@
 // 	// return View::make('home.index');
 // });
 Route::get('/', 'home@index');
+Route::get('account', 'account@myListings');
 Route::get('account/login', 'account@login');
 Route::get('account/logout', 'account@logout');
 Route::get('account/(:num)', 'account@id');
