@@ -1,4 +1,4 @@
-<form class="pull-center" action="">
+<form class="pull-center" action="/listing" method="GET">
   <h1 class="heading">Search</h1>
   <div class='row-fluid'>
   <input class="textinput span8 textinput-1" type="text" name="keywords" placeholder="eg. Wood, Windows, Plumbing, etc...">
@@ -14,6 +14,6 @@
       <option value="Plumbing">Plumbing</option>
     </select>
   </div>
-  <button class="btn btn-primary span12 hidden-desktop">Search</button>
-  <button class="btn btn-primary span4 visible-desktop">Search</button>
+  <button type="submit" class="btn btn-primary span12 hidden-desktop">Search</button>
+  <button type="submit" class="btn btn-primary span4 visible-desktop">Search</button>
 </form>
