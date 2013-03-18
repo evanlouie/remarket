@@ -44,7 +44,7 @@ Route::get('account/login', 'account@login');
 Route::get('account/logout', 'account@logout');
 Route::get('account/(:num)', 'account@id');
 // Route::get('account/(:any)', 'account@email');
-Route::get('about/(:any)', 'about@title');
+Route::get('about/(:num)', 'about@view');
 Route::get('listing/(:num)', 'listing@id');
 Route::get('image/(:num)', 'image@id');
 Route::get('location/(:num)', 'location@id');

@@ -2,17 +2,6 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-.navbar {
-  height: 151px;
-}
-.navbar .navbar-inner {
-  border: none;
-  background: rgba(76, 76, 76, 0) url('/img/source.jpg') no-repeat 0px 0px;
-  background-size: auto;
-  height: 151px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
 .navbar .navbar-inner .navbar-form {
   margin: 10px 0px 0px 0px;
 }
