@@ -2,7 +2,7 @@
 <div class='pull-left'>
 	<a href="#" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
 </div>
-<div class='pull-right'>
+<div class='pull-right' style="margin-right: 10px;">
 	<a class="btn btn-primary" href="/account/myListings">My Account</a>
 	<a class="btn btn-danger" href="/account/logout/">Logout</a>
 </div>
