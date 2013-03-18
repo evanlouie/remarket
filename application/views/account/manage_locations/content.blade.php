@@ -1,6 +1,10 @@
-<div class="container container-1">
+<div class="container-fluid">
   <div class="container">
-    <h1 class="heading pull-left">My Listings</h1>
+    <div class="row-fluid">
+      <span class="span12">
+        <h1 class="heading">Manage Locations</h1>
+      </span>
+    </div>
   </div>
 </div>
 <div class="row-fluid">

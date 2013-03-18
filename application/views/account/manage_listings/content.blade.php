@@ -1,8 +1,9 @@
-<div class="container container-1">
+<div class="container container1" >
   <div class="container">
-    <h1 class="heading pull-left">My Location</h1>
+    <h1 class="heading pull-left">My Listings</h1>
   </div>
 </div>
+
 <div class="row-fluid">
   {{ render( 'account.partials.sidebar' ) }}
   <span class="span9">
