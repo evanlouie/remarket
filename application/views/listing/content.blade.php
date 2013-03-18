@@ -1,5 +1,15 @@
 <div class="container-fluid">
 <div class="row-fluid">
+  @if(isset($error))
+    <div class="alert alert-error">
+      {{ $error }}
+    </div>
+  @endif
+  @if(isset($success))
+    <div class="alert alert-success">
+      {{ $success }}
+    </div>
+  @endif
   <br><br><br><br><br><br><br><br><br><br>
   <span class="span5 offset1">
     <h1 class="heading">{{ $listing->title }}</h1>
@@ -16,7 +26,8 @@
     <a class="btn btn-success btn-large pull-center" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
   <span class="span5">
-    <div id="map_canvas" style="width:300px; height:300px;"></div>
+    <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
+    <div id="map_canvas" class="pull-right" style="width:400px; height:400px;"></div>
   </span>
 </div>
 <div class="pull-center">
