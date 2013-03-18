@@ -4,7 +4,39 @@ class Wishlist_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		echo "Wishlist Page";
+		$account;
+		if (Auth::check() && Session::has('id')) 
+		{
+			$account = Account::find(Session::get('id'));
+		}
+		$tags=$account->wishlistitems()->get();
+		$listings = array();
+		$tempListings = array();
+		foreach($tags as $tag)
+		{
+			$tagListings = Listing::where('title', 'LIKE', "%$tag->item%")
+			->or_where("description", 'LIKE', "%$tag->item%")
+			->get();
+			foreach($tagListings as $listing) 
+			{
+				$listing->location = Location::find($listing->location_id);
+				$listing->category = Categorie::find($listing->category_id);
+			}
+			array_push($tempListings, $tagListings);	
+		}
+		foreach($tempListings as $key=>$tagListings)
+		{
+        	foreach($tagListings as $listing)
+        	{
+        		$listings[$listing->id] = $listing;
+        	}
+        }
+
+		$view = View::make('account.wishlist.index')
+			->with('title', 'My Wishlist')
+			->with('tags', $tags)
+			->with('listings', $listings);
+		echo $view;
 	}
 
 	public function action_id($id)
@@ -18,6 +50,40 @@ class Wishlist_Controller extends Base_Controller {
 			}
 		}
 	}
+
+	public function action_add()
+	{
+		if (Input::has('tags') && Session::has('id')) 
+		{
+			$tags = WishlistItem::where('item', '=', Input::get('tags'))->get();
+			if (sizeof($tags)==0) 
+			{
+				$account = Account::find(Session::get('id'));
+				$wishlistitem = new WishlistItem;
+				$wishlistitem->item = Input::get('tags');
+				$wishlistitem->account_id = $account->id;
+				$wishlistitem->save();
+			}
+		}
+		else 
+		{
+			die('not logged in or no package sent');
+		}
+	}
+
+	public function action_delete()
+	{
+		if (Input::has('tag_id') && Auth::check() && Session::has('id'))
+		{
+			$account = Account::find(Session::get('id'));
+			$wishlistitem = WishlistItem::find(Input::get('tag_id'));
+			$wishlistitem->delete();
+		}
+	}
+
+
+
+
 
 
 }

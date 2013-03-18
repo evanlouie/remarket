@@ -1,36 +1,94 @@
-<div class="container-fluid container-fluid-1">
+<div class="container container-1">
   <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <h1 class="heading"> <strong>Welcome to REMARKET</strong> 
-        </h1>
-        <p>
-          <span>Reduce, reuse, recycle, REMARKET.</span>
-        </p>
-      </span>
-    </div>
+    <h1 class="heading pull-left">My Location</h1>
   </div>
 </div>
-<div class="container-fluid container-fluid-2">
-  <div>
-    <div class="row-fluid">
-      <span class="span12">
-        @include('partials.forms.search')
-      </span>
-    </div>
-    <span></span>
-  </div>
-  <div class="row-fluid">
-    <span class="span9">
-      <div class="hero-unit">
-        <p>[ Here we would like to put some information about the initiative ]</p>
-        <div class="btns">
-          <a href="#" class="btn btn-primary btn-large">Learn More</a>
-        </div>
-      </div>
-    </span>
-    <span class="span3">
-      @include('partials.forms.signup') 
-    </span>
-  </div>
+<div class="row-fluid">
+  {{ render( 'account.partials.sidebar' ) }}
+  <span class="span9">
+    <legend>My Tags</legend>
+    <form class='form-inline'>
+      <fieldset>
+        <input type="text" placeholder="Add Tags" id="addTagInput">
+        <button class="btn" id="addTagButton">Add</button>
+      </fieldset>
+    </form>
+    <div id='tagsContainer'>
+      <div id='tags'>
+       @foreach($tags as $tag)
+       <button tagid="{{$tag->id}}"class='btn-mini btn-warning delete-tag' style='margin:3px;'>{{$tag->item}}</button>
+       @endforeach
+     </div>
+   </div>
+    <table class="table table-hover table-stiped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Category</th>
+          <th>Listing Expires</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($listings as $listing)
+        <tr>
+          <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
+          <td class="td-1">{{$listing->location->address}}, {{$listing->location->city}} {{$listing->location->postal_code}}</td>
+          <td>{{$listing->category->title}}</td>
+          <td>{{substr($listing->date_unavailable,0,-9)}}</td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </span>
 </div>
+<div class='row-fluid'>
+  <span class="span3">
+    teset
+  </span>
+</div>  
+<script>
+  function addTag() {
+    string = $('#addTagInput').val();
+    $.post("/wishlist/add", {tags: string}).done(function() {
+      $('#tagsContainer').load('/wishlist/ #tags');
+    });
+  }
+  $(document).on('click', '.warning', function() {
+    id = $(this).attr('id');
+    confirm = confirm( 'Are you sure you want to delete this listing?' );
+    if(confirm == true) { window.location = "/listing/delete/" + id; }
+    else {
+      delete window.confirm;
+    }
+  });
+  $(document).on('keypress', '#addTagInput', function(e) {
+    if (e.which==13)
+    {
+      addTag();
+      return false;
+    }
+  });
+  $(document).on('click', '#addTagButton', function() {
+    addTag();
+    return false;
+  });
+  $(document).on('click', '.delete-tag', function() 
+  {
+    tagid = $(this).attr('tagid');
+    confirm = confirm("Are you sure you want to delete this tag?");
+    if(confirm==true) 
+    {
+      $.post("/wishlist/delete/", {tag_id: tagid}).done(function() {
+        $('#tagsContainer').load('/wishlist/ #tags');
+        delete window.confirm;
+      });
+    }
+    else
+    {
+      alert('error');
+    }
+  });
+  $('#myListings').attr('class', 'active');
+
+</script>
