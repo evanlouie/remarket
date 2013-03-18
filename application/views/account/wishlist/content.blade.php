@@ -89,6 +89,6 @@
       alert('error');
     }
   });
-  $('#myListings').attr('class', 'active');
+  $('#wishlist').attr('class', 'active');
 
 </script>

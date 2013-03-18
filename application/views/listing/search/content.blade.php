@@ -58,7 +58,7 @@
     <span class="span9">
       <div id="tabs">
         <ul>
-          <li><a id="clearMap" href="#tabs-1">Table View</a></li>
+          <li><a href="#tabs-1">Table View</a></li>
           <li><a id="getMap" href="#tabs-2">Map View</a></li>
         </ul>
         <div id="tabs-1">
@@ -100,11 +100,12 @@
   });
 </script>
 <script type="text/javascript">
-  getMap.onclick = initialize;
-  clearMap.onclick = clearMap;
+  $(document).on('click', '#getMap', function() {
+    initialize();
+  });
 
-  function clearMap() {
-    document.getElementById('map_canvas').innerHTML = "";
+  function clearIt() {
+    document.getElementById('map_canvas').innerHTML = "test";
   }
 
   var geocoder;
