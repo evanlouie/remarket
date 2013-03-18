@@ -4,6 +4,7 @@
 @section('header')
   @include('partials.header');
   {{ HTML::style('css/manageLocations.css')}}
+  {{ HTML::style('css/sidebar.css')}}
 @endsection
 
 @section('loginbar')
