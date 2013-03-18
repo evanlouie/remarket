@@ -1,6 +1,6 @@
 @if (Auth::check()) 
 <div class='pull-left'>
-	<a href="#" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
+	<a href="/" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
 </div>
 <div class='pull-right' style="margin-right: 10px;">
 	<a class="btn btn-primary" href="/account/myListings">My Account</a>
@@ -8,7 +8,7 @@
 </div>
 @else
 <div class='pull-left'>
-	<a href="#" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
+	<a href="/" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
 </div>
 <form class="navbar-form pull-right" action="/account/login/" method='post' style="margin-right: 10px;">
 	<input class="textinput" type="email" placeholder="Email" name="email">
