@@ -2,10 +2,12 @@
 <html>
 	@yield('header')
 	<body>
-		<div class='content'>
-			@yield('loginbar')
-			@yield('content')
+		<div id="wrapper">
+			<div class='content'>
+				@yield('loginbar')
+				@yield('content')
+			</div>
+			@yield('footer')
 		</div>
-		@yield('footer')
 	</body>
 </html>

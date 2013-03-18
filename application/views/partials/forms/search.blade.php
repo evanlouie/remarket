@@ -1,4 +1,8 @@
-<form class="pull-center" action="">
+<<<<<<< HEAD
+<form class="pull-center" action="" style="margin: 0 0 100px 0;">
+=======
+<form class="pull-center" action="/listing" method="GET">
+>>>>>>> 76a584f478c1b7cef1d4aa7c5d1fb6c5daaa217b
   <h1 class="heading">Search</h1>
   <div class='row-fluid'>
   <input class="textinput span8 textinput-1" type="text" name="keywords" placeholder="eg. Wood, Windows, Plumbing, etc...">
@@ -14,6 +18,6 @@
       <option value="Plumbing">Plumbing</option>
     </select>
   </div>
-  <button class="btn btn-primary span12 hidden-desktop">Search</button>
-  <button class="btn btn-primary span4 visible-desktop">Search</button>
+  <button type="submit" class="btn btn-primary span12 hidden-desktop">Search</button>
+  <button type="submit" class="btn btn-primary span4 visible-desktop">Search</button>
 </form>

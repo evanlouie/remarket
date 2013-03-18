@@ -270,4 +270,49 @@ class Listing_Controller extends Base_Controller {
 			return Redirect::to('/');
 		}
 	}
+
+	public function action_flag($id) 
+	{
+		$success = null;
+		$error = null;
+		if (Auth::check() && Session::has('id')) 
+		{
+			$flags = Flag::where_listing_id($id)->get();
+			$size = sizeof($flags);
+			if( $size < 4 ) {
+				$flag = new Flag;
+				$flag->account_id = Session::get('id');
+				$flag->listing_id = $id;
+				$flag->save();
+				$success = '<strong>Success! </strong>This listing has been flagged.';
+			}
+			else {
+				// Set up view
+				$listing = Listing::find($id);
+				$location = $listing->location()->first();
+				$success = '<strong>Success! </strong>This listing has been flagged.';
+				// Delete listing
+				$this->action_delete($id);
+				// Show user view as though listing has just been flagged
+				$view = View::make('listing.index')
+				->with('title', $listing->title)
+				->with('listing', $listing)
+				->with('location', $location)
+				->with('success', $success);
+				return $view;
+			}
+		} 
+		else {
+			$error = '<strong>Error! </strong>You must be logged in to flag a post.';
+		}
+		$listing = Listing::find($id);
+		$location = $listing->location()->first();
+		$view = View::make('listing.index')
+		->with('title', $listing->title)
+		->with('listing', $listing)
+		->with('location', $location)
+		->with('success', $success)
+		->with('error', $error);
+		return $view;
+	}
 }
