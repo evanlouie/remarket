@@ -1,4 +1,4 @@
-<form class="pull-center" action="">
+<form class="pull-center" action="" style="margin: 0 0 100px 0;">
   <h1 class="heading">Search</h1>
   <div class='row-fluid'>
   <input class="textinput span8 textinput-1" type="text" name="keywords" placeholder="eg. Wood, Windows, Plumbing, etc...">

@@ -1,22 +1,9 @@
-<div class="container-fluid container-fluid-3">
-  <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <div class="pull-left">
-          <p>REMARKET</p>
-        </div>
-        <ul class="nav nav-pills pull-right">
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact Us</a>
-          </li>
-          <li>
-            <a href="#">Terms of Use</a>
-          </li>
-        </ul>
-      </span>
-    </div>
+<div class="navbar navbar-bottom">
+  <div class="navbar-inner" style="background: #4c4c4c">
+    <form class="navbar-form pull-right" action="">
+      <button class="btn btn-link">Button</button>
+      <button class="btn btn-link">Button</button>
+      <button class="btn btn-link">Button</button>
+    </form>
   </div>
 </div>
