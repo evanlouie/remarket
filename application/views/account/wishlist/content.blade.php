@@ -20,44 +20,45 @@
        @endforeach
      </div>
    </div>
-    <table class="table table-hover table-stiped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Location</th>
-          <th>Category</th>
-          <th>Listing Expires</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($listings as $listing)
-        <tr>
-          <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
-          <td class="td-1">{{$listing->location->address}}, {{$listing->location->city}} {{$listing->location->postal_code}}</td>
-          <td>{{$listing->category->title}}</td>
-          <td>{{substr($listing->date_unavailable,0,-9)}}</td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
+   <div id='listingsContainer'>
+      <table id='listings' class="table table-hover table-stiped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Category</th>
+            <th>Listing Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($listings as $listing)
+          <tr>
+            <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
+            <td class="td-1">{{$listing->location->address}}, {{$listing->location->city}} {{$listing->location->postal_code}}</td>
+            <td>{{$listing->category->title}}</td>
+            <td>{{substr($listing->date_unavailable,0,-9)}}</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </span>
 </div>
-<div class='row-fluid'>
-  <span class="span3">
-    teset
-  </span>
-</div>  
+ 
 <script>
   function addTag() {
     string = $('#addTagInput').val();
     $.post("/wishlist/add", {tags: string}).done(function() {
       $('#tagsContainer').load('/wishlist/ #tags');
+      $('#listingsContainer').load('/wishlist/ #listings');
     });
   }
   $(document).on('click', '.warning', function() {
     id = $(this).attr('id');
     confirm = confirm( 'Are you sure you want to delete this listing?' );
-    if(confirm == true) { window.location = "/listing/delete/" + id; }
+    if(confirm == true) {
+      window.location = "/listing/delete/" + id; 
+    }
     else {
       delete window.confirm;
     }
@@ -81,6 +82,7 @@
     {
       $.post("/wishlist/delete/", {tag_id: tagid}).done(function() {
         $('#tagsContainer').load('/wishlist/ #tags');
+        $('#listingsContainer').load('/wishlist/ #listings');
         delete window.confirm;
       });
     }
