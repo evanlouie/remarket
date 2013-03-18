@@ -64,8 +64,8 @@ class Listing_Controller extends Base_Controller {
 					$listing->category = $c->title;
 				}
 			}
-			$location = Location::find($listing->location_id)->address;
-			$listing->location = $location;
+			$location = Location::find($listing->location_id);
+			$listing->location = $location->address . ', ' . $location->city . ', ' . $location->postal_code;
 		}
 
 		$categories = Categorie::all();
@@ -92,9 +92,10 @@ class Listing_Controller extends Base_Controller {
 			$listing->email = $account->email;
 			$listing->date_available = substr($listing->date_available, 0, 10);
 			$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
-			var_dump(Listing::find('1')->categorie()->first());
-			$view = View::make('listing.index')->with('title', $listing->title)->with('listing', $listing);
-
+			$view = View::make('listing.index')
+			->with('title', $listing->title)
+			->with('listing', $listing)
+			->with('location', $loc);
 			return $view;
 		}
 		else
@@ -269,5 +270,4 @@ class Listing_Controller extends Base_Controller {
 			return Redirect::to('/');
 		}
 	}
-
 }
