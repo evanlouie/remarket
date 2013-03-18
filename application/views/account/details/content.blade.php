@@ -15,7 +15,7 @@
 @endif
 <div class="container-fluid">
   <div class="row-fluid">
-      <a href="/account/delete" id="warning" class="span12 btn btn-large btn-danger" style="height:150px;">Delete Account</a>
+      <a id="warning" class="span12 btn btn-large btn-danger" style="height:150px;">Delete Account</a>
       <br><br><br><br><br><br><br><br><br>
   </div>
   <div class="row-fluid">

@@ -194,12 +194,18 @@ class Account_Controller extends Base_Controller {
 		{
 			if( Input::has('expirationEmail') ) {
 				$account->expirationEmail = Input::get('expirationEmail');
+			} else {
+				$account->expirationEmail = false;
 			}
 			if( Input::has('flagEmail') ) {
 				$account->flagEmail = Input::get('flagEmail');
+			} else {
+				$account->flagEmail = false;
 			}
 			if( Input::has('wishlistEmail') ) {
 				$account->wishlistEmail = Input::get('wishlistEmail');
+			} else {
+				$account->wishlistEmail = false;
 			}
 			$account->save();
 			$confirmation = 'Your email settings have been update';
@@ -280,6 +286,8 @@ class Account_Controller extends Base_Controller {
 					foreach ($location->listings()->get() as $listing)
 					{
 						$listing->location = $listing->location()->first();
+						$listing->category = Categorie::find($listing->category_id)->title;
+						// var_dump($listing->category_id);
 						array_push( $listings, $listing );
 					}
 				}

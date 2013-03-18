@@ -8,6 +8,6 @@
 	<input class="textinput" type="email" placeholder="Email" name="email">
 	<input class="textinput" type="password" placeholder="Password" name="password">
 	<button class="btn btn-primary">Login</button>
-	<a href="/account/" class="btn btn-link">Forgot Password?</a>
+	<a href="/account/" class="btn btn-link" style="text-shadow:none">Forgot Password?</a>
 </form>
 @endif

@@ -3,7 +3,7 @@
 
 @section('header')
   @include('partials.header');
-  {{ HTML::style('css/wishlist.css')}}
+  {{ HTML::style('css/listingSearch.css')}}
 @endsection
 
 @section('loginbar')
@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  @include('account.wishlist.content')
+  @include('contact.content')
 @endsection
 
 @section('footer')

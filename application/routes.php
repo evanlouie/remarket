@@ -47,7 +47,7 @@ Route::get('account/(:num)', 'account@id');
 Route::get('listing/(:num)', 'listing@id');
 Route::get('image/(:num)', 'image@id');
 Route::get('location/(:num)', 'location@id');
-Route::get('wishlist/(:num)' , 'wishlist@id');
+// Route::get('wishlist/(:num)' , 'wishlist@id');
 
 /*
 |--------------------------------------------------------------------------
