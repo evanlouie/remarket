@@ -27,12 +27,16 @@ body {
   top: 0px;
   left: 0px;
   border:none;
+
+
 }
 #absolute-wrapper .navbar .navbar-inner {
   border: none;
   height: 43px;
   padding-left: 0px;
   padding-right: 0px;
+  padding-bottom: 10px;
+
 }
 #absolute-wrapper .navbar input.textinput {
   width: 136px;
@@ -71,7 +75,8 @@ body {
 }
 .container-fluid-2 div .row-fluid .span12 .pull-center {
   background: rgba(255, 255, 255, 0.831373);
-  padding: 0px 0px 0px 10px;
+  padding: 5px 5px 15px 10px;
+  border-radius: 6px 6px 6px 6px;
 }
 .container-fluid-2 div .row-fluid .span12 .pull-center .heading {
   margin: 10px;
@@ -101,6 +106,8 @@ body {
 }
 .container-fluid-2 .row-fluid .span3 .navbar-form {
   background: rgba(255, 255, 255, 0.756863);
+  border-radius: 6px 6px 6px 6px;
+  padding: 0px 15px 5px 5px;
 }
 .container-fluid-2 .row-fluid .span3 .navbar-form .control-label.text-left {
   padding: 5px 10px 0px 10px;
@@ -120,6 +127,7 @@ body {
   font-weight: 300;
   color: #ffffff;
   line-height: 36px;
+
 }
 .container-fluid-3 .container .row-fluid .span12 .nav {
   margin: 0px;
