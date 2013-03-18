@@ -30,6 +30,7 @@
         <p>[ Here we would like to put some information about the initiative ]</p>
         <div class="btns">
           <a href="#" class="btn btn-primary btn-large">Learn More</a>
+          <a href="/listing/" class="btn btn-success btn-large">Browse Listings</a>
         </div>
       </div>
     </span>
