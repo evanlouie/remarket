@@ -10,7 +10,7 @@
 <div class='pull-left'>
 	<a href="#" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
 </div>
-<form class="navbar-form pull-right" action="/account/login/" method='post'>
+<form class="navbar-form pull-right" action="/account/login/" method='post' style="margin-right: 10px;">
 	<input class="textinput" type="email" placeholder="Email" name="email">
 	<input class="textinput" type="password" placeholder="Password" name="password">
 	<button class="btn btn-primary">Login</button>
