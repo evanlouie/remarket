@@ -67,10 +67,11 @@
           <a class="btn btn-danger pull-left" href="/account/">Cancel Listing</a>
           <button class="btn btn-primary pull-right">Post Listing</button>
           <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
-          <!-- @include('partials.forms.fileUpload') -->
+          
 
         </form>
       </span>
     </div>
   </div>
+  <!-- @include('partials.forms.fileUpload') -->
 </div>

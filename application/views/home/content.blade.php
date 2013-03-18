@@ -1,15 +1,6 @@
 <div class="container-fluid container-fluid-1">
   <div class="container">
-    <div class="row-fluid">
-      <span class="span12">
-        <h1 class="heading"> <strong>Welcome to REMARKET</strong> 
-        </h1>
-        <p>
-          <span>Reduce, reuse, recycle, REMARKET.</span>
-        </p>
-      </span>
-    </div>
-  </div>
+</div>
 </div>
 <div class="container-fluid container-fluid-2">
   <div>
