@@ -24,6 +24,7 @@ class Base_Controller extends Controller {
 		Asset::add('flickcss', 'css/flick/jquery-ui-1.10.2.custom.css');
 		Asset::add('jquery', 'js/jquery-1.9.1.js');
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
+		Session::forget('alert');
 	}
 
 }
