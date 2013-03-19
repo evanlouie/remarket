@@ -1,6 +1,10 @@
-<div class="container container-1">
+<div class="container-fluid1">
   <div class="container">
-    <h1 class="heading pull-left">Change Account Details</h1>
+    <div class="row-fluid">
+      <span class="span12">
+        <h1 class="heading">Change Account Details</h1>
+      </span>
+    </div>
   </div>
 </div>
 @if(isset($error))
