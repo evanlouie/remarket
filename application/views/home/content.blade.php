@@ -1,6 +1,6 @@
 <div class="container-fluid container-fluid-1">
   <div class="container">
-</div>
+  </div>
 </div>
 <div class="container-fluid container-fluid-2">
   <div>

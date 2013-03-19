@@ -7,17 +7,6 @@
     </div>
   </div>
 </div>
-
-@if(isset($error))
-  <div class="alert alert-error">
-    <strong>Error!</strong> {{ $error }}
-  </div>
-@endif
-@if(isset($confirmation))
-  <div class="alert alert-success">
-    <strong>Success!</strong> {{ $confirmation }}
-  </div>
-@endif
 <div class="container-fluid">
   <div class="row-fluid">
     {{ render( 'account.partials.sidebar' ) }}
@@ -29,7 +18,7 @@
           <input class="textinput" type="email" placeholder="Enter new email address" name="email"> <br />
           <label class = "account-form-label"> Re-enter New Email</label>
           <input class="textinput" type="email" placeholder="Re-enter new email address" name="emailConfirm"><br />
-         <label class = "account-form-label"> Current Email</label>
+         <label class = "account-form-label"> Current Password</label>
           <input class="textinput" type="password" placeholder="Enter current password" name="oldpassword">
           <button class="btn btn-success pull-right" type="submit">Submit Changes</button>
         </fieldset>
