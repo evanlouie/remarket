@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-  @include('about.edit.content')
+  @include('about.create.content')
 @endsection
 
 @section('footer')

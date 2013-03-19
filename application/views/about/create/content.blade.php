@@ -1,40 +1,21 @@
-<div class="container-fluid container-fluid-1">
-  <div class="container">
+<div class="hero-unit" style="height:100px;">
+    <h1 class="heading pull-left">Create a New Page</h1>
 </div>
-</div>
-<div class="container-fluid container-fluid-2">
-  <div>
-    <div class="row-fluid">
-      <span class="span12">
-        <form class="pull-center" action="listing" method='GET'>
-          <h1 class="heading">Search</h1>
-          <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="minP" placeholder="Minimum price">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="maxP" placeholder="Maximum price">
-          <input class="textinput span7 textinput-3" type="text" name="city" placeholder="City">
-          <select name="category_id">
-            <option value="all">All</option>
-            @foreach ($categories as $c)
-            <option value="{{$c->id}}">{{$c->title}}</option>
-            @endforeach
-          </select>
-          <button class="btn btn-primary" type='submit'>Search</button>
-        </form>
-      </span>
-    </div>
-    <span></span>
-  </div>
+<div class="container-fluid" style="margin-bottom:40px">
   <div class="row-fluid">
-    <span class="span9">
-      <div class="hero-unit">
-        <p>[ Here we would like to put some information about the initiative ]</p>
-        <div class="btns">
-          <a href="#" class="btn btn-primary btn-large">Learn More</a>
-        </div>
-      </div>
-    </span>
-    <span class="span3">
-      @include('partials.forms.signup') 
+    <span class="span8 offset2">
+      <form method="post">
+        <label>Title: </label>
+        <input class="textinput span3 textinput-1" type="text" name="title" placeholder="Title"><br>
+         <label>Body: </label>
+        <textarea placeholder="Add your page text here" class="span12" name="body" id="textarea" cols="45" rows="5" ></textarea><br>
+        <button class="btn btn-success pull-right" type="submit">Save Changes</button> 
+        <a class="btn btn-danger pull-right" href="/about" style="margin-right: 5px;">Discard</a>
+      </form>
     </span>
   </div>
 </div>
+<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+  CKEDITOR.replace('textarea');
+</script>
