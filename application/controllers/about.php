@@ -162,7 +162,7 @@ class About_Controller extends Base_Controller {
 					else {
 						$pages = Staticpage::all();
 						$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
-							'You must have at least one About page.</div>';
+							'You cannot delete the main About page.</div>';
 						Session::put('alert', $alert);
 						$view = View::make('about.index')
 						->with('title', 'About')
