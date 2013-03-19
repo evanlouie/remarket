@@ -308,18 +308,25 @@ class Listing_Controller extends Base_Controller {
 				$success = '<strong>Success! </strong>This listing has been flagged.';
 			}
 			else {
-				// Set up view
 				$listing = Listing::find($id);
-				$location = $listing->location()->first();
-				$success = '<strong>Success! </strong>This listing has been flagged.';
-				// Delete listing
-				$this->action_delete($id);
-				// Show user view as though listing has just been flagged
+				$imageArray = array();
+
+				$images = $listing->images()->get();
+				foreach($images as $image) {
+					array_push($imageArray, $image);
+				}
+				$listing->images = $imageArray;
+				$loc = $listing->location()->first();
+				$account = Account::find($loc->account_id);
+				$listing->email = $account->email;
+				$listing->date_available = substr($listing->date_available, 0, 10);
+				$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
 				$view = View::make('listing.index')
 				->with('title', $listing->title)
 				->with('listing', $listing)
-				->with('location', $location)
-				->with('success', $success);
+				->with('location', $loc)
+				->with('success', $success)
+				->with('error', $error);
 				return $view;
 			}
 		} 
@@ -327,11 +334,22 @@ class Listing_Controller extends Base_Controller {
 			$error = '<strong>Error! </strong>You must be logged in to flag a post.';
 		}
 		$listing = Listing::find($id);
-		$location = $listing->location()->first();
+		$imageArray = array();
+
+		$images = $listing->images()->get();
+		foreach($images as $image) {
+			array_push($imageArray, $image);
+		}
+		$listing->images = $imageArray;
+		$loc = $listing->location()->first();
+		$account = Account::find($loc->account_id);
+		$listing->email = $account->email;
+		$listing->date_available = substr($listing->date_available, 0, 10);
+		$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
 		$view = View::make('listing.index')
 		->with('title', $listing->title)
 		->with('listing', $listing)
-		->with('location', $location)
+		->with('location', $loc)
 		->with('success', $success)
 		->with('error', $error);
 		return $view;

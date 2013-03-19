@@ -1,10 +1,6 @@
 <div class="container-fluid">
 <div class="row-fluid">
-  @if(isset($error))
-    <div class="alert alert-error">
-      {{ $error }}
-    </div>
-  @endif
+
   @if(isset($success))
     <div class="alert alert-success">
       {{ $success }}
@@ -19,7 +15,7 @@
         <span class = "listing-heading" >Asking Price:</span> <span class ="listing-labels">${{ $listing->price }}</span>
     </div><br />
     <div class="row-fluid">  
-        <span class = "listing-heading">Availability:</span> <span class = "listing-labels">{{ substr($listing->date_available,0,-9) }} to {{ substr($listing->date_unavailable,0,-9) }} </span>
+        <span class = "listing-heading">Availability:</span> <span class = "listing-labels">{{ $listing->date_available }} to {{ $listing->date_unavailable }} </span>
     </div>
 
     <div class="row-fluid">  
