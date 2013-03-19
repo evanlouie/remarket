@@ -12,7 +12,12 @@ class Listing_Controller extends Base_Controller {
 			$from = 'FROM listings WHERE ';
 			if(Input::has('city')) {
 				$city = Input::get('city');
-				$from ='FROM listings, locations WHERE locations.city="$city" AND listings.location_id = locations.id AND';
+				$from ='FROM listings, locations 
+						WHERE 
+							(locations.city LIKE "%'.$city.'%" OR 
+							locations.address LIKE "%'.$city.'%" OR
+							locations.postal_code LIKE "%'.$city.'%") AND 
+							listings.location_id = locations.id AND';
 			}
 			$query = "SELECT * $from";
 
@@ -44,7 +49,6 @@ class Listing_Controller extends Base_Controller {
 			{
 				$query = substr($query, 0, -4);
 			}
-
 			$listings = DB::query($query);
 
 		} 
