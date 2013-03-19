@@ -13,7 +13,7 @@
           <input class="textinput span2 textinput-1 textinput-2" type="text" name="maxP" placeholder="Maximum price">
           <input class="textinput span6 textinput-3" type="text" name="city" placeholder="City">
           <select name="category_id">
-            <option value="all">All</option>
+            <option value="">All</option>
             @foreach ($categories as $c)
             <option value="{{$c->id}}">{{$c->title}}</option>
             @endforeach

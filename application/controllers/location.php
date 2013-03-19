@@ -68,43 +68,37 @@ class Location_Controller extends Base_Controller {
 		}
 	}
 	
-	public function action_remove()
+	public function action_delete($id)
 	{
 		if(Session::has('id'))
 		{
-			if(Input::has('location_id'))
+
+			$account = Account::find(Session::get('id'));
+			$location = Location::find($id);
+			$owner = Account::find($location->account_id);
+			if ($account->id == $owner->id) 
 			{
-				$account = Account::find(Session::get('id'));
-				$location = Location::find(Input::get('location_id'));
-				$owner = Account::find($location->account_id);
-				if ($account->id == $owner->id) 
-				{
-					$listings = Listing::where_location_id($location->id);
-					foreach($listings as $listing)
-					{
-						$images = Image::where_listing_id($listing->id);
-						foreach($images as $image) 
-						{
-							$image->delete();
-						}
-						$listing->delete();
-					}
-					$location->delete();
-					return true;
-				}
-				else 
-				{
-					die('logged in user is not owner');
-				}
+				$listings = Listing::where_location_id($location->id);
+				// foreach($listings as $listing)
+				// {
+				// 	$images = Image::where_listing_id($listing->id);
+				// 	foreach($images as $image) 
+				// 	{
+				// 		$image->delete();
+				// 	}
+				// 	$listing->delete();
+				// }
+				$location->delete();
+				return Redirect::to('/account/myLocations/');
 			}
 			else 
 			{
-				die('location not set');
+				return Redirect::to('/');
 			}
-		}
+		}	
 		else 
 		{
-			die('user not logged in');
+			return Redirect::to('/');
 		}
 	}
 

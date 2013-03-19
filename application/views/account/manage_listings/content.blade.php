@@ -25,7 +25,7 @@
       <tbody>
         @foreach($listings as $listing)
         <tr>
-          <td><a href="/listing/edit/{{$listing->id}}">{{$listing->title}}</a></td>
+          <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
           <td class="td-1">{{ $listing->location->address }}, {{ $listing->location->city }}, {{ $listing->location->postal_code }}</td>
           <td>{{ $listing->category }}</td>
           <td>{{substr($listing->date_unavailable, 0, -9)}}</td>

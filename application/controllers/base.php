@@ -26,11 +26,17 @@ class Base_Controller extends Controller {
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
 		Session::forget('alert');
 
-		if (Session::has('id')) {
+		if (Session::has('id') && Auth::check())
+		{
 			$account = Account::find(Session::get('id'));
 			if ($account->admin == 1)
+			{
 				Session::put('admin', '1');
-			else Session::put('admin', '0');
+			}
+			else 
+			{
+				Session::put('admin', '0');
+			}
 		}
 	}
 

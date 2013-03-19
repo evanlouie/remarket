@@ -13,11 +13,12 @@
     <form action="/listing/create" method='post'>
       <div class="span6">
         <h4 class="heading">Title</h4>
-        <input class="textinput span13" type="text" name="title" placeholder="Title">
+        <input class="textinput span12" type="text" name="title" placeholder="Title">
       </div>
-      <div class="span6">
-        <h4 class="heading">Price</h4>
-        <input class="textinput" type="text" name="price" placeholder="Price">
+      <div class="input-prepend input-append span6">
+        <h4 class="heading heading-5">Price</h4>
+        <span class="add-on">$</span>
+        <input class="textinput span12 textinput-1" type="text" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">
