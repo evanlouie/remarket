@@ -11,14 +11,15 @@
           <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
           <input class="textinput span2 textinput-1 textinput-2" type="text" name="minP" placeholder="Minimum price">
           <input class="textinput span2 textinput-1 textinput-2" type="text" name="maxP" placeholder="Maximum price">
-          <input class="textinput span7 textinput-3" type="text" name="city" placeholder="City">
+          <input class="textinput span6 textinput-3" type="text" name="city" placeholder="City">
           <select name="category_id">
             <option value="all">All</option>
             @foreach ($categories as $c)
             <option value="{{$c->id}}">{{$c->title}}</option>
             @endforeach
           </select>
-          <button class="btn btn-primary" type='submit'>Search</button>
+          <button class="btn btn-success" type='submit' style="padding-left: 28px; padding-right: 28px; margin-right: 5px;">Search</button>
+          <button class="btn btn-warning" type='submit' style="padding-left: 28px; padding-right: 28px;">Browse</button>
         </form>
       </span>
     </div>
