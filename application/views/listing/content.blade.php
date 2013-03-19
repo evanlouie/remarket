@@ -28,13 +28,13 @@
     </div><br />
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
-  <span class="span5">
-    <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
-    <div id="map_canvas" class="pull-right" style="width:400px; height:400px;"></div>
+  <span class="span5"><a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a></span>
+  <span class="span5"><br />
+    <div id="map_canvas" class="pull-right" style="width:400px; height:400px; padding-top: 10px;"></div>
   </span>
 </div>
 <div class="pull-center">
-  <div class="pull-center">
+
     <div class = "image-collection">
     <ul class="thumbnails">
       @foreach ($listing->images as $image)
@@ -45,7 +45,7 @@
       </li>
       @endforeach
     </ul>
-  </div>
+ 
   </div>
 </div>
 
