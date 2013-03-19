@@ -71,3 +71,11 @@
   margin-top:.2cm;
   width: 200px;
 }
+
+.icon.icon-chevron-right {
+  font-size: 14px;
+  margin: 3px 0px 0px 0px;
+  color: #8f8f8f;
+  height: 14px;
+  width: 14px;
+}
