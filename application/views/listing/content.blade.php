@@ -11,7 +11,7 @@
     </div>
   @endif
 
-  <span class="span5 offset1">
+  <span class="span5">
     <h1 class="heading">{{ $listing->title }}</h1>
     <h5 class="heading">{{ $listing->category }}</h5>
 
@@ -19,7 +19,7 @@
         <span class = "listing-heading" >Asking Price:</span> <span class ="listing-labels">${{ $listing->price }}</span>
     </div><br />
     <div class="row-fluid">  
-        <span class = "listing-heading">Availability:</span> <span class = "listing-labels">{{ $listing->date_available }} to {{ $listing->date_unavailable }} </span>
+        <span class = "listing-heading">Availability:</span> <span class = "listing-labels">{{ substr($listing->date_available,0,-9) }} to {{ substr($listing->date_unavailable,0,-9) }} </span>
     </div>
 
     <div class="row-fluid">  
@@ -28,7 +28,7 @@
     </div><br />
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
-  <span class="span6">
+  <span class="span5 offset1">
     <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
    
     <div id="map_canvas" class="pull-right" style="width:550px; height:400px;"></div>

@@ -123,18 +123,29 @@ class Listing_Controller extends Base_Controller {
 				{
 					$location = Location::find(Input::get('location_id'));
 				}
-				if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
+				if(Input::has('address') || Input::has('city') || Input::has('postal_code'))
 				{
 					$location = new Location;
-					$location->address = Input::get('address');
-					$location->city = Input::get('city');
-					$location->postal_code = Input::get('postal_code');
+					(Input::has('address') ? 	$location->address = Input::get('address') :
+												$location->address = '');
+					(Input::has('city') ?	$location->city = Input::get('city') :
+											$location->city = '');
+					(Input::has('postal_code') ?	$location->postal_code=Input::get('postal_code') :
+													$location->postal_code='');
+					// $location->address = Input::get('address');
+					// $location->city = Input::get('city');
+					// $location->postal_code = Input::get('postal_code');
 					$location->account_id = $account->id;
 					$location->save();
 
 					$location = Location::where_address_and_city_and_postal_code(Input::get('address'), Input::get('city'), Input::get('postal_code'))->first();
 
 
+				}
+				else 
+				{
+					Session::put('alert', 'Incomplete Location Data');
+					// $view = View::make('')
 				}
 				$listing = new Listing;
 				$listing->title = Input::get('title');
@@ -283,7 +294,13 @@ class Listing_Controller extends Base_Controller {
 		{
 			$flags = Flag::where_listing_id($id)->get();
 			$size = sizeof($flags);
-			if( $size < 4 ) {
+			$account = Account::find(Session::get('id'));
+			$flag = Flag::where('listing_id', '=', $id)
+							->where('account_id', '=', $account->id)->get();
+			if(sizeof($flag)!=0) {
+				$error = "<strong>Error!</strong> You have already flagged this post.";	
+			}
+			else if( $size < 4 ) {
 				$flag = new Flag;
 				$flag->account_id = Session::get('id');
 				$flag->listing_id = $id;
