@@ -1,16 +1,5 @@
 <div class="container-fluid">
 <div class="row-fluid">
-  @if(isset($error))
-    <div class="alert alert-error">
-      {{ $error }}
-    </div>
-  @endif
-  @if(isset($success))
-    <div class="alert alert-success">
-      {{ $success }}
-    </div>
-  @endif
-
   <span class="span5">
     <h1 class="heading">{{ $listing->title }}</h1>
     <h5 class="heading">{{ $listing->category }}</h5>

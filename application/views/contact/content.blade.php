@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="row-fluid">
-  <span class="well span4 offset2">
+  <span class="well span6 offset1">
     <form action="/contact/" method="post">
       <fieldset>
         <input class="textinput" type="email" placeholder="Your email" name="email"><br>

@@ -3,6 +3,7 @@
 
 @section('header')
   @include('partials.header');
+  {{ HTML::style('css/aboutSidebar.css')}}
 @endsection
 
 @section('loginbar')

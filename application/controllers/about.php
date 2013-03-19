@@ -28,9 +28,8 @@ class About_Controller extends Base_Controller {
 	{
 		if(Session::has('id') )
 		{
-			$account = Account::find(Session::get('id'));
 			// Check if admin
-			if( $account->admin ) {
+			if( Session::get('admin') == 1) {
 				if( Input::has('title') && Input::has('body')) {
 					// Save page
 					$page = Staticpage::find($id);
@@ -89,11 +88,10 @@ class About_Controller extends Base_Controller {
 
 	public function action_create()
 	{
-		if(Session::has('id') )
+		if( Session::has('id') )
 		{
-			$account = Account::find(Session::get('id'));
 			// Check if admin
-			if( $account->admin ) {
+			if( Session::get('admin') == 1) {
 				if( Input::has('title') && Input::has('body')) {
 					// Save page
 					$page = new Staticpage;

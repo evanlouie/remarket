@@ -288,8 +288,6 @@ class Listing_Controller extends Base_Controller {
 
 	public function action_flag($id) 
 	{
-		$success = null;
-		$error = null;
 		if (Auth::check() && Session::has('id')) 
 		{
 			$flags = Flag::where_listing_id($id)->get();
@@ -298,42 +296,47 @@ class Listing_Controller extends Base_Controller {
 			$flag = Flag::where('listing_id', '=', $id)
 							->where('account_id', '=', $account->id)->get();
 			if(sizeof($flag)!=0) {
-				$error = "<strong>Error!</strong> You have already flagged this post.";	
+				$alert = '<div class="alert alert-danger">
+					<strong>Error!</strong> You have already flagged this post.</div>';
+				Session::put('alert', $alert);
 			}
 			else if( $size < 4 ) {
 				$flag = new Flag;
 				$flag->account_id = Session::get('id');
 				$flag->listing_id = $id;
 				$flag->save();
-				$success = '<strong>Success! </strong>This listing has been flagged.';
+				$alert = '<div class="alert alert-success">
+					<strong>Success! </strong>This listing has been flagged.</div>';
+				Session::put('alert', $alert);
 			}
 			else {
 				// Set up view
 				$listing = Listing::find($id);
 				$location = $listing->location()->first();
-				$success = '<strong>Success! </strong>This listing has been flagged.';
+				$alert = '<div class="alert alert-success">
+					<strong>Success! </strong>This listing has been flagged.</div>';
+				Session::put('alert', $alert);
 				// Delete listing
 				$this->action_delete($id);
 				// Show user view as though listing has just been flagged
 				$view = View::make('listing.index')
 				->with('title', $listing->title)
 				->with('listing', $listing)
-				->with('location', $location)
-				->with('success', $success);
+				->with('location', $location);
 				return $view;
 			}
 		} 
 		else {
-			$error = '<strong>Error! </strong>You must be logged in to flag a post.';
+			$alert = '<div class="alert alert-success">
+					<strong>Error! </strong>You must be logged in to flag a post.</div>';
+			Session::put('alert', $alert);
 		}
 		$listing = Listing::find($id);
 		$location = $listing->location()->first();
 		$view = View::make('listing.index')
 		->with('title', $listing->title)
 		->with('listing', $listing)
-		->with('location', $location)
-		->with('success', $success)
-		->with('error', $error);
+		->with('location', $location);
 		return $view;
 	}
 	public function action_imgUpload() {
