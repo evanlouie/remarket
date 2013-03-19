@@ -18,6 +18,9 @@
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
   <span class="span5 offset1">
+    @if(Session::get('admin') == 1)
+      <a id="warning" class="btn btn-danger pull-right">Delete This Post</a>
+    @endif
     <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
    
     <div id="map_canvas" class="pull-right" style="width:550px; height:400px;"></div>
@@ -74,4 +77,12 @@
       });"; ?>
     
   }
+
+  $(document).on('click', '#warning', function() {
+  confirm = confirm( 'Are you sure you want to delete this listing?' );
+  if(confirm == true) { window.location = "/listing/masterDelete/" + {{$listing->id}}; }
+  else {
+    delete window.confirm;
+  }
+  });
 </script>

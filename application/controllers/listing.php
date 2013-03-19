@@ -175,45 +175,65 @@ class Listing_Controller extends Base_Controller {
 		}
 		
 	}
+
 	public function action_delete($id)
 	{
-		// if (Session::has('id')) 
-		// {
-		// 	$account = Session::get('id');
-		// 	if (Input::has('id')) 
-		// 	{
-		// 		$id = Input::get('id');
-		// 		if ($listing = Listing::find($id))
-		// 		{
-		// 			$images = Image::where_listing_id($listing->id);
-		// 			foreach($images as $image)
-		// 			{
-		// 				$image->delete();
-		// 			}
-		// 			$listing->delete();
-		// 		}
-		// 		else
-		// 		{
-		// 			die("Invalid Listing ID");
-		// 		}
-		// 	}
-			
-		// }
 		if (Session::has('id') && Auth::check()) 
 		{
 			$account = Session::get('id');
 			if ($listing = Listing::find($id))
 			{
-				$listing->delete();
-				return Redirect::to('/account');
+				$location = Location::find($listing->location_id);
+				if( $location->account_id == $account ) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/account/myListings');
+				}
+				elseif( Session::get('admin') == 1) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/account/flaggedListings');
+				}
+				else {
+					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							"You do not have permission to delete that listing.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/');
+				}
 			}
 			else
 			{
 				die("Invalid Listing ID");
 			}
-			
 		}
-		
+	}
+
+	public function action_masterDelete($id)
+	{
+		if (Session::has('id') && Auth::check()) 
+		{
+			$account = Session::get('id');
+			if ($listing = Listing::find($id))
+			{
+				if( Session::get('admin') == 1) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/listing');
+				}
+				else {
+					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							"You do not have permission to delete that listing.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/');
+				}
+			}
+		}
 	}
 
 	public function action_edit($id) 
@@ -339,7 +359,7 @@ class Listing_Controller extends Base_Controller {
 			}
 		} 
 		else {
-			$alert = '<div class="alert alert-success">
+			$alert = '<div class="alert alert-danger">
 					<strong>Error! </strong>You must be logged in to flag a post.</div>';
 			Session::put('alert', $alert);
 		}
@@ -359,7 +379,7 @@ class Listing_Controller extends Base_Controller {
 		$view = View::make('listing.index')
 		->with('title', $listing->title)
 		->with('listing', $listing)
-		->with('location', $location);
+		->with('location', $loc);
 		return $view;
 	}
 	public function action_imgUpload() {

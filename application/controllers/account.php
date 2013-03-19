@@ -279,6 +279,41 @@ class Account_Controller extends Base_Controller {
 		return Redirect::to('home');
 	}
 
+	public function action_flaggedlistings()
+	{
+		if(Auth::check())
+		{
+			if(Session::has('id'))
+			{
+				if(Session::get('admin') == 1) {
+					$flags = Flag::all();
+					$listings = array();
+					foreach ($flags as $flag)
+					{
+						if( array_key_exists($flag->listing_id, $listings) ) {
+							$listings[$flag->listing_id]->flags += 1;
+						} 
+						else {
+							$listing = Listing::find($flag->listing_id);
+							$listing->flags = 1;
+							$listing->location = $listing->location()->first();
+							$listing->category = Categorie::find($listing->category_id)->title;
+							$listings[$listing->id] = $listing;
+						}
+					}
+
+					$view = View::make('account.flagged_listings.index')
+					->with('title', 'Flagged Listings')
+					->with('listings', $listings);
+					return $view;
+				}
+				else {
+					Redirect::to('/account/mylistings');
+				}
+			}
+		}
+	}
+
 	public function action_mylistings()
 	{
 		if(Auth::check())
