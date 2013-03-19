@@ -312,13 +312,25 @@ class Listing_Controller extends Base_Controller {
 			else {
 				// Set up view
 				$listing = Listing::find($id);
-				$location = $listing->location()->first();
+				$imageArray = array();
+				$images = $listing->images()->get();
+				foreach($images as $image) {
+					array_push($imageArray, $image);
+				}
+				$listing->images = $imageArray;
+				$loc = $listing->location()->first();
+				$account = Account::find($loc->account_id);
+				$listing->email = $account->email;
+				$listing->date_available = substr($listing->date_available, 0, 10);
+				$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
+
+				// Delete listing
+				$this->action_delete($id);
+
+				// Show view
 				$alert = '<div class="alert alert-success">
 					<strong>Success! </strong>This listing has been flagged.</div>';
 				Session::put('alert', $alert);
-				// Delete listing
-				$this->action_delete($id);
-				// Show user view as though listing has just been flagged
 				$view = View::make('listing.index')
 				->with('title', $listing->title)
 				->with('listing', $listing)
@@ -332,7 +344,18 @@ class Listing_Controller extends Base_Controller {
 			Session::put('alert', $alert);
 		}
 		$listing = Listing::find($id);
-		$location = $listing->location()->first();
+		$imageArray = array();
+
+		$images = $listing->images()->get();
+		foreach($images as $image) {
+			array_push($imageArray, $image);
+		}
+		$listing->images = $imageArray;
+		$loc = $listing->location()->first();
+		$account = Account::find($loc->account_id);
+		$listing->email = $account->email;
+		$listing->date_available = substr($listing->date_available, 0, 10);
+		$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
 		$view = View::make('listing.index')
 		->with('title', $listing->title)
 		->with('listing', $listing)
