@@ -1,6 +1,10 @@
-<div class="container container-1">
+<div class="container-fluid1">
   <div class="container">
-    <h1 class="heading pull-left">Change Account Details</h1>
+    <div class="row-fluid">
+      <span class="span12">
+        <h1 class="heading">Change Account Details</h1>
+      </span>
+    </div>
   </div>
 </div>
 @if(isset($error))
@@ -88,7 +92,7 @@
   $(document).on('click', '#warning', function() {
     id = $(this).attr('id');
     confirm = confirm( 'Are you sure you want to delete your account?' );
-    if(confirm == true) { window.location = "/location/delete/" + id; }
+    if(confirm == true) { window.location = "/account/delete/" + id; }
     else {
       delete window.confirm;
     }

@@ -10,20 +10,23 @@
       {{ $success }}
     </div>
   @endif
-  <br><br><br><br><br><br><br><br><br><br>
+
   <span class="span5 offset1">
     <h1 class="heading">{{ $listing->title }}</h1>
     <h5 class="heading">{{ $listing->category }}</h5>
-    <h4 class="heading">{{ $listing->price }}</h4>
-    <div class="row-fluid">
-      <span class="span6">
-        <h4 class="heading">{{ $listing->date_available }}</h4>
-      </span>
-      <span class="span6">
-        <h4 class="heading">{{ $listing->date_unavailable }}</h4>
-      </span>
+
+    <div class="row-fluid">   
+        <span class = "listing-heading" >Asking Price:</span> <span class ="listing-labels">${{ $listing->price }}</span>
+    </div><br />
+    <div class="row-fluid">  
+        <span class = "listing-heading">Availability:</span> <span class = "listing-labels">{{ $listing->date_available }} to {{ $listing->date_unavailable }} </span>
     </div>
-    <a class="btn btn-success btn-large pull-center" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
+
+    <div class="row-fluid">  
+        <h4 class = "heading">Description</h4>{{$listing->description}}
+        <br / > 
+    </div><br />
+    <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
   <span class="span5">
     <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
@@ -32,6 +35,7 @@
 </div>
 <div class="pull-center">
   <div class="pull-center">
+    <div class = "image-collection">
     <ul class="thumbnails">
       @foreach ($listing->images as $image)
       <li class="span2">
@@ -42,10 +46,9 @@
       @endforeach
     </ul>
   </div>
+  </div>
 </div>
-<div>
-  {{$listing->description}}
-</div>
+
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHQnPSIos4woqO1xkhsUh9Si5ebskymUo&sensor=true"></script>
 <script type="text/javascript">
@@ -74,7 +77,7 @@
           var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location,
-              title:'$listing->title'
+              title:'" . addslashes($listing->title) . "'
           });
           map.setCenter(results[0].geometry.location);
         }
