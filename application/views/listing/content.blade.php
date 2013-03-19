@@ -10,7 +10,6 @@
       {{ $success }}
     </div>
   @endif
-  <br><br><br><br><br><br><br><br><br><br>
   <span class="span5 offset1">
     <h1 class="heading">{{ $listing->title }}</h1>
     <h5 class="heading">{{ $listing->category }}</h5>
