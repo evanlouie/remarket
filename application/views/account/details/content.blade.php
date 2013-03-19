@@ -88,7 +88,7 @@
   $(document).on('click', '#warning', function() {
     id = $(this).attr('id');
     confirm = confirm( 'Are you sure you want to delete your account?' );
-    if(confirm == true) { window.location = "/location/delete/" + id; }
+    if(confirm == true) { window.location = "/account/delete/" + id; }
     else {
       delete window.confirm;
     }

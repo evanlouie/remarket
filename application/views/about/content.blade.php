@@ -1,40 +1,33 @@
-<div class="container-fluid container-fluid-1">
-  <div class="container">
+<div class="hero-unit" style="height:100px;">
+    <h1 class="heading pull-left">{{$page->title}}</h1>
 </div>
-</div>
-<div class="container-fluid container-fluid-2">
-  <div>
-    <div class="row-fluid">
-      <span class="span12">
-        <form class="pull-center" action="listing" method='GET'>
-          <h1 class="heading">Search</h1>
-          <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="minP" placeholder="Minimum price">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="maxP" placeholder="Maximum price">
-          <input class="textinput span7 textinput-3" type="text" name="city" placeholder="City">
-          <select name="category_id">
-            <option value="all">All</option>
-            @foreach ($categories as $c)
-            <option value="{{$c->id}}">{{$c->title}}</option>
-            @endforeach
-          </select>
-          <button class="btn btn-primary" type='submit'>Search</button>
-        </form>
-      </span>
-    </div>
-    <span></span>
-  </div>
+<div class="container-fluid">
   <div class="row-fluid">
-    <span class="span9">
-      <div class="hero-unit">
-        <p>[ Here we would like to put some information about the initiative ]</p>
-        <div class="btns">
-          <a href="#" class="btn btn-primary btn-large">Learn More</a>
-        </div>
-      </div>
-    </span>
     <span class="span3">
-      @include('partials.forms.signup') 
+      <div>
+        <ul class="nav nav-list bs-docs-sidenav" >
+          @foreach ($pages as $list_page)
+            <li><a id="{{$page->id}}" href="/about/{{$list_page->id}}">{{$list_page->title}}</a></li>
+          @endforeach
+        </ul> 
+        <a href="/about/create" class="span12 btn btn-success btn-style">Add a Page</a><br>
+        <a href="/about/edit/{{$page->id}}" class="span12 btn btn-warning btn-style">Edit this Page</a><br>
+        <a id="warning" class="span12 btn btn-danger btn-style">Delete this Page</a>
+      </div>
+    </span> 
+    <span class="span9">
+      {{$page->body}}
     </span>
   </div>
 </div>
+<script>
+  $(document).on('click', '#warning', function() {
+    id = $(this).attr('id');
+    confirm = confirm( 'Are you sure you want to delete this page?' );
+    if(confirm == true) { window.location = "/about/delete/{{$page->id}}"; }
+    else {
+      delete window.confirm;
+    }
+  });
+  $('#{{$page->id}}').attr('class', 'active');
+</script>
