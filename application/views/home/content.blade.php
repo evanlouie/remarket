@@ -18,8 +18,8 @@
             <option value="{{$c->id}}">{{$c->title}}</option>
             @endforeach
           </select>
-          <button class="btn btn-success" type='submit' style="padding-left: 28px; padding-right: 28px; margin-right: 5px;">Search</button>
-          <a href="/listing/" class="btn btn-warning" style="padding-left: 28px; padding-right: 28px;">Browse</button></a>
+          <button class="btn btn-primary" type='submit' style="padding-left: 28px; padding-right: 28px; margin-right: 5px;">Search</button>
+          <a href="/listing/" class="btn btn-success" style="padding-left: 28px; padding-right: 28px;">Browse</button></a>
         </form>
       </span>
     </div>

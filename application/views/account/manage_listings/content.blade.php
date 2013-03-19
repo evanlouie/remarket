@@ -1,6 +1,10 @@
-<div class="container container1" >
+<div class="container-fluid">
   <div class="container">
-    <h1 class="heading pull-left">My Listings</h1>
+    <div class="row-fluid">
+      <span class="span12">
+        <h1 class="heading">My Listings</h1>
+      </span>
+    </div>
   </div>
 </div>
 
@@ -34,13 +38,13 @@
   </span>
 </div>
 <script>
-  $(document).on('click', '.warning', function() {
-    id = $(this).attr('id');
-    confirm = confirm( 'Are you sure you want to delete this listing?' );
-    if(confirm == true) { window.location = "/listing/delete/" + id; }
-    else {
-      delete window.confirm;
-    }
-  });
-  $('#myListings').attr('class', 'active');
+$(document).on('click', '.warning', function() {
+  id = $(this).attr('id');
+  confirm = confirm( 'Are you sure you want to delete this listing?' );
+  if(confirm == true) { window.location = "/listing/delete/" + id; }
+  else {
+    delete window.confirm;
+  }
+});
+$('#myListings').attr('class', 'active');
 </script>

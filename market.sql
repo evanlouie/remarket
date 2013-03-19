@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2013 at 12:54 AM
+-- Generation Time: Mar 19, 2013 at 04:11 AM
 -- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- PHP Version: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `accounts`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts` (
+DROP TABLE IF EXISTS `accounts`;
+CREATE TABLE `accounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `accounts_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `accounts`
@@ -44,15 +45,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `expirationEmail`, `flagEmail`, `wishlistEmail`, `admin`) VALUES
 (1, '0@gmail.com', '$2a$08$jJ4tJK0zLA2phcNZYOotOOJDRj.z/gy5Y4dgmXdYvV82/aYmHlAWu', 0, 0, 1, 0),
-(2, '1@gmail.com', '$2a$08$1D85o1Jpg4pMbJJ/whr7q..PT/xogqBY1xdexLK2qBKQEqDz/ymKO', 0, 0, 1, 0),
 (3, '2@gmail.com', '$2a$08$QxxaYGqgu/VYUkXT4Dmx6eQocrKGVSERAN3WvQ5fN2wEPn.8e4P6q', 0, 0, 1, 0),
-(4, '3@gmail.com', '$2a$08$HwlxIdtNBMZwuunYJyDvSun/7LJjUgj7VvzF..C/VdTZ22Y72GwM2', 0, 0, 1, 0),
-(5, '4@gmail.com', '$2a$08$ieSBuiRR0uNn3raZxNHhZ.NEIBpAzs/YNWVrFDA5IqlDfgbINTq3O', 0, 0, 1, 0),
+(5, '4@gmail.com', '$2a$08$ieSBuiRR0uNn3raZxNHhZ.NEIBpAzs/YNWVrFDA5IqlDfgbINTq3O', 0, 0, 1, 1),
 (6, '5@gmail.com', '$2a$08$SKL6Eb5lbynnyAMX6fNM4uRc0woT2/d5eV/wVhZH2IYgA58Nha9Ou', 0, 0, 1, 0),
 (7, '6@gmail.com', '$2a$08$A81qVmgVGtvscoovXExTB.e9ob0jODpwaiNidbeUJySmIljm7RE8i', 0, 0, 1, 0),
 (8, '7@gmail.com', '$2a$08$aCIRoJT7Hnnsr4UWu8Gio.yTjXXgBcM1hdvo1SH43qDvpCGy.Yw82', 0, 0, 1, 0),
 (9, '8@gmail.com', '$2a$08$Sqx8i2ZdwriqzynTm7NrrOjzji5E2DiU6qB5QGz9bBdDYzJ/bp//.', 0, 0, 1, 0),
-(10, '9@gmail.com', '$2a$08$SJwWmq9byu8Fr.AWsp5uH.gQS5scRvs4yfgWRKOrGnGZaSMcwUcfa', 0, 0, 1, 0);
+(10, '9@gmail.com', '$2a$08$SJwWmq9byu8Fr.AWsp5uH.gQS5scRvs4yfgWRKOrGnGZaSMcwUcfa', 0, 0, 1, 0),
+(12, '1@gmail.com', '$2a$08$V3htQnlaVWtVeTRabG5UVeB/QS1uBLU.8pHddzNQsLtkLPcHWJQq2', 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,8 @@ INSERT INTO `accounts` (`id`, `email`, `password`, `expirationEmail`, `flagEmail
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
@@ -90,7 +91,8 @@ INSERT INTO `categories` (`id`, `title`) VALUES
 -- Table structure for table `flags`
 --
 
-CREATE TABLE IF NOT EXISTS `flags` (
+DROP TABLE IF EXISTS `flags`;
+CREATE TABLE `flags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `listing_id` int(10) unsigned NOT NULL,
@@ -105,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `flags` (
 -- Table structure for table `images`
 --
 
-CREATE TABLE IF NOT EXISTS `images` (
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE `images` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(200) NOT NULL,
   `listing_id` int(10) unsigned NOT NULL,
@@ -138,26 +141,6 @@ INSERT INTO `images` (`id`, `description`, `listing_id`) VALUES
 (18, 'PIC DESCRIPTIOIN', 4),
 (19, 'PIC DESCRIPTIOIN', 4),
 (20, 'PIC DESCRIPTIOIN', 4),
-(21, 'PIC DESCRIPTIOIN', 5),
-(22, 'PIC DESCRIPTIOIN', 5),
-(23, 'PIC DESCRIPTIOIN', 5),
-(24, 'PIC DESCRIPTIOIN', 5),
-(25, 'PIC DESCRIPTIOIN', 5),
-(26, 'PIC DESCRIPTIOIN', 6),
-(27, 'PIC DESCRIPTIOIN', 6),
-(28, 'PIC DESCRIPTIOIN', 6),
-(29, 'PIC DESCRIPTIOIN', 6),
-(30, 'PIC DESCRIPTIOIN', 6),
-(31, 'PIC DESCRIPTIOIN', 7),
-(32, 'PIC DESCRIPTIOIN', 7),
-(33, 'PIC DESCRIPTIOIN', 7),
-(34, 'PIC DESCRIPTIOIN', 7),
-(35, 'PIC DESCRIPTIOIN', 7),
-(36, 'PIC DESCRIPTIOIN', 8),
-(37, 'PIC DESCRIPTIOIN', 8),
-(38, 'PIC DESCRIPTIOIN', 8),
-(39, 'PIC DESCRIPTIOIN', 8),
-(40, 'PIC DESCRIPTIOIN', 8),
 (41, 'PIC DESCRIPTIOIN', 9),
 (42, 'PIC DESCRIPTIOIN', 9),
 (43, 'PIC DESCRIPTIOIN', 9),
@@ -178,26 +161,6 @@ INSERT INTO `images` (`id`, `description`, `listing_id`) VALUES
 (58, 'PIC DESCRIPTIOIN', 12),
 (59, 'PIC DESCRIPTIOIN', 12),
 (60, 'PIC DESCRIPTIOIN', 12),
-(61, 'PIC DESCRIPTIOIN', 13),
-(62, 'PIC DESCRIPTIOIN', 13),
-(63, 'PIC DESCRIPTIOIN', 13),
-(64, 'PIC DESCRIPTIOIN', 13),
-(65, 'PIC DESCRIPTIOIN', 13),
-(66, 'PIC DESCRIPTIOIN', 14),
-(67, 'PIC DESCRIPTIOIN', 14),
-(68, 'PIC DESCRIPTIOIN', 14),
-(69, 'PIC DESCRIPTIOIN', 14),
-(70, 'PIC DESCRIPTIOIN', 14),
-(71, 'PIC DESCRIPTIOIN', 15),
-(72, 'PIC DESCRIPTIOIN', 15),
-(73, 'PIC DESCRIPTIOIN', 15),
-(74, 'PIC DESCRIPTIOIN', 15),
-(75, 'PIC DESCRIPTIOIN', 15),
-(76, 'PIC DESCRIPTIOIN', 16),
-(77, 'PIC DESCRIPTIOIN', 16),
-(78, 'PIC DESCRIPTIOIN', 16),
-(79, 'PIC DESCRIPTIOIN', 16),
-(80, 'PIC DESCRIPTIOIN', 16),
 (81, 'PIC DESCRIPTIOIN', 17),
 (82, 'PIC DESCRIPTIOIN', 17),
 (83, 'PIC DESCRIPTIOIN', 17),
@@ -325,7 +288,8 @@ INSERT INTO `images` (`id`, `description`, `listing_id`) VALUES
 -- Table structure for table `laravel_migrations`
 --
 
-CREATE TABLE IF NOT EXISTS `laravel_migrations` (
+DROP TABLE IF EXISTS `laravel_migrations`;
+CREATE TABLE `laravel_migrations` (
   `bundle` varchar(50) NOT NULL,
   `name` varchar(200) NOT NULL,
   `batch` int(11) NOT NULL,
@@ -360,7 +324,8 @@ INSERT INTO `laravel_migrations` (`bundle`, `name`, `batch`) VALUES
 -- Table structure for table `listings`
 --
 
-CREATE TABLE IF NOT EXISTS `listings` (
+DROP TABLE IF EXISTS `listings`;
+CREATE TABLE `listings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
@@ -374,53 +339,45 @@ CREATE TABLE IF NOT EXISTS `listings` (
   PRIMARY KEY (`id`),
   KEY `listings_location_id_foreign` (`location_id`),
   KEY `listings_category_id_foreign` (`category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `listings`
 --
 
 INSERT INTO `listings` (`id`, `title`, `description`, `category_id`, `price`, `date_available`, `date_unavailable`, `created_at`, `updated_at`, `location_id`) VALUES
-(1, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 1),
-(2, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 1),
-(3, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 2),
-(4, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 2),
-(5, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 3),
-(6, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 3),
-(7, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 4),
-(8, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 4),
-(9, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 5),
-(10, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 5),
-(11, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 6),
-(12, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 6),
-(13, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 7),
-(14, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 7),
-(15, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 8),
-(16, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 8),
-(17, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 9),
-(18, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 9),
-(19, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 10),
-(20, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 10),
-(21, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 11),
-(22, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 11),
-(23, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 12),
-(24, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 12),
-(25, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 13),
-(26, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 13),
-(27, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 14),
-(28, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 14),
-(29, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 15),
-(30, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 15),
-(31, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 16),
-(32, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 16),
-(33, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 17),
-(34, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 17),
-(35, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 18),
-(36, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 18),
-(37, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 19),
-(38, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 19),
-(39, '0', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 20),
-(40, '1', 'THSI IFS AWIFAWOEIJFAWIEJFWEIFJ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 20);
+(1, '1/2" Pressure Regulator', 'Used on boiler feed lines to provide make up water to the system SPECIFICATIONS', 10, '30.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 1),
+(2, 'SHARKBITE  \r\n3/4" Cap', 'Connection system for copper, CPVC or PEX pipe', 10, '45.75', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 1),
+(3, '1-1/2" PVC P-Trap Drain', 'P-Trap', 10, '7.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 2),
+(4, 'Antique Brass Huntington Smart Key Entrance Door Lock', 'Latchbolt by knob from either side, except when outside knob is locked by "push in and turn-to-right" action of entire inside knob', 2, '150.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 2),
+(9, '16" x 25'' Roll Reflective Foil Double Bubble Foil Insulation', 'Use for heating and cooling ducts, pipe wrap, air return', 11, '12.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 5),
+(10, '1/2" x 10'' Ultra Poly Pex Pipe', 'Poly Plex Pipe', 6, '55.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 5),
+(11, '6" x 14" White Poly Baseboard Grille, with Filter', 'Save time with replacement filters that are made to fit, no cutting and fitting necessary', 6, '75.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 6),
+(12, 'Cosmetic Jars', 'Industrial Plastics & Paints offers cosmetic jars in to styles single wall and double wall. The double walled containers have an inner liner designed to reduce corner angles so products such as cream are easier to access.', 6, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:50', '2013-03-17 00:33:50', 6),
+(17, '27" Oak Knockdown Wall Microwave Cabinet', '"Oak"-Ready to Assemble', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 9),
+(18, 'Produce Bags', 'Produce Bags are manufactured for the grocery industry and are dispensed off a roll with a perforated tear-off feature for convienent in-store point of sale service.', 6, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 9),
+(19, 'Layflat tubing', 'Layflat tubing has many applications. Most common is making bottom seal bags using thermal impulse heat sealer and clear poly tubing. Our customers us this method to package irregular size objects. We offer our customer either the small convenience roll or the more economical Production roll. Custom sizes and guages can be produced for orders meeting minimum requirements. Layflat is also used for temporary ducting.', 6, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 10),
+(20, 'Electric Shag Faux Fur', 'Stunning combination of charcoal shag fur and pewter lurex! Fabulous costume and apparel fabric. Ideal for crafts and Home Dec too!', 5, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 10),
+(21, 'Bottles', 'These classic style bottles are used for so many types of filling from chemicals to pet products, it is a multi purpose package. ', 4, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 11),
+(22, 'African Mongolian Faux Fur', 'Gorgeous new quality faux fur from Shannon Fabrics! Fur has a 2'''' pile, a luxurious hand and a soft subtle sheen just like the real thing!', 5, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 11),
+(23, 'STOCK BEVELS', '3/4" and 1" wide', 4, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 12),
+(24, '6.8" Square Amber Ceramic Planter', 'Rich colour glaze protects the pot and holds up to the elements', 3, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 12),
+(25, '5" Round Bone Colour Ceramic Planter', 'Beautiful center-piece good for holding items', 3, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 13),
+(26, '38 x 100MM Standard Square Wiring Box', 'Made of hot dipped galvanized steel', 9, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 13),
+(27, '100 Pack 3/16" x 2-1/4" Hex Head Concrete Screws, with Drill Bit', 'Plus drill bit', 7, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 14),
+(28, 'ECOBUST TYPE 2 (10 to 25C) Expansive Mortar - 44 Lbs Pail', 't 3 Easy Steps, Drill, Mix, Pour and watch it Bust! No jack hammering or explosives needed making ECOBUST a safe, non-toxic, eco-friendly solution. No noise, dust, vibrations, fly rock, fumes or any other environmental pollution so it is ideal for sensitive jobs, big or small.', 7, '99.31', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 14),
+(29, '6 Piece 100 Amp Service Entrance Mast Kit', '100 amp', 9, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 15),
+(30, 'UltraVic 10 Feet Galv Roof Sheet 29 Ga', 'UltraVic is a traditional Board and Batten style that is easy to install. Extra strengthening in the side laps and intermediate ribs give UltraVic improved weather protection, incomparable snow load capacity and increased rigidity.', 2, '45.24', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 15),
+(31, 'Galvanized steel', 'alvanized steel is widely used in applications where rust resistance is needed', 2, '66.30', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 16),
+(32, 'Outdoor 24-Hour Digital Block Heater Timer with 2 Outlets', 'Saves energy - turns block heaters on when needed', 9, '164.00', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 16),
+(33, 'Suntuf Cor. Pc 8 Feet Solar Grey', 'UltraVic is a traditional Board and Batten style that is easy to install. ', 2, '154.24', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 17),
+(34, 'aluminum angle', 'General 6061 characteristics and uses: Excellent joining characteristics, good acceptance of applied coatings. ', 2, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:51', '2013-03-17 00:33:51', 17),
+(35, '5" x 15''L Aluminum Backed Foam Pipe Insulation Wrap', 'Self adhesive aluminum foil backed foam roll goes on easy and stays on', 11, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 18),
+(36, '2x8x10 SPF Dimension Lumber', 'SPF Square Edge Lumber. Every piece meets the highest grading standards for strength and appearance. Dimensional lumber is ideal for a wide range of structural and nonstructural applications ', 1, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 18),
+(37, 'Sunbeam 0.7 Cu. Ft. Microwave ', 'not only gives you a better food preparation experience, its stylish design also adds to the decor of your kitchen', 8, '69.99', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 19),
+(38, 'KING SAKRETE Mortar Mix 30kg', 'SAKRETE Mortar Mix is a ready to use mixture of sand and masonry cement. For laying brick, concrete block or field stone.', 7, '123.12', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 19),
+(39, 'Bosch Tall Tub Built-In Dishwasher ', 'Makes life easier after cooking in the kitchen', 8, '800.34', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 20),
+(40, 'Chest Freezer', 'You''ll have enough room for up to 105 lbs of frozen food', 8, '139.99', '2013-07-27 00:00:00', '2013-08-05 00:00:00', '2013-03-17 00:33:52', '2013-03-17 00:33:52', 20);
 
 -- --------------------------------------------------------
 
@@ -428,7 +385,8 @@ INSERT INTO `listings` (`id`, `title`, `description`, `category_id`, `price`, `d
 -- Table structure for table `locations`
 --
 
-CREATE TABLE IF NOT EXISTS `locations` (
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE `locations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `address` varchar(200) NOT NULL,
   `city` varchar(200) NOT NULL,
@@ -436,33 +394,29 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `account_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `locations_account_id_foreign` (`account_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `locations`
 --
 
 INSERT INTO `locations` (`id`, `address`, `city`, `postal_code`, `account_id`) VALUES
-(1, '123 fake St.', 'Vancouver', 'V8V3X4', 1),
-(2, '123 fake St.', 'Vancouver', 'V8V3X4', 1),
-(3, '123 fake St.', 'Vancouver', 'V8V3X4', 2),
-(4, '123 fake St.', 'Vancouver', 'V8V3X4', 2),
-(5, '123 fake St.', 'Vancouver', 'V8V3X4', 3),
-(6, '123 fake St.', 'Vancouver', 'V8V3X4', 3),
-(7, '123 fake St.', 'Vancouver', 'V8V3X4', 4),
-(8, '123 fake St.', 'Vancouver', 'V8V3X4', 4),
-(9, '123 fake St.', 'Vancouver', 'V8V3X4', 5),
-(10, '123 fake St.', 'Vancouver', 'V8V3X4', 5),
-(11, '123 fake St.', 'Vancouver', 'V8V3X4', 6),
-(12, '123 fake St.', 'Vancouver', 'V8V3X4', 6),
-(13, '123 fake St.', 'Vancouver', 'V8V3X4', 7),
-(14, '123 fake St.', 'Vancouver', 'V8V3X4', 7),
-(15, '123 fake St.', 'Vancouver', 'V8V3X4', 8),
-(16, '123 fake St.', 'Vancouver', 'V8V3X4', 8),
-(17, '123 fake St.', 'Vancouver', 'V8V3X4', 9),
-(18, '123 fake St.', 'Vancouver', 'V8V3X4', 9),
-(19, '123 fake St.', 'Vancouver', 'V8V3X4', 10),
-(20, '123 fake St.', 'Vancouver', 'V8V3X4', 10);
+(1, '1370 Marine Dr', 'Vancouver', 'V6R 4K5', 1),
+(2, '1370 Marine Dr', 'Vancouver', 'V6R 4K5', 1),
+(5, '1370 Marine Dr', 'Vancouver', 'V6R 4K5', 3),
+(6, '1370 Marine Dr', 'Vancouver', 'V6R 4K5', 3),
+(9, '5645 West Blvd, Vancouver', 'Vancouver', 'V8V3X4', 5),
+(10, '5645 West Blvd, Vancouver', 'Vancouver', 'V8V3X4', 5),
+(11, '1755 Davie St.', 'Vancouver', 'V8V3X4', 6),
+(12, '1755 Davie St.', 'Vancouver', 'V8V3X4', 6),
+(13, '1133 Hastings St ', 'Vancouver', 'V8V3X4', 7),
+(14, '1133 Hastings St ', 'Vancouver', 'V8V3X4', 7),
+(15, '1523 Davie St.', 'Vancouver', 'V8V3X4', 8),
+(16, '1523 Davie St.', 'Vancouver', 'V8V3X4', 8),
+(17, '1630 15th Ave W', 'Vancouver', 'V8V3X4', 9),
+(18, '1370 Marine Dr', 'Vancouver', 'V6R 4K5', 9),
+(19, '1630 15th Ave W', 'Vancouver', 'V8V3X4', 10),
+(20, '601-1281 Georgia St ', 'Vancouver', 'V6E3J7', 10);
 
 -- --------------------------------------------------------
 
@@ -470,7 +424,8 @@ INSERT INTO `locations` (`id`, `address`, `city`, `postal_code`, `account_id`) V
 -- Table structure for table `staticpages`
 --
 
-CREATE TABLE IF NOT EXISTS `staticpages` (
+DROP TABLE IF EXISTS `staticpages`;
+CREATE TABLE `staticpages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `body` text NOT NULL,
@@ -479,11 +434,15 @@ CREATE TABLE IF NOT EXISTS `staticpages` (
 
 -- --------------------------------------------------------
 
+INSERT INTO `market`.`staticpages` (`id`, `title`, `body`) VALUES 
+(1, 'Main Page', 'This is the default page.');
+
 --
 -- Table structure for table `surveyresults`
 --
 
-CREATE TABLE IF NOT EXISTS `surveyresults` (
+DROP TABLE IF EXISTS `surveyresults`;
+CREATE TABLE `surveyresults` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `material_type` varchar(200) NOT NULL,
   `monetary_value` float NOT NULL,
@@ -497,7 +456,8 @@ CREATE TABLE IF NOT EXISTS `surveyresults` (
 -- Table structure for table `wishlistitems`
 --
 
-CREATE TABLE IF NOT EXISTS `wishlistitems` (
+DROP TABLE IF EXISTS `wishlistitems`;
+CREATE TABLE `wishlistitems` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(200) NOT NULL,
   `account_id` int(10) unsigned NOT NULL,
@@ -511,7 +471,8 @@ CREATE TABLE IF NOT EXISTS `wishlistitems` (
 -- Table structure for table `wishlistmatches`
 --
 
-CREATE TABLE IF NOT EXISTS `wishlistmatches` (
+DROP TABLE IF EXISTS `wishlistmatches`;
+CREATE TABLE `wishlistmatches` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `wishlistitem_id` int(10) unsigned NOT NULL,
   `listing_id` int(10) unsigned NOT NULL,
@@ -528,8 +489,8 @@ CREATE TABLE IF NOT EXISTS `wishlistmatches` (
 -- Constraints for table `flags`
 --
 ALTER TABLE `flags`
-  ADD CONSTRAINT `flags_listing_id_foreign` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `flags_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `flags_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `flags_listing_id_foreign` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `images`
