@@ -2,24 +2,6 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-.navbar .navbar-inner .navbar-form {
-  margin: 10px 0px 0px 0px;
-}
-.navbar .navbar-inner .navbar-form .btn-primary {
-  margin: 0px;
-}
-.navbar .navbar-inner .navbar-form .btn-danger {
-  margin: 0px;
-}
-.navbar .navbar-inner .brand.cke_focus {
-  text-shadow: none;
-  font-family:"helvetica";
-  font-weight: bold;
-  font-size: 39px;
-  color: #ffffff;
-  line-height: 39.984375px;
-  margin: 0px;
-}
 .container-fluid {
   margin-top: 60px;
   margin-bottom: 60px;
