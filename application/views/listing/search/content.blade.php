@@ -7,7 +7,8 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
+
+<div class="container-fluid containuer-fluid-2">
   <div>
     <div class="row-fluid">
       <span class="span12">
@@ -86,64 +87,64 @@
           </table>
         </div>
         <div id="tabs-2">
-          <div id="map_canvas" style="width:500px; height:500px;"></div>
+          <div id="map_canvas" style="width:700px; height:500px;"></div>
         </div>
       </div>
-      </div>
-    </span>
-  </div>
+    </div>
+  </span>
+</div>
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHQnPSIos4woqO1xkhsUh9Si5ebskymUo&sensor=true"></script>
 <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
+$(function() {
+  $( "#tabs" ).tabs();
+});
 </script>
 <script type="text/javascript">
-  $(document).on('click', '#getMap', function() {
-    initialize();
-  });
+$(document).on('click', '#getMap', function() {
+  initialize();
+});
 
-  function clearIt() {
-    document.getElementById('map_canvas').innerHTML = "test";
-  }
+function clearIt() {
+  document.getElementById('map_canvas').innerHTML = "test";
+}
 
-  var geocoder;
-  var map;
-  function initialize() {
-    geocoder = new google.maps.Geocoder();
-    var mapOptions = {
+var geocoder;
+var map;
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var mapOptions = {
     center: new google.maps.LatLng(49.250, -123.111),
     zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-    getAddresses();
   }
+  map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-  function getAddresses() {
-    var address = null;
+  getAddresses();
+}
 
-    <?php foreach( $listings as $listing ) {
-      echo "geocoder.geocode( { 'address': '$listing->location'}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location,
-                title:'".addslashes($listing->title)."'
-            });
-            var contentString = '<div class=" . '"' . 'text-center' . '"' . 
-            "><h4>".addslashes($listing->title)." - "."$"."$listing->price</h4><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.open(map,marker);
-            });
-          }
-        });";
-      }
-    ?>
-  }
+function getAddresses() {
+  var address = null;
+
+  <?php foreach( $listings as $listing ) {
+    echo "geocoder.geocode( { 'address': '$listing->location'}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+          title:'".addslashes($listing->title)."'
+        });
+ var contentString = '<div class=" . '"' . 'text-center' . '"' . 
+ "><h4>".addslashes($listing->title)." - "."$"."$listing->price</h4><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
+ var infowindow = new google.maps.InfoWindow({
+  content: contentString
+});
+ google.maps.event.addListener(marker, 'click', function() {
+  infowindow.open(map,marker);
+});
+}
+});";
+}
+?>
+}
 </script>
