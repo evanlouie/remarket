@@ -3,3 +3,20 @@
   margin-top:30px;
 }
 
+.container-fluid {
+  background: #f5f5f5;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin-top: 70px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  margin-bottom: 50px;
+}
+.container-fluid .container {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.container-fluid .container .row-fluid .span12 .heading {
+  font-size: 68px;
+  line-height: 64px;
+}

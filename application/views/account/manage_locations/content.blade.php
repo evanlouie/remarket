@@ -7,6 +7,7 @@
     </div>
   </div>
 </div>
+
 <div class="row-fluid">
   {{ render( 'account.partials.sidebar' ) }}
   <span class="span9">
@@ -35,13 +36,13 @@
   </span>
 </div>
 <script>
-  $(document).on('click', '.warning', function() {
-    id = $(this).attr('id');
-    confirm = confirm( 'Are you sure you want to delete this location?' );
-    if(confirm == true) { window.location = "/location/delete/" + id; }
-    else {
-      delete window.confirm;
-    }
-  });
-  $('#myLocations').attr('class', 'active');
+$(document).on('click', '.warning', function() {
+  id = $(this).attr('id');
+  confirm = confirm( 'Are you sure you want to delete this location?' );
+  if(confirm == true) { window.location = "/location/delete/" + id; }
+  else {
+    delete window.confirm;
+  }
+});
+$('#myLocations').attr('class', 'active');
 </script>
