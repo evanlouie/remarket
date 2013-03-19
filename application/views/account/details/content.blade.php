@@ -21,29 +21,34 @@
 <div class="container-fluid">
   <div class="row-fluid">
     {{ render( 'account.partials.sidebar' ) }}
-    <span class="span3">
+    <span class="span9">
       <form method="post">
         <fieldset>
           <legend>Change Email</legend>
-          <input class="textinput" type="email" placeholder="Enter new email address" name="email">
-          <input class="textinput" type="email" placeholder="Re-enter new email address" name="emailConfirm">
+         <label class = "account-form-label"> New Email</label>
+          <input class="textinput" type="email" placeholder="Enter new email address" name="email"> <br />
+          <label class = "account-form-label"> Re-enter New Email</label>
+          <input class="textinput" type="email" placeholder="Re-enter new email address" name="emailConfirm"><br />
+         <label class = "account-form-label"> Current Email</label>
           <input class="textinput" type="password" placeholder="Enter current password" name="oldpassword">
           <button class="btn btn-success pull-right" type="submit">Submit Changes</button>
         </fieldset>
       </form>
-    </span>
-    <span class="span3">
+
       <form method="post">
         <fieldset>
           <legend>Change Password</legend>
-          <input class="textinput" type="password" placeholder="Enter new password" name="password">
-          <input class="textinput" type="password" placeholder="Re-enter new password" name="passwordConfirm">
+          <label class = "account-form-label"> New Password</label>
+          <input class="textinput" type="password" placeholder="Enter new password" name="password"><br />
+          <label class = "account-form-label"> Re-enter New Password</label>
+          <input class="textinput" type="password" placeholder="Re-enter new password" name="passwordConfirm"><br />
+          <label class = "account-form-label"> Current Password</label>
           <input class="textinput" type="password" placeholder="Enter current password" name="oldpassword">
           <button class="btn btn-success pull-right" type="submit">Submit Changes</button>
         </fieldset>
       </form>
     </span>
-    <span class="span3">
+    <span class="span9 pull-right">
       <form method="post">
         <fieldset>
           <legend>Change Email Settings</legend>
@@ -84,10 +89,14 @@
         </fieldset>
       </form>
     </span>
-  </div>
-  
-  <div class="row-fluid">
-      <a id="warning" class="btn btn-large btn-danger">Delete Account</a>
+
+  <span class="span9 pull-right">
+     <legend>Delete Account</legend>
+     <label class = "account-form-label">All associated listings and account information will be deleted.</label>
+      <a id="warning" class="btn btn-danger pull-right">Delete Account</a>
+  </span>
+
+
   </div>
 </div>
 
