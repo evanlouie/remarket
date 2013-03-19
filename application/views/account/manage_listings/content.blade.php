@@ -30,14 +30,13 @@
           <td>{{ $listing->category }}</td>
           <td>{{substr($listing->date_unavailable, 0, -9)}}</td>
           <td><a href="/listing/edit/{{$listing->id}}" class="btn btn-primary btn-small">Edit</a></td>
-          <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
+          <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon-trash pull-center"></i></a></td>
         </tr>
         @endforeach
       </tbody>
     </table>
   </span>
 </div>
-<br>
 <script>
 $(document).on('click', '.warning', function() {
   id = $(this).attr('id');

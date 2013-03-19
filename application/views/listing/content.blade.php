@@ -28,9 +28,10 @@
     </div><br />
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
-  <span class="span5">
+  <span class="span6">
     <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
-    <div id="map_canvas" class="pull-right" style="width:400px; height:400px;"></div>
+   
+    <div id="map_canvas" class="pull-right" style="width:550px; height:400px;"></div>
   </span>
 </div>
 <div class="pull-center">

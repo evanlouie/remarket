@@ -85,6 +85,7 @@
       </form>
     </span>
   </div>
+  
   <div class="row-fluid">
       <a id="warning" class="btn btn-large btn-danger">Delete Account</a>
   </div>
