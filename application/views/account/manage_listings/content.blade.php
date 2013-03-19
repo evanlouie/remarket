@@ -37,6 +37,7 @@
     </table>
   </span>
 </div>
+<br>
 <script>
 $(document).on('click', '.warning', function() {
   id = $(this).attr('id');

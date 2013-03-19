@@ -7,6 +7,7 @@
     </div>
   </div>
 </div>
+
 @if(isset($error))
   <div class="alert alert-error">
     <strong>Error!</strong> {{ $error }}
@@ -88,6 +89,8 @@
       <a id="warning" class="btn btn-large btn-danger">Delete Account</a>
   </div>
 </div>
+
+<br>
 <script>
   $(document).on('click', '#warning', function() {
     id = $(this).attr('id');

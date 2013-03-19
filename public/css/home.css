@@ -28,13 +28,13 @@ body {
   left: 0px;
   border:none;
   margin-bottom: 40px;
+  background-image: url('/img/loginbar.jpg');
 }
 #absolute-wrapper .navbar .navbar-inner {
   border: none;
   height: 70px;
   padding-left: 0px;
   padding-right: 0px;
-
 }
 #absolute-wrapper .navbar input.textinput {
   width: 136px;
