@@ -7,10 +7,11 @@
     </div>
   </div>
 </div>
+
 <div class="row-fluid">
   {{ render( 'account.partials.sidebar' ) }}
   <span class="span9">
-    <table class="table table-hover table-stiped">
+    <table class="table table-hover table-stiped"><br>
       <thead>
         <tr>
           <th>Address</th>
@@ -34,14 +35,15 @@
     </table>
   </span>
 </div>
+<br>
 <script>
-  $(document).on('click', '.warning', function() {
-    id = $(this).attr('id');
-    confirm = confirm( 'Are you sure you want to delete this location?' );
-    if(confirm == true) { window.location = "/location/delete/" + id; }
-    else {
-      delete window.confirm;
-    }
-  });
-  $('#myLocations').attr('class', 'active');
+$(document).on('click', '.warning', function() {
+  id = $(this).attr('id');
+  confirm = confirm( 'Are you sure you want to delete this location?' );
+  if(confirm == true) { window.location = "/location/delete/" + id; }
+  else {
+    delete window.confirm;
+  }
+});
+$('#myLocations').attr('class', 'active');
 </script>

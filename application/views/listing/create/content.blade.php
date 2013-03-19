@@ -33,6 +33,7 @@
       </select>
   </div>
 
+<div class="container-fluid container-fluid-2">
     <div class="row-fluid">
       <span class="span6">
         <h4 class="heading heading-5">Location</h4>

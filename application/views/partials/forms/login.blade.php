@@ -11,9 +11,26 @@
 	<a href="/" class="btn btn-link" style="text-shadow:none; font-size: 20px; color: #ffffff;">Reduce, reuse, recycle, REMARKET</a>
 </div>
 <form class="navbar-form pull-right" action="/account/login/" method='post' style="margin-right: 10px;">
-	<input class="textinput" type="email" placeholder="Email" name="email">
-	<input class="textinput" type="password" placeholder="Password" name="password">
-	<button class="btn btn-primary">Login</button>
+	<input class="textinput" type="email" placeholder="Email" name="email" id='email'>
+	<input class="textinput" type="password" placeholder="Password" name="password" id='password'>
+	<button class="btn btn-primary" id='loginButton'>Login</button>
 	<a href="#" class="btn btn-link" style="text-shadow:none">Forgot Password?</a>
 </form>
 @endif
+
+<script>
+	function login() {
+		e = $('#email').val();
+		p = $('#password').val();
+		// alert(e);/
+		path = window.location.pathname;
+		$.post("/account/login/", {email: e, password: p}).done(function() {
+			window.location.reload();
+		});
+	}
+	$(document).on('click','#loginButton', function() {
+		login();
+		return false;
+	});
+
+</script>
