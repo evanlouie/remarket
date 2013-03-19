@@ -2,6 +2,7 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
+
 .container-fluid {
   margin-top: 60px;
   margin-bottom: 60px;
@@ -9,7 +10,7 @@ body {
 .container-fluid .row-fluid .span6 .btn-success {
   margin-top: 50px;
   margin-bottom: 25px;
-  width: 320px;
+  width: 220px;
 }
 .container-fluid .row-fluid .span6 div.div-1 {
   margin: 0px 0px 20px 0px;
@@ -18,3 +19,27 @@ body {
 .container-fluid div .span12 {
   height: 90px;
 }
+
+
+.description{
+  padding-bottom: 10px;
+}
+
+
+.image-collection{
+padding-bottom: 10px;
+margin-left: 70px;
+margin-top:50px;
+}
+
+.listing-heading{
+    font-weight: bolder;
+    font-size: 17.5px;
+    line-height: 20px;
+    margin: 10px 0;
+
+
+
+}
+
+
