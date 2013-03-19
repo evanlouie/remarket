@@ -77,7 +77,7 @@
           var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location,
-              title:'$listing->title'
+              title:'" . addslashes($listing->title) . "'
           });
           map.setCenter(results[0].geometry.location);
         }

@@ -131,10 +131,10 @@
             var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                title:'$listing->title'
+                title:'".addslashes($listing->title)."'
             });
             var contentString = '<div class=" . '"' . 'text-center' . '"' . 
-            "><h4>$listing->title - "."$"."$listing->price</h3><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
+            "><h4>".addslashes($listing->title)." - "."$"."$listing->price</h4><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
