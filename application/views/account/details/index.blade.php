@@ -2,7 +2,7 @@
 
 
 @section('header')
-  @include('partials.header');
+  @include('partials.header')
   {{ HTML::style('css/accountDetails.css')}}
   {{ HTML::style('css/sidebar.css')}}
 @endsection

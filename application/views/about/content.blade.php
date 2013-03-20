@@ -1,8 +1,15 @@
-<div id="wrapper">
-  <div class="hero-unit" style="height:100px;">
-      <h1 class="heading pull-left">{{$page->title}}</h1>
+<div class="container-fluid" id="banner">
+  <div class="container">
+    <div class="row-fluid">
+      <span class="span12">
+        <h1 class="heading" style="margin-left:97px;">{{$page->title}}</h1>
+      </span>
+    </div>
   </div>
-  <div class="container-fluid">
+</div>
+
+
+  <div class="container-fluid" id="bodypages">
     <div class="row-fluid">
       <span class="span3">
         <div>
@@ -19,7 +26,7 @@
           @endif
         </div>
       </span> 
-      <span class="span9">
+      <span class="span9" id="page-body">
         {{$page->body}}
       </span>
     </div>

@@ -15,7 +15,7 @@
         <h4 class="heading">Title</h4>
         <input class="textinput span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
       </div>
-      <div class="input-prepend input-append span6">
+      <div class="input-prepend input-append span2">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
         <input class="textinput span12 textinput-1" type="number" step='any' min='0'  name="price" placeholder="Price">
@@ -27,7 +27,7 @@
       <input class="textinput span4" readonly="readonly" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
       
       <h4 class="heading heading-4">Category</h4>
-      <select class="pull-left pull-left-1" name="category_id">
+      <select class="pull-left pull-left-1 span2" name="category_id">
         @foreach ($categories as $c)
         <option value="{{$c->id}}">{{$c->title}}</option>
         @endforeach
@@ -38,10 +38,10 @@
       <span class="span6">
         <h4 class="heading heading-5">Location</h4>
         Select a prexisting location:<br />
-        <select name="location_id" id='location-select'>
+        <select name="location_id" id='location-select' class="span9">
           <option value="0">Select a location</option>
           @foreach ($locations as $l)
-          <option value="{{$l->id}}">{{ $l->address }}, {{ $l->city }}</option>
+          <option value="{{$l->id}}">{{ $l->address }}, {{ $l->city }}, {{ $l->postal_code }}</option>
           @endforeach
         </select><br />
         Otherwise, create a location:
