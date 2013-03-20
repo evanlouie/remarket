@@ -1,17 +1,6 @@
 <div class="container-fluid">
 <div class="row-fluid">
-  @if(isset($error))
-    <div class="alert alert-error">
-      {{ $error }}
-    </div>
-  @endif
-  @if(isset($success))
-    <div class="alert alert-success">
-      {{ $success }}
-    </div>
-  @endif
-
-  <span class="span5 offset1">
+  <span class="span5">
     <h1 class="heading">{{ $listing->title }}</h1>
     <h5 class="heading">{{ $listing->category }}</h5>
 
@@ -28,9 +17,13 @@
     </div><br />
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>
   </span>
-  <span class="span5">
+  <span class="span5 offset1">
+    @if(Session::get('admin') == 1)
+      <a id="warning" class="btn btn-danger pull-right">Delete This Post</a>
+    @endif
     <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
-    <div id="map_canvas" class="pull-right" style="width:400px; height:400px;"></div>
+   
+    <div id="map_canvas" class="pull-right" style="width:550px; height:400px;"></div>
   </span>
 </div>
 <div class="pull-center">
@@ -84,4 +77,12 @@
       });"; ?>
     
   }
+
+  $(document).on('click', '#warning', function() {
+  confirm = confirm( 'Are you sure you want to delete this listing?' );
+  if(confirm == true) { window.location = "/listing/masterDelete/" + {{$listing->id}}; }
+  else {
+    delete window.confirm;
+  }
+  });
 </script>

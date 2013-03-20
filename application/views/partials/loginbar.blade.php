@@ -1,7 +1,7 @@
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner" style="background: #4c4c4c;
-		border: none;
-		background-image: url('/img/loginbar.jpg');">
+<div class="navbar-fixed-top">
+	<div class="navbar navbar-inner"
+	style="background-image: url('/img/loginbar.jpg');
+	border: none;">
     	@include('partials.forms.login')
     </div>
 </div>

@@ -9,7 +9,7 @@ body {
 }
 #absolute-wrapper {
   position: relative;
-  width: 980px;
+  width: 960px;
   margin: 0 auto;
   height: 1px;
 }
@@ -21,7 +21,7 @@ body {
   left: 177px;
 }
 #absolute-wrapper .navbar {
-  width: 980px;
+  width: 960px;
   height: 60px;
   position: absolute;
   top: 0px;
@@ -100,7 +100,6 @@ body {
   text-align: center;
   color: #cccccc;
 }
-
 .container1{
   margin-top:30px;
 }
@@ -120,4 +119,17 @@ body {
 .container-fluid1 .container .row-fluid .span12 .heading {
   font-size: 68px;
   line-height: 64px;
+  margin-top: 60px;
 }
+.row-fluid {
+  width:960px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+label .account-form-label{
+  color: #cccccc;
+
+
+}
+

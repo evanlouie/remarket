@@ -12,7 +12,12 @@ class Listing_Controller extends Base_Controller {
 			$from = 'FROM listings WHERE ';
 			if(Input::has('city')) {
 				$city = Input::get('city');
-				$from ='FROM listings, locations WHERE locations.city="$city" AND listings.location_id = locations.id AND';
+				$from ='FROM listings, locations 
+						WHERE 
+							(locations.city LIKE "%'.$city.'%" OR 
+							locations.address LIKE "%'.$city.'%" OR
+							locations.postal_code LIKE "%'.$city.'%") AND 
+							listings.location_id = locations.id AND';
 			}
 			$query = "SELECT * $from";
 
@@ -44,7 +49,6 @@ class Listing_Controller extends Base_Controller {
 			{
 				$query = substr($query, 0, -4);
 			}
-
 			$listings = DB::query($query);
 
 		} 
@@ -111,7 +115,7 @@ class Listing_Controller extends Base_Controller {
 			$account = Account::find(Session::get('id'));
 
 
-			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
+			if(Input::has('title') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 			{
 				$location;
@@ -119,12 +123,18 @@ class Listing_Controller extends Base_Controller {
 				{
 					$location = Location::find(Input::get('location_id'));
 				}
-				if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
+				if(Input::has('address') || Input::has('city') || Input::has('postal_code'))
 				{
 					$location = new Location;
-					$location->address = Input::get('address');
-					$location->city = Input::get('city');
-					$location->postal_code = Input::get('postal_code');
+					(Input::has('address') ? 	$location->address = Input::get('address') :
+												$location->address = '');
+					(Input::has('city') ?	$location->city = Input::get('city') :
+											$location->city = '');
+					(Input::has('postal_code') ?	$location->postal_code=Input::get('postal_code') :
+													$location->postal_code='');
+					// $location->address = Input::get('address');
+					// $location->city = Input::get('city');
+					// $location->postal_code = Input::get('postal_code');
 					$location->account_id = $account->id;
 					$location->save();
 
@@ -132,9 +142,16 @@ class Listing_Controller extends Base_Controller {
 
 
 				}
+				else 
+				{
+					Session::put('alert', 'Incomplete Location Data');
+					// $view = View::make('')
+				}
 				$listing = new Listing;
 				$listing->title = Input::get('title');
-				$listing->description = Input::get('description');
+				$listing->description = (Input::has('description')?
+											Input::get('description'):
+											'');	
 				$listing->category_id = Input::get('category_id');
 				$listing->price = Input::get('price');
 				$date_available = Input::get('date_available');
@@ -160,45 +177,65 @@ class Listing_Controller extends Base_Controller {
 		}
 		
 	}
+
 	public function action_delete($id)
 	{
-		// if (Session::has('id')) 
-		// {
-		// 	$account = Session::get('id');
-		// 	if (Input::has('id')) 
-		// 	{
-		// 		$id = Input::get('id');
-		// 		if ($listing = Listing::find($id))
-		// 		{
-		// 			$images = Image::where_listing_id($listing->id);
-		// 			foreach($images as $image)
-		// 			{
-		// 				$image->delete();
-		// 			}
-		// 			$listing->delete();
-		// 		}
-		// 		else
-		// 		{
-		// 			die("Invalid Listing ID");
-		// 		}
-		// 	}
-			
-		// }
 		if (Session::has('id') && Auth::check()) 
 		{
 			$account = Session::get('id');
 			if ($listing = Listing::find($id))
 			{
-				$listing->delete();
-				return Redirect::to('/account');
+				$location = Location::find($listing->location_id);
+				if( $location->account_id == $account ) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/account/myListings');
+				}
+				elseif( Session::get('admin') == 1) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/account/flaggedListings');
+				}
+				else {
+					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							"You do not have permission to delete that listing.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/');
+				}
 			}
 			else
 			{
 				die("Invalid Listing ID");
 			}
-			
 		}
-		
+	}
+
+	public function action_masterDelete($id)
+	{
+		if (Session::has('id') && Auth::check()) 
+		{
+			$account = Session::get('id');
+			if ($listing = Listing::find($id))
+			{
+				if( Session::get('admin') == 1) {
+					$listing->delete();
+					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							"Listing removed.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/listing');
+				}
+				else {
+					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							"You do not have permission to delete that listing.</div>";
+					Session::put('alert', $alert);
+					return Redirect::to('/');
+				}
+			}
+		}
 	}
 
 	public function action_edit($id) 
@@ -206,7 +243,7 @@ class Listing_Controller extends Base_Controller {
 		if (Auth::check() && Session::has('id')) 
 		{
 			$account = Account::find(Session::get('id'));
-			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
+			if(Input::has('title') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 				{
 					$listing = Listing::find($id);
@@ -215,18 +252,26 @@ class Listing_Controller extends Base_Controller {
 					{
 						$location = Location::find(Input::get('location_id'));
 					}
-					if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
+					if(Input::has('address') || Input::has('city') || Input::has('postal_code'))
 					{
 						$location = new Location;
-						$location->address = Input::get('address');
-						$location->city = Input::get('city');
-						$location->postal_code = Input::get('postal_code');
+						(Input::has('address') ?
+								$location->address = Input::get('address') :
+							$location->address = '');
+						(Input::has('city') ? 
+							$location->city = Input::get('city') :
+							$location->city = '');
+						(Input::has('postal_code') ? 
+							$location->postal_code=Input::get('postal_code') :
+							$location->postal_code='');
 						$location->account_id = $account->id;
 						$location->save();
 						$location = Location::where_address_and_city_and_postal_code(Input::get('address'), Input::get('city'), Input::get('postal_code'))->first();
 					}
 					$listing->title = Input::get('title');
-					$listing->description = Input::get('description');
+					$listing->description = (Input::has('description')?
+												Input::get('description'):
+												'');	
 					$listing->category_id = Input::get('category_id');
 					$listing->price = Input::get('price');
 					$date_available = Input::get('date_available');
@@ -273,46 +318,78 @@ class Listing_Controller extends Base_Controller {
 
 	public function action_flag($id) 
 	{
-		$success = null;
-		$error = null;
 		if (Auth::check() && Session::has('id')) 
 		{
 			$flags = Flag::where_listing_id($id)->get();
 			$size = sizeof($flags);
-			if( $size < 4 ) {
+			$account = Account::find(Session::get('id'));
+			$flag = Flag::where('listing_id', '=', $id)
+							->where('account_id', '=', $account->id)->get();
+			if(sizeof($flag)!=0) {
+				$alert = '<div class="alert alert-danger">
+					<strong>Error!</strong> You have already flagged this post.</div>';
+				Session::put('alert', $alert);
+			}
+			else if( $size < 4 ) {
 				$flag = new Flag;
 				$flag->account_id = Session::get('id');
 				$flag->listing_id = $id;
 				$flag->save();
-				$success = '<strong>Success! </strong>This listing has been flagged.';
+				$alert = '<div class="alert alert-success">
+					<strong>Success! </strong>This listing has been flagged.</div>';
+				Session::put('alert', $alert);
 			}
 			else {
 				// Set up view
 				$listing = Listing::find($id);
-				$location = $listing->location()->first();
-				$success = '<strong>Success! </strong>This listing has been flagged.';
+				$imageArray = array();
+				$images = $listing->images()->get();
+				foreach($images as $image) {
+					array_push($imageArray, $image);
+				}
+				$listing->images = $imageArray;
+				$loc = $listing->location()->first();
+				$account = Account::find($loc->account_id);
+				$listing->email = $account->email;
+				$listing->date_available = substr($listing->date_available, 0, 10);
+				$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
+
 				// Delete listing
 				$this->action_delete($id);
-				// Show user view as though listing has just been flagged
+
+				// Show view
+				$alert = '<div class="alert alert-success">
+					<strong>Success! </strong>This listing has been flagged.</div>';
+				Session::put('alert', $alert);
 				$view = View::make('listing.index')
 				->with('title', $listing->title)
 				->with('listing', $listing)
-				->with('location', $location)
-				->with('success', $success);
+				->with('location', $location);
 				return $view;
 			}
 		} 
 		else {
-			$error = '<strong>Error! </strong>You must be logged in to flag a post.';
+			$alert = '<div class="alert alert-danger">
+					<strong>Error! </strong>You must be logged in to flag a post.</div>';
+			Session::put('alert', $alert);
 		}
 		$listing = Listing::find($id);
-		$location = $listing->location()->first();
+		$imageArray = array();
+
+		$images = $listing->images()->get();
+		foreach($images as $image) {
+			array_push($imageArray, $image);
+		}
+		$listing->images = $imageArray;
+		$loc = $listing->location()->first();
+		$account = Account::find($loc->account_id);
+		$listing->email = $account->email;
+		$listing->date_available = substr($listing->date_available, 0, 10);
+		$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
 		$view = View::make('listing.index')
 		->with('title', $listing->title)
 		->with('listing', $listing)
-		->with('location', $location)
-		->with('success', $success)
-		->with('error', $error);
+		->with('location', $loc);
 		return $view;
 	}
 	public function action_imgUpload() {

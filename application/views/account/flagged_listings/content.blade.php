@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row-fluid">
       <span class="span12">
-        <h1 class="heading">My Listings</h1>
+        <h1 class="heading">Flagged Listings</h1>
       </span>
     </div>
   </div>
@@ -18,7 +18,7 @@
           <th>Location</th>
           <th>Category</th>
           <th>Listing Expires</th>
-          <th>Edit</th>
+          <th>Flags</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -29,7 +29,11 @@
           <td class="td-1">{{ $listing->location->address }}, {{ $listing->location->city }}, {{ $listing->location->postal_code }}</td>
           <td>{{ $listing->category }}</td>
           <td>{{substr($listing->date_unavailable, 0, -9)}}</td>
-          <td><a href="/listing/edit/{{$listing->id}}" class="btn btn-primary btn-small">Edit</a></td>
+          <td>
+            @for( $i=1; $i <= $listing->flags; $i++ )
+             <i class="icon-flag"></i>
+            @endfor
+          </td>
           <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon-trash pull-center"></i></a></td>
         </tr>
         @endforeach
@@ -46,5 +50,5 @@ $(document).on('click', '.warning', function() {
     delete window.confirm;
   }
 });
-$('#myListings').attr('class', 'active');
+$('#flaggedListings').attr('class', 'active');
 </script>

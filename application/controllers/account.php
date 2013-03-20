@@ -114,10 +114,11 @@ class Account_Controller extends Base_Controller {
 			// Check that emails match
 			if( $email != $emailConfirm ) {
 				// Error - Email fields do not match
-				$error = "Emails do not match.";
+				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+							'Emails do not match.</div>';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('error', $error)
 				->with('account', $account);
 				return $view;
 			}
@@ -130,20 +131,22 @@ class Account_Controller extends Base_Controller {
 				// Success - Update email and show confirmation
 				$account->email = $email;
 				$account->save();
-				$confirmation = 'Your new email is ' . $email;
+				$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							'Your new email is ' . $email . '</div>';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('confirmation', $confirmation)
 				->with('account', $account);
 				return $view;
 			}
 			else
 			{
 				// Error - Password does not match
-				$error = "Password does not match this account.";
+				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+							'Password does not match this account.';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('error', $error)
 				->with('account', $account);
 				return $view;
 			}
@@ -156,10 +159,11 @@ class Account_Controller extends Base_Controller {
 			// Check that passwords match
 			if( $password != $passwordConfirm ) {
 				// Error - Password fields do not match
-				$error = "Passwords do not match.";
+				$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							'Passwords do not match.</div>';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('error', $error)
 				->with('account', $account);
 				return $view;
 			}
@@ -172,20 +176,22 @@ class Account_Controller extends Base_Controller {
 				// Success - Update password and show confirmation
 				$account->password = Hash::make($password);
 				$account->save();
-				$confirmation = 'Your password has been changed';
+				$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							'Your password has been changed.</div>';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('confirmation', $confirmation)
 				->with('account', $account);
 				return $view;
 			}
 			else
 			{
 				// Error - Password does not match
-				$error = "Your old password was incorrect.";
+				$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							'Your old password was incorrect.</div>';
+				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
-				->with('error', $error)
 				->with('account', $account);
 				return $view;
 			}
@@ -208,10 +214,11 @@ class Account_Controller extends Base_Controller {
 				$account->wishlistEmail = false;
 			}
 			$account->save();
-			$confirmation = 'Your email settings have been update';
+			$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+							'Your email settings have been updated.</div>';
+			Session::put('alert', $alert);
 			$view = View::make('account.details.index')
 			->with('title', 'Change Account Details')
-			->with('confirmation', $confirmation)
 			->with('account', $account);
 			return $view;
 		} 
@@ -220,10 +227,11 @@ class Account_Controller extends Base_Controller {
 					|| Input::has('email') || Input::has('emailConfirm') )
 		{
 			// Error - Missing fields
-			$error = "You're missing some fields.";
+			$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+							'You\'re missing some fields.</div>';
+			Session::put('alert', $alert);
 			$view = View::make('account.details.index')
 			->with('title', 'Change Account Details')
-			->with('error', $error)
 			->with('account', $account);
 			return $view;
 		}
@@ -269,6 +277,41 @@ class Account_Controller extends Base_Controller {
 	{
 		Auth::logout();
 		return Redirect::to('home');
+	}
+
+	public function action_flaggedlistings()
+	{
+		if(Auth::check())
+		{
+			if(Session::has('id'))
+			{
+				if(Session::get('admin') == 1) {
+					$flags = Flag::all();
+					$listings = array();
+					foreach ($flags as $flag)
+					{
+						if( array_key_exists($flag->listing_id, $listings) ) {
+							$listings[$flag->listing_id]->flags += 1;
+						} 
+						else {
+							$listing = Listing::find($flag->listing_id);
+							$listing->flags = 1;
+							$listing->location = $listing->location()->first();
+							$listing->category = Categorie::find($listing->category_id)->title;
+							$listings[$listing->id] = $listing;
+						}
+					}
+
+					$view = View::make('account.flagged_listings.index')
+					->with('title', 'Flagged Listings')
+					->with('listings', $listings);
+					return $view;
+				}
+				else {
+					Redirect::to('/account/mylistings');
+				}
+			}
+		}
 	}
 
 	public function action_mylistings()

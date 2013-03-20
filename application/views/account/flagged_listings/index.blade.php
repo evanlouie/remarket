@@ -3,7 +3,8 @@
 
 @section('header')
   @include('partials.header');
-  {{ HTML::style('css/aboutSidebar.css')}}
+  {{ HTML::style('css/flaggedListings.css')}}
+  {{ HTML::style('css/sidebar.css')}}
 @endsection
 
 @section('loginbar')
@@ -11,7 +12,7 @@
 @endsection
 
 @section('content')
-  @include('about.content')
+  @include('account.flagged_listings.content')
 @endsection
 
 @section('footer')
