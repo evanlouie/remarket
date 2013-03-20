@@ -115,7 +115,7 @@ class Listing_Controller extends Base_Controller {
 			$account = Account::find(Session::get('id'));
 
 
-			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
+			if(Input::has('title') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 			{
 				$location;
@@ -149,7 +149,9 @@ class Listing_Controller extends Base_Controller {
 				}
 				$listing = new Listing;
 				$listing->title = Input::get('title');
-				$listing->description = Input::get('description');
+				$listing->description = (Input::has('description')?
+											Input::get('description'):
+											'');	
 				$listing->category_id = Input::get('category_id');
 				$listing->price = Input::get('price');
 				$date_available = Input::get('date_available');
@@ -241,7 +243,7 @@ class Listing_Controller extends Base_Controller {
 		if (Auth::check() && Session::has('id')) 
 		{
 			$account = Account::find(Session::get('id'));
-			if(Input::has('title') && Input::has('description') && Input::has('category_id') && Input::has('price') 
+			if(Input::has('title') && Input::has('category_id') && Input::has('price') 
 				&& Input::has('date_available') && Input::has('date_unavailable'))
 				{
 					$listing = Listing::find($id);
@@ -250,18 +252,26 @@ class Listing_Controller extends Base_Controller {
 					{
 						$location = Location::find(Input::get('location_id'));
 					}
-					if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
+					if(Input::has('address') || Input::has('city') || Input::has('postal_code'))
 					{
 						$location = new Location;
-						$location->address = Input::get('address');
-						$location->city = Input::get('city');
-						$location->postal_code = Input::get('postal_code');
+						(Input::has('address') ?
+								$location->address = Input::get('address') :
+							$location->address = '');
+						(Input::has('city') ? 
+							$location->city = Input::get('city') :
+							$location->city = '');
+						(Input::has('postal_code') ? 
+							$location->postal_code=Input::get('postal_code') :
+							$location->postal_code='');
 						$location->account_id = $account->id;
 						$location->save();
 						$location = Location::where_address_and_city_and_postal_code(Input::get('address'), Input::get('city'), Input::get('postal_code'))->first();
 					}
 					$listing->title = Input::get('title');
-					$listing->description = Input::get('description');
+					$listing->description = (Input::has('description')?
+												Input::get('description'):
+												'');	
 					$listing->category_id = Input::get('category_id');
 					$listing->price = Input::get('price');
 					$date_available = Input::get('date_available');

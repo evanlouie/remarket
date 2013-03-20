@@ -9,8 +9,8 @@
         <form class="pull-center" action="listing" method='GET'>
           <h1 class="heading">Search</h1>
           <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="minP" placeholder="Minimum price">
-          <input class="textinput span2 textinput-1 textinput-2" type="text" name="maxP" placeholder="Maximum price">
+          <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="minP" placeholder="Minimum price">
+          <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="maxP" placeholder="Maximum price">
           <input class="textinput span6 textinput-3" type="text" name="city" placeholder="City">
           <select name="category_id">
             <option value="">All</option>
