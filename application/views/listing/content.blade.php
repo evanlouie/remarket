@@ -2,8 +2,9 @@
 <div class="row-fluid">
   <span class="span5">
     <h1 class="heading">{{ $listing->title }}</h1>
-    <h5 class="heading">{{ $listing->category }}</h5>
-
+    <div class="row-fluid">   
+        <span class = "listing-heading" >Category:</span> <span class ="listing-labels">{{ $listing->category }}</span>
+    </div><br />
     <div class="row-fluid">   
         <span class = "listing-heading" >Asking Price:</span> <span class ="listing-labels">${{ $listing->price }}</span>
     </div><br />
@@ -12,7 +13,7 @@
     </div>
 
     <div class="row-fluid">  
-        <h4 class = "heading">Description</h4>{{$listing->description}}
+        <h4 class = "heading">Description:</h4>{{$listing->description}}
         <br / > 
     </div><br />
     <a class="btn btn-success" href="mailto:{{ $listing->email }}?subject={{$listing->title}}">Contact Seller</a>

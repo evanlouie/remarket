@@ -96,10 +96,17 @@ class Listing_Controller extends Base_Controller {
 			$listing->email = $account->email;
 			$listing->date_available = substr($listing->date_available, 0, 10);
 			$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
+			$categories = Categorie::all();
+			foreach( $categories as $c ) {
+				if( $c->id == $listing->category_id ) {
+					$listing->category = $c->title;
+				}
+			}
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
 			->with('listing', $listing)
-			->with('location', $loc);
+			->with('location', $loc)
+			->with('categories', $categories);
 			return $view;
 		}
 		else

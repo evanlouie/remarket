@@ -55,16 +55,46 @@ class Location_Controller extends Base_Controller {
 
 	public function action_edit($id)
 	{
-		if(Auth::check() && Session::has('id'))
+		if (Auth::check() && Session::has('id')) 
 		{
-			// echo "test";
-			$location = Location::find($id);
 			$account = Account::find(Session::get('id'));
-			if($location->account_id == $account->id) 
+			$location = Location::find($id);
+			if( Input::has('address') && Input::has('city') && Input::has('postal_code') )
 			{
-				var_dump($location);	
+				if( $account->id == $location->account_id ) {
+					(Input::has('address') ?
+						$location->address = Input::get('address') :
+						$location->address = '');
+					(Input::has('city') ? 
+						$location->city = Input::get('city') :
+						$location->city = '');
+					(Input::has('postal_code') ? 
+						$location->postal_code=Input::get('postal_code') :
+						$location->postal_code='');
+					$location->save();
+					return Redirect::to("/account/myLocations");
+				}
+				else {
+					return Redirect::to("/account/myLocations");
+				}
 			}
-
+			else {
+				if ($location->account_id == $account->id)
+				{
+					$view = View::make('location.edit.index')
+					->with('title', 'Edit Location')
+					->with('location', $location);
+					return $view;
+				}
+				else
+				{
+					return Response::error('403');
+				}
+			}
+		}
+		else
+		{
+			return Redirect::to('/');
 		}
 	}
 	
