@@ -276,6 +276,7 @@ class Account_Controller extends Base_Controller {
 	public function action_logout()
 	{
 		Auth::logout();
+		Session::flush();
 		return Redirect::to('home');
 	}
 
