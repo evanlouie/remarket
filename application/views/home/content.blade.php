@@ -30,7 +30,7 @@
       <div class="hero-unit">
         <p>[ Here we would like to put some information about the initiative ]</p>
         <div class="btns">
-          <a href="/about" class="btn btn-primary btn-large">Learn More</a>
+          <a href="/about/" class="btn btn-primary btn-large">Learn More</a>
           <a href="/listing/" class="btn btn-success btn-large">Browse Listings</a>
         </div>
       </div>
