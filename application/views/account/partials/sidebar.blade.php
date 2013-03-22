@@ -1,4 +1,7 @@
 <span class="span3">
+	<div class="buttons">
+		<a href="/listing/create" class="width btn btn-success btn-style">Add New Listing</a>
+	</div>
 	<div>
 		<ul class="nav nav-list bs-docs-sidenav" >
 			@if(Session::get('admin') == 1)
@@ -9,9 +12,5 @@
 	  		<li id="wishlist"><a href="/wishlist">My Wishlist <i class="icon icon-chevron-right pull-right icon-chevron-right-1"></i></a></li>
 	  		<li id="details"><a href="/account/edit">Change Account Details <i class="icon icon-chevron-right pull-right"></i></a></li>		
 		</ul>
-	</div>
-	<div class="buttons">
-		<a href="/listing/create" class="width btn btn-success btn-style">Add New listings</a>
-		<a href="/listing" class="width btn btn-info btn-style">Browse Listings</a>	
 	</div>
 </span>	
