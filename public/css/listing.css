@@ -1,9 +1,8 @@
 body {
   padding-left: 0;
   padding-right: 0;
-  width:960px;
+  max-width:1100px;
   margin: auto;
-
 }
 
 .container-fluid {
@@ -18,7 +17,7 @@ body {
   width: 220px;
 }
 .container-fluid .row-fluid .span6 div.div-1 {
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 0px 0px;
   height: 300px;
 }
 .span6 .btn {
@@ -27,13 +26,9 @@ body {
 .container-fluid div .span12 {
   height: 90px;
 }
-
-
 .description{
   padding-bottom: 10px;
 }
-
-
 .image-collection{
   padding-bottom: 10px;
   margin-left: 70px;

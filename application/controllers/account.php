@@ -68,7 +68,7 @@ class Account_Controller extends Base_Controller {
 				$account->email = $email;
 				$account->password = $password;
 				$account->save();
-				return Redirect::to('account');
+				return Redirect::to('/');
 			}
 			else echo "email already registered";
 		}
@@ -283,6 +283,7 @@ class Account_Controller extends Base_Controller {
 	public function action_logout()
 	{
 		Auth::logout();
+		Session::flush();
 		return Redirect::to('home');
 	}
 

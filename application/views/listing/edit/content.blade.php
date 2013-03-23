@@ -15,7 +15,7 @@
             <div class='row-fluid'>
             <div class='span6'>
               <h4 class="heading heading-5">Title</h4>
-              <input class="textinput textinput-1 span12" type="text" name="title" placeholder="Title" maxlength="50" title="Max: 50 character" value="{{$listing->title}}">
+              <input class="textinput textinput-1 span12" type="text" name="title" placeholder="Title" maxlength="50" title="Max: 50 character" value="{{ htmlspecialchars($listing->title) }}">
             </div>
             <div class="input-prepend input-append span6">
               <h4 class="heading heading-5">Price</h4>
