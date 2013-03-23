@@ -199,20 +199,20 @@ class Listing_Controller extends Base_Controller {
 				$location = Location::find($listing->location_id);
 				if( $location->account_id == $account ) {
 					$listing->delete();
-					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
 					Session::put('alert', $alert);
 					return Redirect::to('/account/myListings');
 				}
 				elseif( Session::get('admin') == 1) {
 					$listing->delete();
-					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
 					Session::put('alert', $alert);
 					return Redirect::to('/account/flaggedListings');
 				}
 				else {
-					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+					$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							"You do not have permission to delete that listing.</div>";
 					Session::put('alert', $alert);
 					return Redirect::to('/');
@@ -313,7 +313,7 @@ class Listing_Controller extends Base_Controller {
 			$flag = Flag::where('listing_id', '=', $id)
 							->where('account_id', '=', $account->id)->get();
 			if(sizeof($flag)!=0) {
-				$alert = '<div class="alert alert-danger">
+				$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Error!</strong> You have already flagged this post.</div>';
 				Session::put('alert', $alert);
 			}
@@ -322,7 +322,7 @@ class Listing_Controller extends Base_Controller {
 				$flag->account_id = Session::get('id');
 				$flag->listing_id = $id;
 				$flag->save();
-				$alert = '<div class="alert alert-success">
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Success! </strong>This listing has been flagged.</div>';
 				Session::put('alert', $alert);
 			}
@@ -345,7 +345,7 @@ class Listing_Controller extends Base_Controller {
 				$this->action_delete($id);
 
 				// Show view
-				$alert = '<div class="alert alert-success">
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Success! </strong>This listing has been flagged.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('listing.index')
@@ -356,7 +356,7 @@ class Listing_Controller extends Base_Controller {
 			}
 		} 
 		else {
-			$alert = '<div class="alert alert-danger">
+			$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Error! </strong>You must be logged in to flag a post.</div>';
 			Session::put('alert', $alert);
 		}
