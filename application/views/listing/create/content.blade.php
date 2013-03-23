@@ -18,7 +18,7 @@
       <div class="input-prepend input-append span6">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
-        <input class="textinput span12 textinput-1" type="number" step='any' min='0'  name="price" placeholder="Price">
+        <input class="textinput span12 textinput-1" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">

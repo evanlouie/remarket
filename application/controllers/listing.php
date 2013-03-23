@@ -221,30 +221,6 @@ class Listing_Controller extends Base_Controller {
 		}
 	}
 
-	public function action_masterDelete($id)
-	{
-		if (Session::has('id') && Auth::check()) 
-		{
-			$account = Session::get('id');
-			if ($listing = Listing::find($id))
-			{
-				if( Session::get('admin') == 1) {
-					$listing->delete();
-					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
-							"Listing removed.</div>";
-					Session::put('alert', $alert);
-					return Redirect::to('/listing');
-				}
-				else {
-					$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
-							"You do not have permission to delete that listing.</div>";
-					Session::put('alert', $alert);
-					return Redirect::to('/');
-				}
-			}
-		}
-	}
-
 	public function action_edit($id) 
 	{
 		if (Auth::check() && Session::has('id')) 
@@ -399,6 +375,30 @@ class Listing_Controller extends Base_Controller {
 		->with('location', $loc);
 		return $view;
 	}
+
+	public function action_unflag($id) {
+			if (Auth::check() && Session::has('id')) {
+
+				if( Session::get('admin') == 1) {
+
+					$flags = Flag::all();
+					foreach ($flags as $flag) {
+
+						if( $flag->listing_id == $id ) {
+							$flag->delete();
+						}
+					}
+					return Redirect::to('/account/flaggedListings');
+				}
+				else {
+					return Redirect::to('/');
+				}
+			} 
+			else {
+				return Redirect::to('/');
+			}
+	}
+
 	public function action_imgUpload() {
 		// $allowedExts = array("jpg", "jpeg", "gif", "png");
 		// $temp = explode(".", $_FILES["file"]["name"]);
