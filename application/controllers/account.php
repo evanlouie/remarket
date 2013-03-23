@@ -138,7 +138,7 @@ class Account_Controller extends Base_Controller {
 				// Success - Update email and show confirmation
 				$account->email = $email;
 				$account->save();
-				$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							'Your new email is ' . $email . '</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -149,7 +149,7 @@ class Account_Controller extends Base_Controller {
 			else
 			{
 				// Error - Password does not match
-				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'Password does not match this account.';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -166,7 +166,7 @@ class Account_Controller extends Base_Controller {
 			// Check that passwords match
 			if( $password != $passwordConfirm ) {
 				// Error - Password fields do not match
-				$alert = '<div class="alert alert-danger container-fluid"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-danger container-fluid" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'Passwords do not match.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -183,7 +183,7 @@ class Account_Controller extends Base_Controller {
 				// Success - Update password and show confirmation
 				$account->password = Hash::make($password);
 				$account->save();
-				$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							'Your password has been changed.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -194,7 +194,7 @@ class Account_Controller extends Base_Controller {
 			else
 			{
 				// Error - Password does not match
-				$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'Your old password was incorrect.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -221,7 +221,7 @@ class Account_Controller extends Base_Controller {
 				$account->wishlistEmail = false;
 			}
 			$account->save();
-			$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+			$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							'Your email settings have been updated.</div>';
 			Session::put('alert', $alert);
 			$view = View::make('account.details.index')
@@ -234,7 +234,7 @@ class Account_Controller extends Base_Controller {
 					|| Input::has('email') || Input::has('emailConfirm') )
 		{
 			// Error - Missing fields
-			$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+			$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'You\'re missing some fields.</div>';
 			Session::put('alert', $alert);
 			$view = View::make('account.details.index')
