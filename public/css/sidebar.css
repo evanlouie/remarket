@@ -67,12 +67,6 @@
   top: auto;
   bottom: 270px;
 }
-
-.btn-style {
-  margin-top:.2cm;
-  width: 200px;
-}
-
 .icon.icon-chevron-right {
   font-size: 14px;
   margin: 3px 0px 0px 0px;
@@ -80,8 +74,9 @@
   height: 14px;
   width: 14px;
 }
-
 .buttons .width {
   margin: 10px 0px 0px -10px;
   width: 215px;
+  height: 26px;
+  padding-top: 8px;
 }

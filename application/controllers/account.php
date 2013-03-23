@@ -121,7 +121,7 @@ class Account_Controller extends Base_Controller {
 			// Check that emails match
 			if( $email != $emailConfirm ) {
 				// Error - Email fields do not match
-				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'Emails do not match.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -166,7 +166,7 @@ class Account_Controller extends Base_Controller {
 			// Check that passwords match
 			if( $password != $passwordConfirm ) {
 				// Error - Password fields do not match
-				$alert = '<div class="alert alert-danger"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-danger container-fluid"><strong>Error!</strong> ' .
 							'Passwords do not match.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
@@ -277,7 +277,7 @@ class Account_Controller extends Base_Controller {
 		else
 		{
 			// SHOW LOGIN SCREEN
-			echo "LOIGN SCREEN";
+			echo "LOGIN SCREEN";
 		}
 	}
 	public function action_logout()
