@@ -28,11 +28,11 @@
           <div class='row-fluid'>
             <div class='span6'>
               <h4 class="heading heading-5">Available</h4>
-              <input class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
+              <input style='cursor:pointer; background:#fff' class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
             </div>
             <div class='span6'>
               <h4 class="heading heading-5">Unavailable</h4>
-              <input class="textinput span12" type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_unavailable,0,-9)}}">
+              <input class="textinput span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_unavailable,0,-9)}}">
             </div>  
           </div>
           <div class='row-fluid'>

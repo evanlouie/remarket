@@ -95,6 +95,13 @@ class Account_Controller extends Base_Controller {
 		}
 	}
 
+	public function action_block($id) 
+	{
+		$account = Account::find($id);
+		$account->blocked = true;
+		$account->save();
+	}
+
 	public function action_edit()
 	{
 		$account;

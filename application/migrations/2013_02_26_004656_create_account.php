@@ -19,6 +19,7 @@ class Create_Account {
 			$table->boolean('flagEmail')->default(false);
 			$table->boolean('wishlistEmail')->default(true);
 			$table->boolean('admin')->default(false);
+			$table->boolean('banned')->default(false);
 		});
 	}
 

@@ -12,7 +12,7 @@ class Listing_Controller extends Base_Controller {
 			$from = 'FROM listings WHERE ';
 			if(Input::has('city')) {
 				$city = Input::get('city');
-				$from ='FROM listings, locations 
+				$from ='FROM locations, listings
 						WHERE 
 							(locations.city LIKE "%'.$city.'%" OR 
 							locations.address LIKE "%'.$city.'%" OR
@@ -50,6 +50,7 @@ class Listing_Controller extends Base_Controller {
 				$query = substr($query, 0, -4);
 			}
 			$listings = DB::query($query);
+			// die(var_dump($listings));
 
 		} 
 		else
@@ -115,6 +116,9 @@ class Listing_Controller extends Base_Controller {
 		}
 	}
 
+	public function action_test(){
+		die('test');	
+	}
 	public function action_create()
 	{
 		if(Session::has('id'))
