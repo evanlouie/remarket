@@ -68,7 +68,7 @@ class Account_Controller extends Base_Controller {
 				$account->email = $email;
 				$account->password = $password;
 				$account->save();
-				return Redirect::to('account');
+				return Redirect::to('/');
 			}
 			else echo "email already registered";
 		}
@@ -93,6 +93,13 @@ class Account_Controller extends Base_Controller {
 			die('accuont id not set');
 			return false;
 		}
+	}
+
+	public function action_block($id) 
+	{
+		$account = Account::find($id);
+		$account->blocked = true;
+		$account->save();
 	}
 
 	public function action_edit()

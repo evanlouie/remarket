@@ -2,7 +2,7 @@
 
 
 @section('header')
-  @include('partials.header');
+  @include('partials.header')
 @endsection
 
 @section('loginbar')

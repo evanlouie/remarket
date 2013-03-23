@@ -14,9 +14,38 @@ class Wishlist_Controller extends Base_Controller {
 		$tempListings = array();
 		foreach($tags as $tag)
 		{
-			$tagListings = Listing::where('title', 'LIKE', "%$tag->item%")
-			->or_where("description", 'LIKE', "%$tag->item%")
-			->get();
+			$tagListings;
+			$strings = explode(' ', $tag->item);
+			if (sizeof($strings) == 1) 
+			{
+				$tagListings = Listing::where('title', 'LIKE', "%$tag->item%")
+				->or_where("description", 'LIKE', "%$tag->item%")
+				->get();
+			}
+			else
+			{
+
+				$string = array_pop($strings);
+				$query = "	SELECT *
+							FROM listings
+							WHERE
+								(title LIKE '%$string%'
+								OR description LIKE '%$string%')";
+				while(!empty($strings))
+				{
+					$string = array_pop($strings);
+					$query .= " AND (title LIKE '%$string%'
+								OR description LIKE '%$string%')";
+				}
+				$tagListings = DB::query($query);
+
+			}
+			foreach($strings as $string) {
+
+			}
+			// $tagListings = Listing::where('title', 'LIKE', "%$tag->item%")
+			// ->or_where("description", 'LIKE', "%$tag->item%")
+			// ->get();
 			foreach($tagListings as $listing) 
 			{
 				$listing->location = Location::find($listing->location_id);
