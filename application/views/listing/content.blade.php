@@ -82,7 +82,7 @@
 
   $(document).on('click', '#warning', function() {
   confirm = confirm( 'Are you sure you want to delete this listing?' );
-  if(confirm == true) { window.location = "/listing/masterDelete/" + {{$listing->id}}; }
+  if(confirm == true) { window.location = "/listing/delete/" + {{$listing->id}}; }
   else {
     delete window.confirm;
   }

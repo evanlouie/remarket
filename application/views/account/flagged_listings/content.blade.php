@@ -19,6 +19,7 @@
           <th>Category</th>
           <th>Listing Expires</th>
           <th>Flags</th>
+          <th>Unflag</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -34,6 +35,7 @@
              <i class="icon-flag"></i>
             @endfor
           </td>
+          <td><a id="{{ $listing->id }}" class="flag-warning btn btn-warning btn-small"><i class="icon-remove pull-center"></i></a></td>
           <td><a id="{{ $listing->id }}" class="warning btn btn-danger btn-small"><i class="icon-trash pull-center"></i></a></td>
         </tr>
         @endforeach
@@ -46,6 +48,14 @@ $(document).on('click', '.warning', function() {
   id = $(this).attr('id');
   confirm = confirm( 'Are you sure you want to delete this listing?' );
   if(confirm == true) { window.location = "/listing/delete/" + id; }
+  else {
+    delete window.confirm;
+  }
+});
+$(document).on('click', '.flag-warning', function() {
+  id = $(this).attr('id');
+  confirm = confirm( 'Are you sure you want to remove all flags from this listing?' );
+  if(confirm == true) { window.location = "/listing/unflag/" + id; }
   else {
     delete window.confirm;
   }

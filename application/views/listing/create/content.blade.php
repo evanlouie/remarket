@@ -18,13 +18,13 @@
       <div class="input-prepend input-append span2">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
-        <input class="textinput span12 textinput-1" type="number" step='any' min='0'  name="price" placeholder="Price">
+        <input class="textinput span12 textinput-1" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">
       <h4 class="heading heading-3 heading-4">Listing Availability</h4>
-      <input class="textinput span4" readonly="readonly" type="text" id="date_available" name="date_available" placeholder="Date available from">
-      <input class="textinput span4" readonly="readonly" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
+      <input class="textinput span4" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_available" name="date_available" placeholder="Date available from">
+      <input class="textinput span4" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
       
       <h4 class="heading heading-4">Category</h4>
       <select class="pull-left pull-left-1 span2" name="category_id">
