@@ -73,6 +73,27 @@
             $('#postal_code').prop('disabled', false);
           }
         });
+        var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+        $(document).on('change', '#date_available', function() {
+            start = $('#date_available').val();
+            // end = $('date_unavailable').val();
+            startyear = start.substring(0,4);
+            // endyear= end.substring(0,4);
+            startmonth = start.substring(5,7);
+            // endmonth = end.substring(5,7);
+            startday= start.substring(8,10);
+            // endday = end.substring(8,10);
+        })
+        $(document).on('change', '#date_unavailable', function() {
+            // start = $('#date_available').val();
+            end = $('#date_unavailable').val();
+            // startyear = start.substring(0,4);
+            endyear= end.substring(0,4);
+            // startmonth = start.substring(5,7);
+            endmonth = end.substring(5,7);
+            // startday= start.substring(8,10);
+            endday = end.substring(8,10);
+        })
         $('#date_available').datepicker({
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
@@ -149,6 +170,10 @@
                     message += "Please select a valid location\n";
                   }
                 })
+              if(startday>endday || startmonth>endmonth || startyear>endyear)
+              {
+                message += "Please select an available date which occures before the expiry date\n";
+              }
               
               if (message!='') {
                 alert(message);
