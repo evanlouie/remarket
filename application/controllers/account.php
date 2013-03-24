@@ -267,6 +267,11 @@ class Account_Controller extends Base_Controller {
 			{
 				$account = Account::where_email(Input::get('email'))->first();
 				Session::put('id', $account->id);
+
+			$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
+							'You\'re missing some fields.</div>';
+			Session::put('alert', $alert);
+			Session::put('forget_alert', 1);
 				return Redirect::to('account');
 			}
 			else 

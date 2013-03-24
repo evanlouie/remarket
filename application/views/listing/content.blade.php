@@ -23,23 +23,10 @@
       <a id="warning" class="btn btn-danger pull-right">Delete This Post</a>
       @endif
       <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
-
-      <div class = "image-collection">
-        <ul class="thumbnails">
-          @foreach ($listing->images as $image)
-          <li class="span5">
-            <div class="thumbnail">
-              <img src="http://placehold.it/900x600" class="image">
-            </div>
-          </li>
-          @endforeach
-        </ul>
-      </div>
-
     </span>
   </div>
 
-  <div id="map_canvas" class="pull-center" style="width:500px; height:400px;"></div>
+<div id="map_canvas" class="pull-center" style="width:500px; height:400px;"></div>
 
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHQnPSIos4woqO1xkhsUh9Si5ebskymUo&sensor=true"></script>
