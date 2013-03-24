@@ -1,6 +1,6 @@
 <span class="span3">
 	<div class="buttons">
-		<a href="/listing/create" class="width btn btn-success btn-style">Add New Listing</a>
+		<a href="/listing/create" class="width btn btn-success btn-style">Post New Listing</a>
 	</div>
 	<div>
 		<ul class="nav nav-list bs-docs-sidenav" >

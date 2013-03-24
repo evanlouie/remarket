@@ -16,7 +16,7 @@ body {
 }
 #wrapper {
   position: relative;
-  width: 960px;
+  max-width: 960px;
   margin: 0 auto;
   height: 1px;
 }
@@ -27,8 +27,6 @@ body {
   top: 0px;
   left: 0px;
   border:none;
-  margin-bottom: 40px;
-  background-image: url('/img/loginbar.jpg');
 }
 #absolute-wrapper .navbar .navbar-inner {
   border: none;
@@ -36,7 +34,6 @@ body {
   padding-left: 0px;
   padding-right: 0px;
 }
-
 #absolute-wrapper .navbar input.textinput {
   width: 136px;
   border:none;
@@ -49,13 +46,12 @@ body {
   background: #f5f5f5;
   background-image: url('/img/header3.png');
   margin-top: 50px;
-  margin-bottom: -15px;
+  margin-bottom: -40px;
   height: 233px;
   border-radius: 6px 6px 6px 6px;
 }
 .container-fluid-1 .container {
   margin-top: 0px;
-  margin-bottom: 40px;
 }
 .container-fluid-1 .container .row-fluid .span12 .heading {
   font-size: 68px;
@@ -70,14 +66,13 @@ body {
 }
 .container-fluid.container-fluid-2 {
   margin-top: 60px;
-  margin-bottom: 60px;
   padding: 0px;
 }
 .container-fluid-2 div .row-fluid .span12 .pull-center {
   background: rgba(255, 255, 255, 0.831373);
   padding: 5px 5px 15px 10px;
   border-radius: 6px 6px 6px 6px;
-  margin-bottom: 50px;
+
 }
 .container-fluid-2 div .row-fluid .span12 .pull-center .heading {
   margin: 10px;

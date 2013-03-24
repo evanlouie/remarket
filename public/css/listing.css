@@ -1,15 +1,13 @@
 body {
   padding-left: 0;
   padding-right: 0;
-  max-width:1100px;
+  max-width:960px;
   margin: auto;
 }
 
 .container-fluid {
   margin-top: 60px;
   margin-bottom: 60px;
-  margin-left: -80px;
-  margin-right: -55px;
 }
 .container-fluid .row-fluid .span6 .btn-success {
   margin-top: 50px;
@@ -29,10 +27,9 @@ body {
 .description{
   padding-bottom: 10px;
 }
-.image-collection{
-  padding-bottom: 10px;
+.thumbnails{
   margin-left: 70px;
-  margin-top:50px;
+  margin-top: 50px;
 }
 
 .listing-heading{

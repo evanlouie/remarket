@@ -5,7 +5,7 @@ class Contact_Controller extends Base_Controller {
 	public function action_index()
 	{
 		if (Input::has('email') && Input::has('subject') && Input::has('name') && Input::has('message')) {
-			echo '<br><br><br><div class="alert alert-success"><strong>Success! </strong>Thanks for the feedback!</div>';
+			echo '<br><br><br><div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success! </strong>Thanks for the feedback!</div>';
 			return View::make('contact.index')->with('title', 'Contact Us');
 		// 	$name = Input::get('name');
 		// 	$subject = Input::get('subject'); 

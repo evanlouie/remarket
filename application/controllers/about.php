@@ -37,7 +37,7 @@ class About_Controller extends Base_Controller {
 					$page->body = Input::get('body');
 					$page->save();
 					// Take user to page
-					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"'$page->title' page updated.</div>";
 					Session::put('alert', $alert);
 					$pages = Staticpage::all();
@@ -58,7 +58,7 @@ class About_Controller extends Base_Controller {
 			}
 			else {
 				// Not an admin
-				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'You must be an admin to create pages.</div>';
 				Session::put('alert', $alert);
 				$pages = Staticpage::all();
@@ -73,7 +73,7 @@ class About_Controller extends Base_Controller {
 		else
 		{
 			// Not logged in
-			$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+			$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 						'You are not logged in.</div>';
 			Session::put('alert', $alert);
 			$pages = Staticpage::all();
@@ -99,7 +99,7 @@ class About_Controller extends Base_Controller {
 					$page->body = Input::get('body');
 					$page->save();
 					// Take user to page
-					$alert = '<div class="alert alert-success"><strong>Success!</strong> ' .
+					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"'$page->title' page created.</div>";
 					Session::put('alert', $alert);
 					$pages = Staticpage::all();
@@ -118,7 +118,7 @@ class About_Controller extends Base_Controller {
 			}
 			else {
 				// Not an admin
-				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'You must be an admin to create pages.</div>';
 				Session::put('alert', $alert);
 				$pages = Staticpage::all();
@@ -133,7 +133,7 @@ class About_Controller extends Base_Controller {
 		else
 		{
 			// Not logged in
-			$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+			$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 						'You are not logged in.</div>';
 			Session::put('alert', $alert);
 			$pages = Staticpage::all();
@@ -161,7 +161,7 @@ class About_Controller extends Base_Controller {
 					}
 					else {
 						$pages = Staticpage::all();
-						$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+						$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'You cannot delete the main About page.</div>';
 						Session::put('alert', $alert);
 						$view = View::make('about.index')
@@ -178,7 +178,7 @@ class About_Controller extends Base_Controller {
 			}
 			else {
 				// Not an admin
-				$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 							'You must be an admin to create pages.</div>';
 				Session::put('alert', $alert);
 				$pages = Staticpage::all();
@@ -193,7 +193,7 @@ class About_Controller extends Base_Controller {
 		else
 		{
 			// Not logged in
-			$alert = '<div class="alert alert-error"><strong>Error!</strong> ' .
+			$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
 						'You are not logged in.</div>';
 			Session::put('alert', $alert);
 			$pages = Staticpage::all();

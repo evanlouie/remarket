@@ -39,7 +39,8 @@
 <script>
 $(document).on('click', '.warning', function() {
   id = $(this).attr('id');
-  confirm = confirm( 'Are you sure you want to delete this location?' );
+  confirm = confirm( 'WARNING: Deleting a location will remove all existing listings with that location.' +
+                      '\n\n Are you sure you want to delete this location?' );
   if(confirm == true) { window.location = "/location/delete/" + id; }
   else {
     delete window.confirm;

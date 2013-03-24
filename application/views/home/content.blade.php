@@ -7,7 +7,7 @@
     <div class="row-fluid">
       <span class="span12">
         <form class="pull-center" action="listing" method='GET'>
-          <h1 class="heading">Search</h1>
+          <h1 class="heading">Search Listings</h1>
           <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
           <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="minP" placeholder="Minimum price">
           <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="maxP" placeholder="Maximum price">
@@ -18,9 +18,8 @@
             <option value="{{$c->id}}">{{$c->title}}</option>
             @endforeach
           </select>
-          <button class="btn btn-primary" type='submit' style="padding-left: 28px; padding-right: 28px; margin-right: 5px;">Search</button>
-          <a href="/listing/" class="btn btn-success" style="padding-left: 28px; padding-right: 28px;">Browse</button></a>
-        </form>
+          <button class="btn btn-primary" type='submit' style="padding-left: 28px; padding-right: 28px; margin-right: 5px;">Search listings now!</button>
+          </form>
       </span>
     </div>
     <span></span>
