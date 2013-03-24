@@ -80,6 +80,10 @@
       </div>
     </div>
         <script>
+        var postal_code;
+          $(document).on('change', '#postal_code', function() {
+            postal_code=$('#postal_code').val();
+          })
           $(document).on('change', '#createListing', function() {
             if ($('#location-select').attr('disabled')) {
               $('#location-select').prop('disabled', false);
@@ -183,6 +187,12 @@
                   $('select[name="location_id"]').is(":disabled")) 
               {
                 message += "Please provide at least one field in the location\n";
+              }
+              var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
+              if (reg.test(postal_code)) {
+
+              } else {
+                message+= "Please insert proper Canadian postal code\n";
               }
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
