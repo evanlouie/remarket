@@ -150,7 +150,7 @@ class Account_Controller extends Base_Controller {
 			{
 				// Error - Password does not match
 				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
-							'Password does not match this account.';
+							'Password does not match this account.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')

@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-  @include('about.content');
+  @include('about.content')
 @endsection
 
 @section('footer')

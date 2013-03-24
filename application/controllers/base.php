@@ -25,7 +25,6 @@ class Base_Controller extends Controller {
 		Asset::add('jquery', 'js/jquery-1.9.1.js');
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
 		Asset::add('bootstrap-js', 'js/bootstrap.min.js');
-		Session::forget('alert');
 
 		if (Session::has('id') && Auth::check())
 		{
