@@ -325,6 +325,14 @@ class Listing_Controller extends Base_Controller {
 				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Success! </strong>This listing has been flagged.</div>';
 				Session::put('alert', $alert);
+				$flagCount = Flag::where('listing_id', '=', $id)->count();
+				if($flagCount >= 5) {
+					$listing = Listing::find($id);
+					$location = Location::find($listing->location_id);
+					$account = Account::find($location->account_id);
+					$account->blocked = 1;
+					$account->save();
+				}
 			}
 			else {
 				// Set up view
