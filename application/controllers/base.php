@@ -37,6 +37,16 @@ class Base_Controller extends Controller {
 			{
 				Session::put('admin', '0');
 			}
+			if($account->blocked == 1 ) 
+			{
+				Session::put('alert', "Your account has been banned. Please contact the admin for more details");
+				Session::forget('id');
+				Auth::logout();
+			}
+			else 
+			{
+
+			}
 		}
 	}
 

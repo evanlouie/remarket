@@ -28,11 +28,13 @@
           <div class='row-fluid'>
             <div class='span6'>
               <h4 class="heading heading-5">Available</h4>
-              <input style='cursor:pointer; background:#fff' class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
+              <input class="span12" style='cursor:pointer; background:#fff' type="text" name="date_available" readonly="readonly" id="date_available" value="{{substr($listing->date_available,0,-9)}}">
+
+              <!-- <input style='cursor:pointer; background:#fff' class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}"> -->
             </div>
             <div class='span6'>
               <h4 class="heading heading-5">Unavailable</h4>
-              <input class="textinput span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_unavailable,0,-9)}}">
+              <input class="span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" value="{{substr($listing->date_unavailable,0,-9)}}">
             </div>  
           </div>
           <div class='row-fluid'>
@@ -63,12 +65,25 @@
           <input type='checkbox' name='createListing' id='createListing' value='true'>
         </label>
         <input class="textinput span12" type="text" name="address" id='address' placeholder="Address" disabled='true'>
-        <input class="textinput span8" type="text" name="city" id='city' placeholder="City" disabled='true'>
+        <!-- <input class="textinput span8" type="text" name="city" id='city' placeholder="City" disabled='true'> -->
+        <select name="city" id='city' placeholder="City" disabled='true'>
+          <option value="Vancouver">Vancouver</option>
+          <option value="West Vancouver">West Vancouver</option>
+          <option value="North Vancouver">North Vancouver</option>
+          <option value="Richmond">Richmond</option>
+          <option value="Burnaby/New Westminster">Burnaby/New Westminster</option>
+          <option value="Coquitlam">Coquitlam</option>
+          <option value="Delta/Surrey/Langley">Delta/Surrey/Langley</option>
+        </select>
         <input class="textinput span4" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
         </div>
       </div>
     </div>
         <script>
+        var postal_code;
+          $(document).on('change', '#postal_code', function() {
+            postal_code=$('#postal_code').val();
+          })
           $(document).on('change', '#createListing', function() {
             if ($('#location-select').attr('disabled')) {
               $('#location-select').prop('disabled', false);
@@ -83,11 +98,32 @@
               $('#postal_code').prop('disabled', false);
             }
           });
+          var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+        $(document).on('change', '#date_available', function() {
+            start = $('#date_available').val();
+            // end = $('date_unavailable').val();
+            startyear = start.substring(0,4);
+            // endyear= end.substring(0,4);
+            startmonth = start.substring(5,7);
+            // endmonth = end.substring(5,7);
+            startday= start.substring(8,10);
+            // endday = end.substring(8,10);
+        })
+        $(document).on('change', '#date_unavailable', function() {
+            // start = $('#date_available').val();
+            end = $('#date_unavailable').val();
+            // startyear = start.substring(0,4);
+            endyear= end.substring(0,4);
+            // startmonth = start.substring(5,7);
+            endmonth = end.substring(5,7);
+            // startday= start.substring(8,10);
+            endday = end.substring(8,10);
+        })
           $('#date_available').datepicker({
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
               changeMonth: true,
-              changeYear: true,
+              // changeYear: true,
               // showOn: "button",
               // buttonImage: "images/calendar.gif",
               // buttonImageOnly: true,
@@ -99,7 +135,7 @@
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
               changeMonth: true,
-              changeYear: true,
+              // changeYear: true,
               // showOn: "button",
               // buttonImage: "images/calendar.gif",
               // buttonImageOnly: true,
@@ -152,11 +188,21 @@
               {
                 message += "Please provide at least one field in the location\n";
               }
+              var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
+              if (reg.test(postal_code)) {
+
+              } else {
+                message+= "Please insert proper Canadian postal code\n";
+              }
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
                   }
                 })
+              if(startday>endday || startmonth>endmonth || startyear>endyear)
+              {
+                message += "Please select an available date which occures before the expiry date\n";
+              }
               
               if (message!='') {
                 alert(message);

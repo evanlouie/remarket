@@ -47,9 +47,22 @@
         Otherwise, create a location:
         <input type='checkbox' name='createListing' id='createListing' value='true'><br />
         <input class="textinput" type="text" name="address" id='address' placeholder="Address" disabled='true'>
-        <input class="textinput" type="text" name="city" id='city' placeholder="City" disabled='true'>
+        <!-- <input class="textinput" type="text" name="city" id='city' placeholder="City" disabled='true'> -->
+        <select name="city" id='city' placeholder="City" disabled='true'>
+          <option value="Vancouver">Vancouver</option>
+          <option value="West Vancouver">West Vancouver</option>
+          <option value="North Vancouver">North Vancouver</option>
+          <option value="Richmond">Richmond</option>
+          <option value="Burnaby/New Westminster">Burnaby/New Westminster</option>
+          <option value="Coquitlam">Coquitlam</option>
+          <option value="Delta/Surrey/Langley">Delta/Surrey/Langley</option>
+        </select>
         <input class="textinput" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
         <script>
+        var postal_code;
+          $(document).on('change', '#postal_code', function() {
+            postal_code=$('#postal_code').val();
+          })
         $(document).on('change', '#createListing', function() {
           if ($('#location-select').attr('disabled')) {
             $('#location-select').prop('disabled', false);
@@ -64,6 +77,27 @@
             $('#postal_code').prop('disabled', false);
           }
         });
+        var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+        $(document).on('change', '#date_available', function() {
+            start = $('#date_available').val();
+            // end = $('date_unavailable').val();
+            startyear = start.substring(0,4);
+            // endyear= end.substring(0,4);
+            startmonth = start.substring(5,7);
+            // endmonth = end.substring(5,7);
+            startday= start.substring(8,10);
+            // endday = end.substring(8,10);
+        })
+        $(document).on('change', '#date_unavailable', function() {
+            // start = $('#date_available').val();
+            end = $('#date_unavailable').val();
+            // startyear = start.substring(0,4);
+            endyear= end.substring(0,4);
+            // startmonth = start.substring(5,7);
+            endmonth = end.substring(5,7);
+            // startday= start.substring(8,10);
+            endday = end.substring(8,10);
+        })
         $('#date_available').datepicker({
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
@@ -135,11 +169,21 @@
               {
                 message += "Please provide at least one field in the location\n";
               }
+              var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
+              if (reg.test(postal_code)) {
+
+              } else {
+                message+= "Please insert proper Canadian postal code\n";
+              }
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
                   }
                 })
+              if(startday>endday || startmonth>endmonth || startyear>endyear)
+              {
+                message += "Please select an available date which occures before the expiry date\n";
+              }
               
               if (message!='') {
                 alert(message);
