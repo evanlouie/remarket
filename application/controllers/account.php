@@ -68,6 +68,7 @@ class Account_Controller extends Base_Controller {
 				$account->email = $email;
 				$account->password = $password;
 				$account->save();
+				Emailer::signUpConfirmation($email);
 				return Redirect::to('/');
 			}
 			else echo "email already registered";

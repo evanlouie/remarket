@@ -12,15 +12,15 @@ class Contact_Controller extends Base_Controller {
 			$header="from: $name <$mail_from>";
 
 			// Enter your email address
-			$to ='tristan.ng.sebens@gmail.com';
+			$to ='ryanbooth77@gmail.com';
 			$sent=mail($to,$subject,$message,$header);
 
 			if($sent){
-			echo '<div class="alert alert-success"><strong>Success!</strong>Thanks for the feedback!</div>';
+			$alert = '<div class="alert alert-success"><strong>Success!</strong>Thanks for the feedback!</div>';
 			return Redirect::to('/contact');
 			}
 			else {
-			echo '<div class="alert alert-danger"><strong>Error!</strong> Failed to send email.</div>';
+			$alert = '<div class="alert alert-danger"><strong>Error!</strong> Failed to send email.</div>';
 			return Redirect::to('/contact');
 			}
 		}
