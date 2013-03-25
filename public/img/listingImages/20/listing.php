@@ -203,7 +203,8 @@ class Listing_Controller extends Base_Controller {
 			if ($account->id == Session::get('id'))
 			{
 				// $files = scandir("public/img/listingImages/$id");
-				$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+				// $files = glob("/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+				die(getcwd()."/img/listingImages/$id/");
 				// die(var_dump($files));
 				// foreach($files as $file) {
 				//   //do your work here
@@ -485,15 +486,5 @@ class Listing_Controller extends Base_Controller {
 		Input::upload('file', '/img/', $_FILES['file']['name']);
 		echo realpath('/');
 
-	}
-
-	public function action_deleteExpired()
-	{
-		$today = date("Y-m-d H:i:s");    
-		Listing::where("date_unavailable", "<", $today)->get();
-		foreach($listings as $listing)
-		{
-			$listing->delete();
-		}
 	}
 }
