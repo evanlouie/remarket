@@ -181,6 +181,7 @@ class Multup {
 
 			/* upload the file */
 			$save = move_uploaded_file($this->image[$this->input]['tmp_name'],$this->path.$filename);
+			// die(var_dump($this->path));
 			if($save){
 				$path = $this->path.$filename;
 
