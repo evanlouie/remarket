@@ -82,7 +82,8 @@ INSERT INTO `categories` (`id`, `title`) VALUES
 (9, 'Electical'),
 (10, 'Plumbing'),
 (11, 'Insulation'),
-(12, 'Other');
+(12, 'Other')
+(13, 'Event');
 
 -- --------------------------------------------------------
 

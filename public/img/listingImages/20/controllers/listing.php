@@ -103,14 +103,14 @@ class Listing_Controller extends Base_Controller {
 					$listing->category = $c->title;
 				}
 			}
-			$files = glob("public/img/$id/*.{jpg,png,gif}", GLOB_BRACE);
+			$files = glob("html/img/$id/*.*");
 			if($files)
 			{
 
 			}
 			else
 			{
-				$files = array();
+				$files=array();
 			}
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
@@ -210,8 +210,12 @@ class Listing_Controller extends Base_Controller {
 			if ($account->id == Session::get('id'))
 			{
 				// $files = scandir("public/img/listingImages/$id");
-				$files = glob("public/img/$id/*.{jpg,png,gif}", GLOB_BRACE);
-				if($files)
+				if (!is_dir("html/img/$id")) {
+	    		mkdir("html/img/$id");
+			}
+
+				$files = glob("html/img/$id/*.*");
+				if ($files)
 				{
 
 				}
@@ -219,6 +223,9 @@ class Listing_Controller extends Base_Controller {
 				{
 					$files = array();
 				}
+				// die(var_dump($files));
+				// die(getcwd()."/img/listingImages/$id/");
+				// die(var_dump(glob("html/img/$id/*.*")));
 				// die(var_dump($files));
 				// foreach($files as $file) {
 				//   //do your work here
@@ -255,8 +262,6 @@ class Listing_Controller extends Base_Controller {
 					$listing->delete();
 					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
-					$account = Account::find(Session::get('id'));
-					Emailer::surveyEmail($account->email, $listing);
 					Session::put('alert', $alert);
 					return Redirect::to('/account/myListings');
 				}
@@ -264,8 +269,6 @@ class Listing_Controller extends Base_Controller {
 					$listing->delete();
 					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
-					$account = Account::find(Session::get('id'));
-					Emailer::surveyEmail($account->email, $listing);
 					Session::put('alert', $alert);
 					return Redirect::to('/account/flaggedListings');
 				}
@@ -504,18 +507,5 @@ class Listing_Controller extends Base_Controller {
 		Input::upload('file', '/img/', $_FILES['file']['name']);
 		echo realpath('/');
 
-	}
-
-	public function action_deleteExpired()
-	{
-		$today = date("Y-m-d H:i:s");    
-		Listing::where("date_unavailable", "<", $today)->get();
-		foreach($listings as $listing)
-		{
-			$location = Location::find($listing->location_id);
-			$account = Account::find($location->account_id);;
-			Emailer::surveyEmail($account->email, $listing);
-			$listing->delete();
-		}
 	}
 }
