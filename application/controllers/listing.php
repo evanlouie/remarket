@@ -240,6 +240,8 @@ class Listing_Controller extends Base_Controller {
 					$listing->delete();
 					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
+					$account = Account::find(Session::get('id'));
+					Emailer::surveyEmail($account->email, $listing);
 					Session::put('alert', $alert);
 					return Redirect::to('/account/myListings');
 				}
@@ -247,6 +249,8 @@ class Listing_Controller extends Base_Controller {
 					$listing->delete();
 					$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
 							"Listing removed.</div>";
+					$account = Account::find(Session::get('id'));
+					Emailer::surveyEmail($account->email, $listing);
 					Session::put('alert', $alert);
 					return Redirect::to('/account/flaggedListings');
 				}
