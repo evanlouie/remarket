@@ -46,10 +46,14 @@
                 <?php $c = array_pop($categories) ?>
                 <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
               </td>
-              <td>
-                <?php $c = array_pop($categories) ?>
-                <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
-              </td>
+              @if(!empty($categories))
+                <td>
+                  <?php $c = array_pop($categories) ?>
+                  <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
+                </td>
+              @else
+                <td></td>
+              @endif
             </tr>
             @endwhile
           </tbody>
