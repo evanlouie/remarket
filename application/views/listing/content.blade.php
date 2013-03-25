@@ -26,10 +26,12 @@
 
       <div class = "image-collection">
         <ul class="thumbnails">
-          @foreach ($listing->images as $image)
+          @foreach ($images as $image)
           <li class="span5">
             <div class="thumbnail">
-              <img src="http://placehold.it/900x600" class="image">
+               <a class='thumbnail'href="{{substr($image, 6)}}">
+                <img src="{{substr($image, 6)}}"/>
+              </a>
             </div>
           </li>
           @endforeach

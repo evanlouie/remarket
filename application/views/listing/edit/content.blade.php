@@ -10,6 +10,8 @@
     </div>
     <div class="container-fluid container-fluid-2">
     <div class="row-fluid">
+                <a class="btn btn-info" id="updateImages" href='/listing/addimages/{{$listing->id}}'>Add/Remove Images</a>
+
       <form action="/listing/edit/{{ $listing->id }}" method='post'>
 
             <div class='row-fluid'>
@@ -156,8 +158,7 @@
         <textarea class="span12" rows='5'placeholder="Enter a brief description of your listing here. A More detailed description will allow more people to find you listing." title="Be descriptive" name="description">{{$listing->description}}</textarea>
           <a class="btn btn-danger pull-left" href="/account/">Cancel Update</a>
           <button class="btn btn-success pull-right" id='updateButton' type='submit'/>Update Listing</button> 
-          <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
-          <!-- @include('partials.forms.fileUpload') -->
+
           <script>
             $(document).on('click', '#updateButton', function(e) {
               message = '';
@@ -189,11 +190,15 @@
                 message += "Please provide at least one field in the location\n";
               }
               var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
-              if (reg.test(postal_code)) {
+              if(!$('#postal_code').is(":disabled"))
+              {
+                  if (reg.test(postal_code)) {
 
-              } else {
-                message+= "Please insert proper Canadian postal code\n";
+                  } else {
+                    message+= "Please insert proper Canadian postal code\n";
+                  }
               }
+              
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
@@ -214,5 +219,6 @@
               $(document).tooltip();
             })
           </script>
+
         </form>
     </div>
