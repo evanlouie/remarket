@@ -104,7 +104,6 @@ class Listing_Controller extends Base_Controller {
 				}
 			}
 			$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
-
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
 			->with('listing', $listing)

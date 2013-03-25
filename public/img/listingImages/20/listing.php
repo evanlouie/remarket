@@ -103,8 +103,15 @@ class Listing_Controller extends Base_Controller {
 					$listing->category = $c->title;
 				}
 			}
-			$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+			$files = glob("public/img/$id/*.*");
+			if($files)
+			{
 
+			}
+			else
+			{
+				$files=array();
+			}
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
 			->with('listing', $listing)
@@ -203,8 +210,22 @@ class Listing_Controller extends Base_Controller {
 			if ($account->id == Session::get('id'))
 			{
 				// $files = scandir("public/img/listingImages/$id");
-				// $files = glob("/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
-				die(getcwd()."/img/listingImages/$id/");
+				if (!is_dir("html/img/$id")) {
+	    		mkdir("html/img/$id");
+			}
+
+				$files = glob("html/img/$id/*.*");
+				if ($files)
+				{
+
+				}
+				else
+				{
+					$files = array();
+				}
+				// die(var_dump($files));
+				// die(getcwd()."/img/listingImages/$id/");
+				// die(var_dump(glob("html/img/$id/*.*")));
 				// die(var_dump($files));
 				// foreach($files as $file) {
 				//   //do your work here

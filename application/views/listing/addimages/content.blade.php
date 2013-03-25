@@ -20,7 +20,7 @@
           <ul class='thumbnails' id='images' class='span12'>
           @foreach($images as $image)
           <li class='span3'>
-            <a class='thumbnail'href="{{substr($image, 6)}}">
+            <a class='thumbnail'href="/{{substr($image, 6)}}">
               <img src="{{substr($image, 6)}}"/>
             </a>
             <button file="{{$image}}" class='deleteImage pull-right btn-warning btn-mini'>Delete</button>
