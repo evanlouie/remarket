@@ -7,7 +7,7 @@
     <div class="row-fluid">
       <span class="span12">
         <form class="pull-center" action="listing" method='GET'>
-          <h1 class="heading">Search Listings</h1>
+          <h2 class="heading">Search Listings</h2>
           <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
           <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="minP" placeholder="Minimum price">
           <input class="textinput span2 textinput-1 textinput-2" type="number" step='any' name="maxP" placeholder="Maximum price">

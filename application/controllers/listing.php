@@ -104,6 +104,14 @@ class Listing_Controller extends Base_Controller {
 				}
 			}
 			$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+			if($files)
+			{
+
+			}
+			else
+			{
+				$files = array();
+			}
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
 			->with('listing', $listing)
@@ -203,6 +211,14 @@ class Listing_Controller extends Base_Controller {
 			{
 				// $files = scandir("public/img/listingImages/$id");
 				$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+				if($files)
+				{
+
+				}
+				else
+				{
+					$files = array();
+				}
 				// die(var_dump($files));
 				// foreach($files as $file) {
 				//   //do your work here
@@ -496,6 +512,9 @@ class Listing_Controller extends Base_Controller {
 		Listing::where("date_unavailable", "<", $today)->get();
 		foreach($listings as $listing)
 		{
+			$location = Location::find($listing->location_id);
+			$account = Account::find($location->account_id);;
+			Emailer::surveyEmail($account->email, $listing);
 			$listing->delete();
 		}
 	}
