@@ -260,7 +260,10 @@ class Account_Controller extends Base_Controller {
 			{
 				$account = Account::where_email(Input::get('email'))->first();
 				Session::put('id', $account->id);
-				return Redirect::to('account');
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
+					'You are now logged in.</div>';
+				Session::put('alert', $alert);
+				
 			}
 			else 
 			{
@@ -277,6 +280,9 @@ class Account_Controller extends Base_Controller {
 	{
 		Auth::logout();
 		Session::flush();
+		$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
+				'You are now logged out.</div>';
+		Session::put('alert', $alert);	
 		return Redirect::to('home');
 	}
 
