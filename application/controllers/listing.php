@@ -355,6 +355,7 @@ class Listing_Controller extends Base_Controller {
 				$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Error!</strong> You have already flagged this post.</div>';
 				Session::put('alert', $alert);
+				return Redirect::to('/listing/'.$id);
 			}
 			else if( $size < 4 ) {
 				$flag = new Flag;
@@ -395,11 +396,7 @@ class Listing_Controller extends Base_Controller {
 				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;">
 					<strong>Success! </strong>This listing has been flagged.</div>';
 				Session::put('alert', $alert);
-				$view = View::make('listing.index')
-				->with('title', $listing->title)
-				->with('listing', $listing)
-				->with('location', $location);
-				return $view;
+				
 			}
 		} 
 		else {
@@ -420,11 +417,7 @@ class Listing_Controller extends Base_Controller {
 		$listing->email = $account->email;
 		$listing->date_available = substr($listing->date_available, 0, 10);
 		$listing->date_unavailable = substr($listing->date_unavailable, 0, 10);
-		$view = View::make('listing.index')
-		->with('title', $listing->title)
-		->with('listing', $listing)
-		->with('location', $loc);
-		return $view;
+		return Redirect::to('/listing/'.$id);
 	}
 
 	public function action_unflag($id) {

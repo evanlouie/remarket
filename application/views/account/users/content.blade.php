@@ -73,5 +73,5 @@
     })
     e.preventDefault();
   });
-
+  $('#users').attr('class', 'active');
 </script>

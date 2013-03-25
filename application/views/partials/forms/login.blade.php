@@ -4,7 +4,7 @@
 </div>
 
 <div class='pull-right' style="margin-right: 10px;">
-	<form class="navbar-form pull-left">
+	<form class="navbar-form pull-left" action="/listing" method="GET">
 		<input class="textinput span5" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
 		<button type="submit" class="btn btn-primary">Search</button>
 		<a href="/listing/" class="btn btn-success" style="margin-right:4px">Browse Listings</a>
