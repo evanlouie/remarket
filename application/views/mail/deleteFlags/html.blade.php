@@ -1,2 +1,0 @@
-<strong>HTML EMAIL</strong>
-DELETE DUE TO EXPIRY
