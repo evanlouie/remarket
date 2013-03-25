@@ -204,7 +204,7 @@ class Listing_Controller extends Base_Controller {
 			{
 				// $files = scandir("public/img/listingImages/$id");
 				$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
-
+				// die(var_dump($files));
 				// foreach($files as $file) {
 				//   //do your work here
 				// }
