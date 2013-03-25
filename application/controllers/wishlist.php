@@ -111,8 +111,4 @@ class Wishlist_Controller extends Base_Controller {
 	}
 
 
-
-
-
-
 }

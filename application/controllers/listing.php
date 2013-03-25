@@ -496,6 +496,9 @@ class Listing_Controller extends Base_Controller {
 		Listing::where("date_unavailable", "<", $today)->get();
 		foreach($listings as $listing)
 		{
+			$location = Location::find($listing->location_id);
+			$account = Account::find($location->account_id);;
+			Emailer::surveyEmail($account->email, $listing);
 			$listing->delete();
 		}
 	}

@@ -16,18 +16,21 @@ class Base_Controller extends Controller {
 
 	public function __construct() 
 	{
+				// Asset::add('jquery.dropdown.css', 'css/jquery.dropdown.css');
+
 		Asset::add('bootstrap', 'css/bootstrap.min.css');
 		Asset::add('bootstrap-responsive', 'css/bootstrap-responsive.css');
 		Asset::add('common', 'css/common.css');
 		// Asset::add('style', 'css/style.css');
 		Asset::add('fontawsome', 'css/fontawesome.css');
 		Asset::add('flickcss', 'css/flick/jquery-ui-1.10.2.custom.css');
-		Asset::add('bootstrap-js', 'js/bootstrap.min.js');
+		Asset::add('jquery', 'js/jquery-1.9.1.js');			
+		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.min.js');
 
-		Asset::add('jquery', 'js/jquery-1.9.1.js');
-		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
+		Asset::add('bootstrap-js', 'js/bootstrap.js');
+		Asset::add('jquery.dropdown.js', 'js/jquery.dropdown.js');
 
-		$files = glob("public/css/pikachoose/*.css", GLOB_BRACE);
+		// $files = glob("public/css/pikachoose/*.css", GLOB_BRACE);
 		// foreach($files as $file)
 		// {
 		// 	Asset::add($file, substr($file, 7));
