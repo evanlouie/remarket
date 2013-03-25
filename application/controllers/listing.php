@@ -103,10 +103,13 @@ class Listing_Controller extends Base_Controller {
 					$listing->category = $c->title;
 				}
 			}
+			$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+
 			$view = View::make('listing.index')
 			->with('title', $listing->title)
 			->with('listing', $listing)
 			->with('location', $loc)
+			->with('images', $files)
 			->with('categories', $categories);
 			return $view;
 		}
@@ -171,7 +174,8 @@ class Listing_Controller extends Base_Controller {
 				$listing->date_unavailable = $date_unavailable."-00-00-00";
 				$listing->location_id = $location->id;
 				$listing->save();
-				return Redirect::to('account');
+				$listing = Listing::order_by('id', 'desc')->first();
+				return Redirect::to('/listing/addimages/'.$listing->id);
 			}
 			else
 			{	$categories = Categorie::all();
@@ -187,6 +191,41 @@ class Listing_Controller extends Base_Controller {
 			return Redirect::to('/account');
 		}
 		
+	}
+
+	public function action_addImages($id)
+	{
+		if(Session::has('id') && Auth::check())
+		{
+			$listing = Listing::find($id);
+			$location = Location::find($listing->location_id);
+			$account = Account::find($location->account_id);
+			if ($account->id == Session::get('id'))
+			{
+				// $files = scandir("public/img/listingImages/$id");
+				$files = glob("public/img/listingImages/$id/*.{jpg,png,gif}", GLOB_BRACE);
+
+				// foreach($files as $file) {
+				//   //do your work here
+				// }
+				$view = View::make('listing.addimages.index')
+							->with('title', 'Add Images')
+							->with('listing', $listing)
+							->with('location', $location)
+							->with('account', $account)
+							->with('images', $files);
+				return $view;
+			}
+			else 
+			{
+				die('User does not own listing');
+			}
+		}
+		else
+		{
+			die('User not logged in');
+		}
+
 	}
 
 	public function action_delete($id)

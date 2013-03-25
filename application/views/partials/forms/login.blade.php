@@ -15,6 +15,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu pull-right">
+  	@if(Session::get('admin') == 1)
+	<li><a tabindex="-1" href="/account/flaggedListings">Flagged Listings</a></li>
+    <li><a tabindex="-1" href="/account/users">Users</a></li>
+	@endif
     <li><a tabindex="-1" href="/account/myListings">Manage Listings</a></li>
     <li><a tabindex="-1" href="/account/myLocations">Manage Locations</a></li>
     <li><a tabindex="-1" href="/wishlist">My Wishlist</a></li>

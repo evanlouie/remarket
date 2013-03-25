@@ -49,6 +49,9 @@ Route::get('listing/(:num)', 'listing@id');
 Route::get('image/(:num)', 'image@id');
 Route::get('location/(:num)', 'location@id');
 // Route::get('wishlist/(:num)' , 'wishlist@id');
+Route::get('/upload', function() {
+	return View::make('upload');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -123,5 +126,6 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::to('login');
 });
 
+Bundle::start('multup');
 
 Route::controller(Controller::detect());

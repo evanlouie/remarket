@@ -13,12 +13,12 @@
     <form action="/listing/create" method='post'>
       <div class="span6">
         <h4 class="heading">Title</h4>
-        <input class="textinput span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
+        <input class="span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
       </div>
       <div class="input-prepend input-append span2">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
-        <input class="textinput span12 textinput-1" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
+        <input class="span12" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">
@@ -134,7 +134,7 @@
          
          <div class="row-fluid">
           <a class="btn btn-danger pull-left" href="/account/">Cancel Listing</a>
-          <button id='postButton' class="btn btn-primary pull-right">Post Listing</button>
+          <button id='postButton' class="btn btn-primary pull-right" title="Continue to Image Uploads">Continue</button>
           <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
           </div>
 
@@ -170,11 +170,15 @@
                 message += "Please provide at least one field in the location\n";
               }
               var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
-              if (reg.test(postal_code)) {
+              if(!$('#postal_code').is(":disabled"))
+              {
+                  if (reg.test(postal_code)) {
 
-              } else {
-                message+= "Please insert proper Canadian postal code\n";
+                  } else {
+                    message+= "Please insert proper Canadian postal code\n";
+                  }
               }
+              
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
@@ -198,5 +202,4 @@
       </span>
     </div>
   </div>
-  <!-- @include('partials.forms.fileUpload') -->
 </div>
