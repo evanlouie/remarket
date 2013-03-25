@@ -27,7 +27,7 @@ class Base_Controller extends Controller {
 		Asset::add('jquery', 'js/jquery-1.9.1.js');	
 		Asset::add('bootstrap-js', 'js/bootstrap.js');		
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.min.js');
-
+		Asset::add('jquery.tablesorter.js', 'js/jquery.tablesorter.js');
 		Asset::add('jquery.dropdown.js', 'js/jquery.dropdown.js');
 
 		// $files = glob("public/css/pikachoose/*.css", GLOB_BRACE);

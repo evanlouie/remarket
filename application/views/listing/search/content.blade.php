@@ -70,7 +70,7 @@
           @if(sizeOf($listings) == 0)
           <h4> No results were found. </h4>
           @else
-          <table class="table table-hover table-stiped">
+          <table id="tabletosort" class="table table-hover table-stiped">
             <thead>
               <tr>
                 <th class="cke_focus cke_focus-1">Title</th>
@@ -109,6 +109,12 @@ $(function() {
 });
 </script>
 <script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#tabletosort").tablesorter(); 
+    } 
+); 
+
 $(document).on('click', '#getMap', function() {
   initialize();
 });
