@@ -28,7 +28,7 @@
           <td>{{$location->city}}</td>
           <td>{{$location->postal_code}}</td>
           <td><a href="/location/edit/{{$location->id}}" class="btn btn-primary btn-small">Edit</a></td>
-          <td><a id="{{ $location->id }}" class="warning btn btn-danger btn-small"><i class="icon icon-trash pull-center"></i></a></td>
+          <td><a id="{{ $location->id }}" class="warning btn btn-danger btn-small"><i class="icon-trash pull-center"></i></a></td>
         </tr>
         @endforeach
       </tbody>
