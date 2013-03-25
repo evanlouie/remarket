@@ -10,6 +10,8 @@
     </div>
     <div class="container-fluid container-fluid-2">
     <div class="row-fluid">
+                <a class="btn btn-info" id="updateImages" href='/listing/addimages/{{$listing->id}}'>Add/Remove Images</a>
+
       <form action="/listing/edit/{{ $listing->id }}" method='post'>
 
             <div class='row-fluid'>
@@ -28,11 +30,13 @@
           <div class='row-fluid'>
             <div class='span6'>
               <h4 class="heading heading-5">Available</h4>
-              <input style='cursor:pointer; background:#fff' class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}">
+              <input class="span12" style='cursor:pointer; background:#fff' type="text" name="date_available" readonly="readonly" id="date_available" value="{{substr($listing->date_available,0,-9)}}">
+
+              <!-- <input style='cursor:pointer; background:#fff' class="textinput span12" type="text" name="date_available" readonly="readonly" id="date_available" placeholder='' value="{{substr($listing->date_available, 0,-9)}}"> -->
             </div>
             <div class='span6'>
               <h4 class="heading heading-5">Unavailable</h4>
-              <input class="textinput span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" placeholder="Date listing expires" value="{{substr($listing->date_unavailable,0,-9)}}">
+              <input class="span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" value="{{substr($listing->date_unavailable,0,-9)}}">
             </div>  
           </div>
           <div class='row-fluid'>
@@ -78,6 +82,10 @@
       </div>
     </div>
         <script>
+        var postal_code;
+          $(document).on('change', '#postal_code', function() {
+            postal_code=$('#postal_code').val();
+          })
           $(document).on('change', '#createListing', function() {
             if ($('#location-select').attr('disabled')) {
               $('#location-select').prop('disabled', false);
@@ -92,11 +100,32 @@
               $('#postal_code').prop('disabled', false);
             }
           });
+          var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+        $(document).on('change', '#date_available', function() {
+            start = $('#date_available').val();
+            // end = $('date_unavailable').val();
+            startyear = start.substring(0,4);
+            // endyear= end.substring(0,4);
+            startmonth = start.substring(5,7);
+            // endmonth = end.substring(5,7);
+            startday= start.substring(8,10);
+            // endday = end.substring(8,10);
+        })
+        $(document).on('change', '#date_unavailable', function() {
+            // start = $('#date_available').val();
+            end = $('#date_unavailable').val();
+            // startyear = start.substring(0,4);
+            endyear= end.substring(0,4);
+            // startmonth = start.substring(5,7);
+            endmonth = end.substring(5,7);
+            // startday= start.substring(8,10);
+            endday = end.substring(8,10);
+        })
           $('#date_available').datepicker({
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
               changeMonth: true,
-              changeYear: true,
+              // changeYear: true,
               // showOn: "button",
               // buttonImage: "images/calendar.gif",
               // buttonImageOnly: true,
@@ -108,7 +137,7 @@
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
               changeMonth: true,
-              changeYear: true,
+              // changeYear: true,
               // showOn: "button",
               // buttonImage: "images/calendar.gif",
               // buttonImageOnly: true,
@@ -129,8 +158,7 @@
         <textarea class="span12" rows='5'placeholder="Enter a brief description of your listing here. A More detailed description will allow more people to find you listing." title="Be descriptive" name="description">{{$listing->description}}</textarea>
           <a class="btn btn-danger pull-left" href="/account/">Cancel Update</a>
           <button class="btn btn-success pull-right" id='updateButton' type='submit'/>Update Listing</button> 
-          <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
-          <!-- @include('partials.forms.fileUpload') -->
+
           <script>
             $(document).on('click', '#updateButton', function(e) {
               message = '';
@@ -161,11 +189,25 @@
               {
                 message += "Please provide at least one field in the location\n";
               }
+              var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
+              if(!$('#postal_code').is(":disabled"))
+              {
+                  if (reg.test(postal_code)) {
+
+                  } else {
+                    message+= "Please insert proper Canadian postal code\n";
+                  }
+              }
+              
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
                   }
                 })
+              if(startday>endday || startmonth>endmonth || startyear>endyear)
+              {
+                message += "Please select an available date which occures before the expiry date\n";
+              }
               
               if (message!='') {
                 alert(message);
@@ -177,5 +219,6 @@
               $(document).tooltip();
             })
           </script>
+
         </form>
     </div>

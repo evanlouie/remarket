@@ -13,12 +13,12 @@
     <form action="/listing/create" method='post'>
       <div class="span6">
         <h4 class="heading">Title</h4>
-        <input class="textinput span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
+        <input class="span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
       </div>
       <div class="input-prepend input-append span2">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
-        <input class="textinput span12 textinput-1" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
+        <input class="span12" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">
@@ -59,6 +59,10 @@
         </select>
         <input class="textinput" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
         <script>
+        var postal_code;
+          $(document).on('change', '#postal_code', function() {
+            postal_code=$('#postal_code').val();
+          })
         $(document).on('change', '#createListing', function() {
           if ($('#location-select').attr('disabled')) {
             $('#location-select').prop('disabled', false);
@@ -73,6 +77,27 @@
             $('#postal_code').prop('disabled', false);
           }
         });
+        var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+        $(document).on('change', '#date_available', function() {
+            start = $('#date_available').val();
+            // end = $('date_unavailable').val();
+            startyear = start.substring(0,4);
+            // endyear= end.substring(0,4);
+            startmonth = start.substring(5,7);
+            // endmonth = end.substring(5,7);
+            startday= start.substring(8,10);
+            // endday = end.substring(8,10);
+        })
+        $(document).on('change', '#date_unavailable', function() {
+            // start = $('#date_available').val();
+            end = $('#date_unavailable').val();
+            // startyear = start.substring(0,4);
+            endyear= end.substring(0,4);
+            // startmonth = start.substring(5,7);
+            endmonth = end.substring(5,7);
+            // startday= start.substring(8,10);
+            endday = end.substring(8,10);
+        })
         $('#date_available').datepicker({
               dateFormat: 'yy-mm-dd',
               // showButtonPanel: true,
@@ -109,7 +134,7 @@
          
          <div class="row-fluid">
           <a class="btn btn-danger pull-left" href="/account/">Cancel Listing</a>
-          <button id='postButton' class="btn btn-primary pull-right">Post Listing</button>
+          <button id='postButton' class="btn btn-primary pull-right" title="Continue to Image Uploads">Continue</button>
           <!-- <button class="btn btn-primary pull-center btn-primary-1">Add Images</button> -->
           </div>
 
@@ -144,11 +169,25 @@
               {
                 message += "Please provide at least one field in the location\n";
               }
+              var reg = /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$/;
+              if(!$('#postal_code').is(":disabled"))
+              {
+                  if (reg.test(postal_code)) {
+
+                  } else {
+                    message+= "Please insert proper Canadian postal code\n";
+                  }
+              }
+              
               $('select:enabled').each(function() {
                   if($(this).val() == '0') {
                     message += "Please select a valid location\n";
                   }
                 })
+              if(startday>endday || startmonth>endmonth || startyear>endyear)
+              {
+                message += "Please select an available date which occures before the expiry date\n";
+              }
               
               if (message!='') {
                 alert(message);
@@ -163,5 +202,4 @@
       </span>
     </div>
   </div>
-  <!-- @include('partials.forms.fileUpload') -->
 </div>

@@ -7,6 +7,7 @@
 				@yield('loginbar')
 				@if(Session::has('alert'))
 					{{ Session::get('alert') }}
+					{{ Session::forget('alert') }}
 				@endif
 				@yield('content')
 			</div>

@@ -31,6 +31,7 @@
         <div class="btns">
           <a href="/about/" class="btn btn-primary btn-large">Learn More</a>
           <a href="/listing/" class="btn btn-success btn-large">Browse Listings</a>
+          <a href="/listing?q=&minP=&maxP=&city=&category_id=14" class="btn btn-info btn-large">Browse Events</a>
         </div>
       </div>
     </span>

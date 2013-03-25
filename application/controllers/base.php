@@ -22,19 +22,17 @@ class Base_Controller extends Controller {
 		// Asset::add('style', 'css/style.css');
 		Asset::add('fontawsome', 'css/fontawesome.css');
 		Asset::add('flickcss', 'css/flick/jquery-ui-1.10.2.custom.css');
+		Asset::add('bootstrap-js', 'js/bootstrap.min.js');
+
 		Asset::add('jquery', 'js/jquery-1.9.1.js');
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.js');
-		Asset::add('bootstrap-js', 'js/bootstrap.min.js');
-		// if( Session::has('forget_alert') ) {
-		// 	if( Session::get('forget_alert') == 1) {
-		// 		Session::put('forget_alert', 0);
-		// 	}
-		// 	if( Session::get('forget_alert') == 0) {
-		// 		Session::forget('alert');
-		// 		Session::forget('forget_alert');
-		// 	}
+
+		$files = glob("public/css/pikachoose/*.css", GLOB_BRACE);
+		// foreach($files as $file)
+		// {
+		// 	Asset::add($file, substr($file, 7));
 		// }
-		Session::forget('alert');
+
 		if (Session::has('id') && Auth::check())
 		{
 			$account = Account::find(Session::get('id'));
@@ -45,6 +43,16 @@ class Base_Controller extends Controller {
 			else 
 			{
 				Session::put('admin', '0');
+			}
+			if($account->blocked == 1 ) 
+			{
+				Session::put('alert', "Your account has been banned. Please contact the admin for more details");
+				Session::forget('id');
+				Auth::logout();
+			}
+			else 
+			{
+
 			}
 		}
 	}

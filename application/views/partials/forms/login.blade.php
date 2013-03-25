@@ -4,7 +4,7 @@
 </div>
 
 <div class='pull-right' style="margin-right: 10px;">
-	<form class="navbar-form pull-left">
+	<form class="navbar-form pull-left" action="/listing" method="GET">
 		<input class="textinput span5" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
 		<button type="submit" class="btn btn-primary">Search</button>
 		<a href="/listing/" class="btn btn-success" style="margin-right:4px">Browse Listings</a>
@@ -15,6 +15,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu pull-right">
+  	@if(Session::get('admin') == 1)
+	<li><a tabindex="-1" href="/account/flaggedListings">Flagged Listings</a></li>
+    <li><a tabindex="-1" href="/account/users">Users</a></li>
+	@endif
     <li><a tabindex="-1" href="/account/myListings">Manage Listings</a></li>
     <li><a tabindex="-1" href="/account/myLocations">Manage Locations</a></li>
     <li><a tabindex="-1" href="/wishlist">My Wishlist</a></li>

@@ -1,4 +1,4 @@
- <div class="container-fluid container-fluid-1">
+ <div class="container-fluid1">
   <div class="container">
     <div class="row-fluid">
       <span class="span12">
@@ -46,10 +46,14 @@
                 <?php $c = array_pop($categories) ?>
                 <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
               </td>
-              <td>
-                <?php $c = array_pop($categories) ?>
-                <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
-              </td>
+              @if(!empty($categories))
+                <td>
+                  <?php $c = array_pop($categories) ?>
+                  <a class="dom-link" href="/listing?category_id={{$c->id}}">{{$c->title}}</a>
+                </td>
+              @else
+                <td></td>
+              @endif
             </tr>
             @endwhile
           </tbody>
@@ -63,29 +67,29 @@
           <li><a id="getMap" href="#tabs-2">Map View</a></li>
         </ul>
         <div id="tabs-1">
-              @if(sizeOf($listings) == 0)
-                <h4> No results were found. </h4>
-              @else
-              <table class="table table-hover table-stiped">
-              <thead>
-                <tr>
-                  <th class="cke_focus cke_focus-1">Title</th>
-                  <th class="cke_focus cke_focus-2">Price</th>
-                  <th class="cke_focus cke_focus-3">Category</th>
-                  <th class="cke_focus cke_focus-4">Location</th>
-                  <th class="th-1">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($listings as $listing)
-                <tr>
-                  <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
-                  <td>${{$listing->price}}</td>
-                  <td>{{$listing->category}}</td>
-                  <td class="td-1">{{$listing->location}}</td>
-                  <td>12/12/12</td>
-                </tr>
-                @endforeach
+          @if(sizeOf($listings) == 0)
+          <h4> No results were found. </h4>
+          @else
+          <table class="table table-hover table-stiped">
+            <thead>
+              <tr>
+                <th class="cke_focus cke_focus-1">Title</th>
+                <th class="cke_focus cke_focus-2">Price</th>
+                <th class="cke_focus cke_focus-3">Category</th>
+                <th class="cke_focus cke_focus-4">Location</th>
+                <th class="th-1">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($listings as $listing)
+              <tr>
+                <td><a href="/listing/{{$listing->id}}">{{$listing->title}}</a></td>
+                <td>${{$listing->price}}</td>
+                <td>{{$listing->category}}</td>
+                <td class="td-1">{{$listing->location}}</td>
+                <td>12/12/12</td>
+              </tr>
+              @endforeach
               @endif
             </tbody>
           </table>

@@ -68,6 +68,7 @@ class Account_Controller extends Base_Controller {
 				$account->email = $email;
 				$account->password = $password;
 				$account->save();
+				Emailer::signUpConfirmation($email);
 				return Redirect::to('/');
 			}
 			else echo "email already registered";
@@ -93,13 +94,6 @@ class Account_Controller extends Base_Controller {
 			die('accuont id not set');
 			return false;
 		}
-	}
-
-	public function action_block($id) 
-	{
-		$account = Account::find($id);
-		$account->blocked = true;
-		$account->save();
 	}
 
 	public function action_edit()
@@ -150,7 +144,7 @@ class Account_Controller extends Base_Controller {
 			{
 				// Error - Password does not match
 				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
-							'Password does not match this account.';
+							'Password does not match this account.</div>';
 				Session::put('alert', $alert);
 				$view = View::make('account.details.index')
 				->with('title', 'Change Account Details')
@@ -267,12 +261,10 @@ class Account_Controller extends Base_Controller {
 			{
 				$account = Account::where_email(Input::get('email'))->first();
 				Session::put('id', $account->id);
-
-			$alert = '<div class="alert alert-danger" style="margin-top: 45px; margin-bottom: -45px;"><strong>Error!</strong> ' .
-							'You\'re missing some fields.</div>';
-			Session::put('alert', $alert);
-			Session::put('forget_alert', 1);
-				return Redirect::to('account');
+				$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
+					'You are now logged in.</div>';
+				Session::put('alert', $alert);
+				
 			}
 			else 
 			{
@@ -289,6 +281,9 @@ class Account_Controller extends Base_Controller {
 	{
 		Auth::logout();
 		Session::flush();
+		$alert = '<div class="alert alert-success" style="margin-top: 45px; margin-bottom: -45px;"><strong>Success!</strong> ' .
+				'You are now logged out.</div>';
+		Session::put('alert', $alert);	
 		return Redirect::to('home');
 	}
 
@@ -326,7 +321,66 @@ class Account_Controller extends Base_Controller {
 			}
 		}
 	}
+	public function action_users() 
+	{
+		if(Session::has('id') && Auth::check() && Session::get('admin')==1) 
+		{
+			$blocked = Account::where('blocked' ,'=', 1)->where('id','!=', Session::get('id'))->get();
+			$normal = Account::where('blocked', '=', 0)->where('id','!=', Session::get('id'))->get();
 
+			$view = View::make('account.users.index')
+							->with('title', 'Manage Users')
+							->with('blocked', $blocked)
+							->with('normal', $normal);
+
+			return $view;
+		}
+		
+	}
+	public function action_block($id)
+	{
+		if(Session::has('id') && Auth::check() && Session::get('admin')==1) 
+		{
+			$account = Account::find($id);
+			$account->blocked = 1;
+			$account->save();
+		}
+	}
+	public function action_unblock($id)
+	{
+		if(Session::has('id') && Auth::check() && Session::get('admin')==1) 
+		{
+			$account = Account::find($id);
+			$account->blocked = 0;
+			$account->save();
+		}
+	}
+	public function action_search($email)
+	{
+		if(Session::has('id') && Auth::check() && Session::get('admin')==1) 
+		{
+			$accounts = Account::where('email', 'LIKE', "%$email%")->get();
+			$payload='';
+			foreach($accounts as $account) 
+			{
+				if($account->blocked==1)
+				{
+					$payload.="<tr>
+            <td>{{$user->email}}</td>
+            <td><a accountid='{{$user->id}}' class='unblockbutton btn btn-mini btn-warning' href='/account/unblock/{{$user->id}}'>UnBlock</a></td>
+          </tr>";
+				}
+				else 
+				{
+					$payload .= "<tr>
+            <td>{{$user->email}}</td>
+            <td><a accountid='{{$user->id}} class='blockbutton btn btn-mini btn-warning' href='/account/block/{{$user->id}}'>Block</a></td>
+          </tr>";
+				}
+			}
+			echo $payload;
+		}
+	}
 	public function action_mylistings()
 	{
 		if(Auth::check())
