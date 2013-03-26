@@ -54,5 +54,4 @@ function login() {
 		login();
 		return false;
 	});
-
-	</script>
+</script>
