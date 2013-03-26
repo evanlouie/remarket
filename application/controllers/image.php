@@ -79,7 +79,7 @@ class Image_Controller extends Base_Controller {
 	    		mkdir("public/img/listingImages/$id");
 			}
 			
-		    $success = Multup::open('file', 'image|max:30000|mimes:jpg,gif,png', "public/img/listingImages/$id/")
+		    $success = Multup::open('file', 'image|max:30000|mimes:jpg,gif,png', "public/img/$id/")
 	        ->filename_callback(function( $filename ){ 
 	                /* prepend lolcat to our image */
 	                // return 'lolcat_'.basename($filename); 

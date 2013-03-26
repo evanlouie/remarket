@@ -64,14 +64,19 @@ function initialize() {
 
 function getAddresses() {
   var address = null;
-  <?php echo "geocoder.geocode( { 'address': '"
+  <?php 
+  $title = $listing->title;
+  $title = str_replace("'", '&#039;', $title);
+  $title = str_replace('"', '&quot', $title);
+  $title = json_encode($title);
+  echo "geocoder.geocode( { 'address': '"
     . $location->address . ", " . $location->city . ", " . $location->postal_code .
     "'}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location,
-          title:'" . addslashes($listing->title) . "'
+          title:'" . addslashes($title) . "'
         });
 map.setCenter(results[0].geometry.location);
 }

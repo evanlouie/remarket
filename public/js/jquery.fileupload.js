@@ -689,6 +689,7 @@
         },
 
         _beforeSend: function (e, data) {
+            $('#loadingDiv').show();
             if (this._active === 0) {
                 // the start callback is triggered when an upload starts
                 // and no other uploads are currently running,
@@ -730,6 +731,7 @@
             response.textStatus = options.textStatus = textStatus;
             response.jqXHR = options.jqXHR = jqXHR;
             this._trigger('done', null, options);
+            $('#loadingDiv').hide();
         },
 
         _onFail: function (jqXHR, textStatus, errorThrown, options) {
@@ -750,6 +752,7 @@
             // jqXHRorResult, textStatus and jqXHRorError are added to the
             // options object via done and fail callbacks
             this._trigger('always', null, options);
+
         },
 
         _onSend: function (e, data) {

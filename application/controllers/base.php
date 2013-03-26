@@ -25,10 +25,11 @@ class Base_Controller extends Controller {
 		Asset::add('fontawsome', 'css/fontawesome.css');
 		Asset::add('flickcss', 'css/flick/jquery-ui-1.10.2.custom.css');
 		Asset::add('jquery', 'js/jquery-1.9.1.js');	
+		Asset::add('jquery-migrate-1.1.1.js', 'js/jquery-migrate-1.1.1.js');
 		Asset::add('bootstrap-js', 'js/bootstrap.js');		
 		Asset::add('jqueryui', 'js/jquery-ui-1.10.2.custom.min.js');
 		Asset::add('jquery.tablesorter.js', 'js/jquery.tablesorter.js');
-		Asset::add('jquery.dropdown.js', 'js/jquery.dropdown.js');
+		Asset::add('jquery.tablesorter.pager.js', 'js/jquery.tablesorter.pager.js');
 
 		// $files = glob("public/css/pikachoose/*.css", GLOB_BRACE);
 		// foreach($files as $file)

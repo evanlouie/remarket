@@ -32,13 +32,20 @@
   </div>
 
 </div>
-
+<div id="loadingDiv" style='width:100%; height:100%; position:fixed; top:0; opacity:0.9; background-color:#123;'>
+<img style='display:block; margin: 10% auto;' src='/img/loading.gif'/>
+</div>
     <script>
+    $(document).ready(function() {
+      $('#loadingDiv').hide();
+    })
       $(document).on('click', '.deleteImage', function() {
+        $('#loadingDiv').show();
         fileurl = $(this).attr('file');
         $.post('/image/delete', {file: fileurl, listing_id: {{$listing->id}}}).done(function() {
           address = document.URL;
           $('#imagesHolder').load(address+" #images");
+          $('#loadingDiv').hide();
         })
       })
     </script>

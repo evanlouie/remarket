@@ -77,7 +77,7 @@
                 <th class="cke_focus cke_focus-2">Price</th>
                 <th class="cke_focus cke_focus-3">Category</th>
                 <th class="cke_focus cke_focus-4">Location</th>
-                <th class="th-1">Date</th>
+                <th class="th-1">Date Posted</th>
               </tr>
             </thead>
             <tbody>
@@ -87,12 +87,28 @@
                 <td>${{$listing->price}}</td>
                 <td>{{$listing->category}}</td>
                 <td class="td-1">{{$listing->location}}</td>
-                <td>12/12/12</td>
+                <td>{{substr($listing->date_available,0,-9)}}</td>
               </tr>
               @endforeach
               @endif
             </tbody>
           </table>
+          <div id="pager" style='position: relative;' class="pager">
+            <form>
+              <img class="first icon-fast-backward"/>
+              <img class="icon-backward prev"/>
+              <input type="text" class="pagedisplay"/>
+              <img class="icon-forward next"/>
+              <img class="last icon-fast-forward"/>
+              <select class="pagesize">
+                <option selected="selected"  value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option  value="40">40</option>
+              </select>
+            </form>
+          </div>
+
         </div>
         <div id="tabs-2" class="span12" style="height:500px">
           <div id="map_canvas" style="width:100%;height:100%"></div>
@@ -111,7 +127,8 @@ $(function() {
 <script type="text/javascript">
 $(document).ready(function() 
     { 
-        $("#tabletosort").tablesorter(); 
+        $("#tabletosort").tablesorter().tablesorterPager({container: $("#pager")});
+        $('#pager').css('position', '')
     } 
 ); 
 
@@ -141,15 +158,22 @@ function getAddresses() {
   var address = null;
 
   <?php foreach( $listings as $listing ) {
-    echo "geocoder.geocode( { 'address': '$listing->location'}, function(results, status) {
+    $title = $listing->title;
+    $title = htmlspecialchars($title);
+    // $title = str_replace("/", "&#92;", $title);
+    // $title = str_replace("\\", '&#47;', $title);
+    $title = str_replace("'", '&#039;', $title);
+    $title = str_replace('"', '&quot', $title);
+    $title = json_encode($title);
+    $string = "geocoder.geocode( { 'address': '$listing->location'}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location,
-          title:'".addslashes($listing->title)."'
+          title:'".$title."'
         });
  var contentString = '<div class=" . '"' . 'text-center' . '"' . 
- "><h4>".addslashes($listing->title)." - "."$"."$listing->price</h4><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
+ "><h4>".addslashes($title)." - "."$"."$listing->price</h4><a href=" . '"/listing/'. $listing->id . '"' ."><button class=" . '"' . 'btn btn-primary type=' . '"' . 'button' . '"' . ">Check it out!</button></a></div>';
  var infowindow = new google.maps.InfoWindow({
   content: contentString
 });
@@ -158,6 +182,12 @@ function getAddresses() {
 });
 }
 });";
+    // $string = htmlspecialchars($string);
+    // $string = str_replace("/", "&#92;", $string);
+    // $string = str_replace("\\", '&#47;', $string);
+    // // $string = str_replace("'", '&#039;', $string);
+    // // $string = str_replace('"', '&quot', $string);
+    echo $string;
 }
 ?>
 }

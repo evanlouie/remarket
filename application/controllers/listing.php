@@ -55,7 +55,7 @@ class Listing_Controller extends Base_Controller {
 		} 
 		else
 		{
-			$listings = Listing::order_by('created_at', 'desc')->take(10)->get();
+			$listings = Listing::order_by('created_at', 'desc')->get();
 			
 			
 		}
