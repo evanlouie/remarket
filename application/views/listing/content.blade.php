@@ -41,7 +41,7 @@
     </span>
   </div>
 
-  <div id="map_canvas" class="pull-center" style="width:500px; height:400px;"></div>
+  <div id="map_canvas" class="pull-center" style="width:100%; height:400px;"></div>
 
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHQnPSIos4woqO1xkhsUh9Si5ebskymUo&sensor=true"></script>
