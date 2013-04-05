@@ -5,6 +5,7 @@
 	<div>
 		<ul class="nav nav-list bs-docs-sidenav" >
 			@if(Session::get('admin') == 1)
+	  		<li id='stats'><a href="/statistics">Statistics <i class="icon icon-chevron-right pull-right"></i></a></li>
 			<li id="flaggedListings"><a href="/account/flaggedListings">Flagged Listings <i class="icon icon-chevron-right pull-right"></i></a></li>
 	  		<li id='users'><a href="/account/users">Users <i class="icon icon-chevron-right pull-right"></i></a></li>
 	  		@endif

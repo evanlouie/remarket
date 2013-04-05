@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row-fluid">
       <span class="span12">
-        <h1 class="heading" style="margin-left:97px;">{{$title}}</h1>
+        <h1 class="heading">{{$title}}</h1>
       </span>
     </div>
   </div>

@@ -4,20 +4,29 @@ class Statistics_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		$listings_count = Listing::count();
-		$successes = 0;
-		$money = 0;
-		$survey_results = Surveyresult::all();
-		foreach ( $survey_results as $result ) {
-			$money += $result->monetary_value;
-			$successes += $result->exchange_success;
+		if(Auth::check())
+		{
+			if(Session::has('id'))
+			{
+				if(Session::get('admin') == 1) {
+					$listings_count = Listing::count();
+					$successes = 0;
+					$money = 0;
+					$survey_results = Surveyresult::all();
+					foreach ( $survey_results as $result ) {
+						$money += $result->monetary_value;
+						$successes += $result->exchange_success;
+					}
+					$view = View::make('statistics.index')
+					->with('title','Current Stats')
+					->with('listings_count', $listings_count)
+					->with('successes', $successes)
+					->with('money', $money);	
+					return $view;
+				}
+			}
 		}
-		$view = View::make('statistics.index')
-		->with('title','Current Stats')
-		->with('listings_count', $listings_count)
-		->with('successes', $successes)
-		->with('money', $money);	
-		return $view;
+		return Redirect::to('/');
 	}
 
 	public function action_reply()
