@@ -517,6 +517,17 @@ class Listing_Controller extends Base_Controller {
 		$listings = Listing::where('date_unavailable', '<', $date)->get();
 		foreach($listings as $listing)
 		{
+			$location = Location::find($listing->location_id);
+			$account = Account::find($location->account_id);
+
+			$email = $account->email;
+			$subject = 'REMARKET: Tell us what happened with your listing.';
+			$message = "Your posting titled '".addslashes($listing->title).
+						"' was recently deleted from market319.tk. \n\n How did it go?".
+						"\n\n We were wondering if you would fill out our customer survey".
+						" at market319.tk/survey \n\n Thanks, \n The REMARKET team";
+			$header="from: REMARKET <no-reply@market.tk>";
+			$sent=mail($email,$subject,$message,$header);
 			$listing->delete();
 		}
 	}

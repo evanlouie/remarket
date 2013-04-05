@@ -72,7 +72,7 @@ return array(
 			'host'     => 'localhost',
 			'database' => 'market',
 			'username' => 'root',
-			'password' => 'password',
+			'password' => '',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),

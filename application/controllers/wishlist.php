@@ -112,7 +112,7 @@ class Wishlist_Controller extends Base_Controller {
 
 	public function action_sendEmails() 
 	{
-		$accounts = Account::all();
+		$accounts = Account::where('wishlistEmail', '=', '1')->get();
 		foreach($accounts as $account)
 		{
 			$matches = array();

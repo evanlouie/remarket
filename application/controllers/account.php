@@ -57,21 +57,33 @@ class Account_Controller extends Base_Controller {
 
 	public function action_create()
 	{
-		if (Input::has('email') && Input::has('password'))
+		if (Input::has('email') && Input::has('password') && Input::has('email2') && Input::has('password2') )
 		{
-			$size = Account::where_email(Input::get('email'));
-			if($size->count()==0)
+			if (Input::get('email')==Input::get('email2') && Input::get('password')==Input::get('password2'))
 			{
-				$email = Input::get('email');
-				$password = Hash::make(Input::get('password'));
-				$account = new Account;
-				$account->email = $email;
-				$account->password = $password;
-				$account->save();
-				Emailer::signUpConfirmation($email);
-				return Redirect::to('/');
+				$size = Account::where_email(Input::get('email'));
+				if($size->count()==0)
+				{
+					$email = Input::get('email');
+					$password = Hash::make(Input::get('password'));
+					$account = new Account;
+					$account->email = $email;
+					$account->password = $password;
+					$account->save();
+					Emailer::signUpConfirmation($email);
+					echo "Signup successful, please check your email for confirmation or login using the login bar";
+					// return Redirect::to('/');
+				}
+				else 
+				{
+					echo "email already registered";
+				}
 			}
-			else echo "email already registered";
+			else
+			{
+				echo "emails or passwords do not match";
+			}
+			
 		}
 		else 
 		{
@@ -268,13 +280,17 @@ class Account_Controller extends Base_Controller {
 			}
 			else 
 			{
+				$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;">invalid username or password</div>';
+				Session::put('alert', $alert);
 				echo "invalid username or password";
 			}
 		}
 		else
 		{
 			// SHOW LOGIN SCREEN
-			echo "LOGIN SCREEN";
+			$alert = '<div class="alert alert-error" style="margin-top: 45px; margin-bottom: -45px;">Email or Password not present</div>';
+			Session::put('alert', $alert);
+			echo "Email or Password not present";
 		}
 	}
 	public function action_logout()
