@@ -10,7 +10,7 @@
 <div class="container-fluid container-fluid-1">
   <div class="container-fluid" id="bodypages">
     <form action="/statistics/reply" method="post">
-      <div class="span8 well">
+      <div class="span8 well input-prepend input-append">
         <fieldset>
           <label style="cursor:default">Did the listing lead to a successful transaction?</label>
           <label class="radio">
@@ -22,9 +22,10 @@
             No
           </label><br>
           <label style="cursor:default">What type of material was exchanged?</label>
-          <input class="textinput" type="text" name="material_type"><br>
+          <input class="textinput" type="text" name="material_type"><br><br>
           <label style="cursor:default">Did you get any money out of the transaction? (Enter 0 if no money was exchanged)</label>
-          <input class="textinput" type="text" name="monetary_value"><br>
+          <span class="add-on">$</span>
+          <input class="textinput" min="0" type="number" name="monetary_value"><br><br>
           <button class="btn btn-success btn-large pull-left" type="submit">Submit</button>
         </fieldset>
       </div>
