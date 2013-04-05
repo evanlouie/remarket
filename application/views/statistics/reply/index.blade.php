@@ -3,7 +3,7 @@
 
 @section('header')
   @include('partials.header')
-  {{ HTML::style('about.css')}}
+  {{ HTML::style('css/about.css')}}
 @endsection
 
 @section('loginbar')

@@ -1,11 +1,23 @@
- <div class="container-fluid container-fluid-1" style="margin-top:70px">
+<div class="container-fluid" id="banner">
   <div class="container">
     <div class="row-fluid">
       <span class="span12">
-        <h1 class="heading">Listings right now: {{$listings_count}}</h1>
-        <h1 class="heading">Money so far: ${{$money}}</h1>
-        <h1 class="heading">Successes so far: {{$successes}}</h1>
+        <h1 class="heading" style="margin-left:97px;">{{$title}}</h1>
       </span>
     </div>
   </div>
+</div>
+
+<div class="container-fluid container-fluid-1">
+	<div class="container-fluid" id="bodypages">
+		<div class="row-fluid">
+		  <span class="span12">
+		  	<div class="span12 well">
+		        <h2 class="">Active listings right now: {{$listings_count}}</h2>
+		        <h2 class="">Money exchanged so far: ${{$money}}</h2>
+		        <h2 class="">Successful exchanges so far: {{$successes}}</h2>
+		    </div>
+		  </span>
+		</div>
+	</div>
 </div>
