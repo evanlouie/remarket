@@ -87,7 +87,7 @@ class Account_Controller extends Base_Controller {
 		}
 		else 
 		{
-			die('inputs incorect');
+			die('Error: Invalid input.');
 			return false;
 		}
 	}
