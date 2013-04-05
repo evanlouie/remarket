@@ -7,6 +7,11 @@
 	<input class="textinput span12" type="password" name="password2" placeholder="Enter password again"><br>
 	</div>
 	<div class='row'>
-	<button id='button-signup span12' class="btn btn-primary" style='width:100%; margin: 5px 0 0 0;'>Sign up</button>
+	<button id='button-signup'  class="btn btn-warning span12" style='width:100%; margin: 5px 0 0 0;'>Sign up</button>
 </div>
 </form>
+<script>
+	$(document).on('click', '#button-signup', function() {
+		alert("Signup successful, please check you email your email for confirmation or log in using the login bar");
+	}) 
+</script>

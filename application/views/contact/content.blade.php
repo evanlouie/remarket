@@ -1,4 +1,4 @@
- <div class="container-fluid container-fluid-1" style="margin-top:70px">
+ <div class="container-fluid1">
   <div class="container">
     <div class="row-fluid">
       <span class="span12">
@@ -7,8 +7,11 @@
     </div>
   </div>
 </div>
+
+
+
 <div class="row-fluid" style="margin-top:40px">
-  <span class="well span6 offset1">
+  <span class="well span12">
     <form action="/contact/" method="post">
       <fieldset>
         <input class="textinput" type="email" placeholder="Your email" name="email"><br>

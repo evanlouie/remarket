@@ -8,7 +8,7 @@ class Emailer {
 	public static function signUpConfirmation($email) {
 		$subject = 'REMARKET: Welcome to REMARKET!';
 		$message = "Welcome to the world of reusable building materials. \n\n" .
-					"Go to market319.tk/account to view and add your listings.\n".
+					"Go to market319.tk/ and login to view and add your listings.\n".
 					"Go to market319.tk/listing to view all listings.".
 					"\n\n Thanks for joining, \n The REMARKET team";
 		$header="from: REMARKET <no-reply@market.tk>";

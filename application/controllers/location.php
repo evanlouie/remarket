@@ -81,9 +81,11 @@ class Location_Controller extends Base_Controller {
 			else {
 				if ($location->account_id == $account->id)
 				{
+					$locations = Location::all();
 					$view = View::make('location.edit.index')
 					->with('title', 'Edit Location')
-					->with('location', $location);
+					->with('location', $location)
+					->with('locations', $locations);
 					return $view;
 				}
 				else

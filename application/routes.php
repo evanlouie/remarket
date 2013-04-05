@@ -50,9 +50,6 @@ Route::get('image/(:num)', 'image@id');
 Route::get('location/(:num)', 'location@id');
 Route::get('survey', 'statistics@reply');
 // Route::get('wishlist/(:num)' , 'wishlist@id');
-Route::get('/upload', function() {
-	return View::make('upload');
-});
 
 /*
 |--------------------------------------------------------------------------

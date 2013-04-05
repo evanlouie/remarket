@@ -23,6 +23,11 @@ class About_Controller extends Base_Controller {
 		->with('page', $page);
 		return $view;
 	}
+	
+	public function action_phpinfo()
+	{
+	        phpinfo();
+	}
 
 	public function action_edit($id)
 	{

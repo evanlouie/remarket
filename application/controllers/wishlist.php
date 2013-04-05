@@ -110,5 +110,75 @@ class Wishlist_Controller extends Base_Controller {
 		}
 	}
 
+	public function action_sendEmails() 
+	{
+		$accounts = Account::all();
+		foreach($accounts as $account)
+		{
+			$matches = array();
+			$tags = $account->wishlistitems()->get();
+			$listings = array();
+			$tempListings = array();
+			foreach($tags as $tag)
+			{
+				$tagListings;
+				$strings = explode(' ', $tag->item);
+				if (sizeof($strings) == 1) 
+				{
+					$tagListings = Listing::where('title', 'LIKE', "%$tag->item%")
+					->or_where("description", 'LIKE', "%$tag->item%")
+					->get();
+				}
+				else
+				{
+
+					$string = array_pop($strings);
+					$query = "	SELECT *
+								FROM listings
+								WHERE
+									(title LIKE '%$string%'
+									OR description LIKE '%$string%')";
+					while(!empty($strings))
+					{
+						$string = array_pop($strings);
+						$query .= " AND (title LIKE '%$string%'
+									OR description LIKE '%$string%')";
+					}
+					$tagListings = DB::query($query);
+
+				}
+				foreach($strings as $string) {
+
+				}
+				foreach($tagListings as $listing) 
+				{
+					$listing->location = Location::find($listing->location_id);
+					$listing->category = Categorie::find($listing->category_id);
+				}
+				array_push($tempListings, $tagListings);	
+			}
+			foreach($tempListings as $key=>$tagListings)
+			{
+	        	foreach($tagListings as $listing)
+	        	{
+	        		$listings[$listing->id] = $listing;
+	        	}
+	        }
+	        var_dump(sizeof($listings));
+	        if (sizeof($listings)>0)
+	        {
+	        	$email = $account->email;
+	        	$subject = 'REMARKET: Matches found on your wishlist!';
+				$message = "There have recently been matches found which match the tags in your wishlist. \n\n" .
+							"Go to market319.tk/ and login to view your wishlist.\n".
+							"\n\n Happy buying, \n The REMARKET team";
+				$header="from: REMARKET <no-reply@market.tk>";
+				$sent=mail($email,$subject,$message,$header);
+
+	        }
+		}
+		
+	}
+
 
 }

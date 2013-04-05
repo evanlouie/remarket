@@ -11,7 +11,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     {{ render( 'account.partials.sidebar' ) }}
-    <span class="span9">
+    <span class="span9 well">
       <form method="post">
         <fieldset>
           <legend>Change Email</legend>
@@ -38,7 +38,7 @@
         </fieldset>
       </form>
     </span>
-    <span class="span9 pull-right">
+    <span class="well span9 pull-right">
       <form method="post">
         <fieldset>
           <legend>Change Email Settings</legend>
@@ -80,7 +80,7 @@
       </form>
     </span>
 
-  <span class="span9 pull-right">
+  <span class="span9 well pull-right">
      <legend>Delete Account</legend>
      <label class = "account-form-label">All associated listings and account information will be deleted.</label>
       <a id="warning" class="btn btn-danger pull-right">Delete Account</a>

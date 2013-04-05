@@ -93,7 +93,7 @@
       </div>
     </span>
     <span class="span9">
-      <table id="tabletosort"  class="table table-hover table-stiped">
+      <table class="table table-hover table-stiped">
         <thead>
           <tr>
             <th class="cke_focus cke_focus-1">Title</th>

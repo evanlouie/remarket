@@ -8,42 +8,42 @@
     </div>
   </div>
 </div>
-<div class="container-fluid container-fluid-2">
+<div class="container-fluid container-fluid-2 well">
   <div class="row-fluid">
     <form action="/listing/create" method='post'>
       <div class="span6">
         <h4 class="heading">Title</h4>
         <input class="span12" type="text" name="title" title="Max 50 characters" maxlength='50' placeholder="Title">
       </div>
-      <div class="input-prepend input-append span2">
+      <div class="input-prepend input-append span6">
         <h4 class="heading heading-5">Price</h4>
         <span class="add-on">$</span>
-        <input class="span12" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
+        <input class="span11" type="number" step='any' min='0' value="0" name="price" placeholder="Price">
       </div>
 </div>
    <div class="row-fluid">
-      <h4 class="heading heading-3 heading-4">Listing Availability</h4>
-      <input class="textinput span4" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_available" name="date_available" placeholder="Date available from">
-      <input class="textinput span4" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
+   		<div class='span6'>
+        <h4 class="heading heading-5">Available:</h4>
+      <input class="textinput span12" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_available" name="date_available" placeholder="Date available from">
+        </div>
+      	<div class='span6'>
+         <h4 class="heading heading-5">Unavailable:</h4>
+      <input class="textinput span12" style='cursor:pointer; background:#fff' readonly="readonly" type="text" id="date_unavailable" name="date_unavailable" placeholder="Date listing expires">
       
-      <h4 class="heading heading-4">Category</h4>
-      <select class="pull-left pull-left-1 span2" name="category_id">
-        @foreach ($categories as $c)
-        <option value="{{$c->id}}">{{$c->title}}</option>
-        @endforeach
-      </select>
+      </div>
+
   </div>
 
     <div class="row-fluid">
       <span class="span6">
         <h4 class="heading heading-5">Location</h4>
-        Select a prexisting location:<br />
-        <select name="location_id" id='location-select' class="span9">
+        <select name="location_id" id='location-select' class="span12">
           <option value="0">Select a location</option>
           @foreach ($locations as $l)
           <option value="{{$l->id}}">{{ $l->address }}, {{ $l->city }}, {{ $l->postal_code }}</option>
           @endforeach
-        </select><br />
+        </select>
+        <div class='row-fluid'>
         Otherwise, create a location:
         <input type='checkbox' name='createListing' id='createListing' value='true'><br />
         <input class="textinput" type="text" name="address" id='address' placeholder="Address" disabled='true'>
@@ -57,6 +57,7 @@
           <option value="Coquitlam">Coquitlam</option>
           <option value="Delta/Surrey/Langley">Delta/Surrey/Langley</option>
         </select>
+        </div>
         <input class="textinput" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
         <script>
         var postal_code;
@@ -124,11 +125,19 @@
           });
         </script>
       </span>
+      <span class='span6'>
+            <h4 class="heading heading-4">Category</h4>
+      <select class="pull-left pull-left-1 span12" name="category_id">
+        @foreach ($categories as $c)
+        <option value="{{$c->id}}">{{$c->title}}</option>
+        @endforeach
+      </select>
+      </span>
 
     </div>
-    <div>
+
       <div class="row-fluid">
-        <span class="span8">
+        <span class="span12">
           <h4 class="heading">Description</h4>
           <textarea class="span12" placeholder="Enter a brief description of your listing here." name="description"></textarea>
          
@@ -200,6 +209,5 @@
             })
           </script>
       </span>
-    </div>
   </div>
 </div>

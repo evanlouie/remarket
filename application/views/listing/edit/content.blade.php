@@ -8,9 +8,9 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid container-fluid-2">
+    <div class="container-fluid container-fluid-2 well">
     <div class="row-fluid">
-                <a class="btn btn-info" id="updateImages" href='/listing/addimages/{{$listing->id}}'>Add/Remove Images</a>
+               
 
       <form action="/listing/edit/{{ $listing->id }}" method='post'>
 
@@ -39,36 +39,29 @@
               <input class="span12" style='cursor:pointer; background:#fff' type="text" name="date_unavailable" readonly="readonly" id="date_unavailable" value="{{substr($listing->date_unavailable,0,-9)}}">
             </div>  
           </div>
-          <div class='row-fluid'>
-            <div class='span6'>
-              <h4 class="heading heading-5">Category</h4>
-              <select class="pull-left pull-left-1 span12" name="category_id">
-              @foreach ($categories as $c)
-              <option value="{{$c->id}}">{{$c->title}}</option>
-              @endforeach
-              </select>
-            </div>
-          </div>
+
 
           <div class="row-fluid">
-            <div class='span12'>
+            <div class='span6'>
               <h4 class="heading heading-5">Location</h4>
-              Select a prexisting location:<br />
-              <select class='span6' name="location_id" id='location-select'>
-                <option value="{{$listing->location_id}}">test</option>
+              <select class='span12' name="location_id" id='location-select'>
                 @foreach ($locations as $l)
+                @if($l->id == $listing->location_id)
+                <option value="{{$l->id}}" selected="selected">{{ $l->address }}, {{ $l->city }}</option>
+                @else
                 <option value="{{$l->id}}">{{ $l->address }}, {{ $l->city }}</option>
+                @endif
                 @endforeach
               </select>
 <div class="row-fluid">
-            <div class='span6'>
+            <div class='span12'>
         <label>
           Otherwise, select to create a new location
           <input type='checkbox' name='createListing' id='createListing' value='true'>
         </label>
         <input class="textinput span12" type="text" name="address" id='address' placeholder="Address" disabled='true'>
         <!-- <input class="textinput span8" type="text" name="city" id='city' placeholder="City" disabled='true'> -->
-        <select name="city" id='city' placeholder="City" disabled='true'>
+        <select name="city" id='city' placeholder="City" class='span6' disabled='true'>
           <option value="Vancouver">Vancouver</option>
           <option value="West Vancouver">West Vancouver</option>
           <option value="North Vancouver">North Vancouver</option>
@@ -77,10 +70,25 @@
           <option value="Coquitlam">Coquitlam</option>
           <option value="Delta/Surrey/Langley">Delta/Surrey/Langley</option>
         </select>
-        <input class="textinput span4" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
+        <input class="textinput span6" type="text" name="postal_code" id='postal_code' placeholder="Postal Code" disabled='true'>
         </div>
       </div>
     </div>
+    
+    
+    
+    
+    <div class='span6'>
+              <h4 class="heading heading-5">Category</h4>
+              <select class="pull-left pull-left-1 span12" name="category_id">
+              @foreach ($categories as $c)
+              <option value="{{$c->id}}">{{$c->title}}</option>
+              @endforeach
+              </select>
+            </div>
+    
+    
+    
         <script>
         var postal_code;
           $(document).on('change', '#postal_code', function() {
@@ -154,6 +162,7 @@
     </span>
   </div>
     <div class="row-fluid">
+     <a class="btn btn-info pull-right" id="updateImages" href='/listing/addimages/{{$listing->id}}'>Add/Remove Images</a>
         <h4 class="heading">Description</h4>
         <textarea class="span12" rows='5'placeholder="Enter a brief description of your listing here. A More detailed description will allow more people to find you listing." title="Be descriptive" name="description">{{$listing->description}}</textarea>
           <a class="btn btn-danger pull-left" href="/account/">Cancel Update</a>

@@ -8,23 +8,20 @@
     </div>
   </div>
 </div>
-<div class="container-fluid container-fluid-2">
+<div class="container-fluid container-fluid-2 well">
   <div class="row-fluid">
   <form id='uploadform' action="/image/upload/{{$listing->id}}" method="post" enctype="multipart/form-data">
-      <input id="fileupload" type="file" name="file" multiple>
+      <input id="fileupload" type="file" name="file" class="btn btn-mini btn-info" multiple>
               <a class='btn btn-success pull-right' href='/account'>Done</a>
 
   </form>
          <div id='imagesHolder'>
 
           <ul class='thumbnails' id='images' class='span12'>
-            @if(sizeof($images) ==0)
-            <span><strong>No Images currently attached to the listing</strong></span>
-            @endif
           @foreach($images as $image)
           <li class='span3'>
-            <a class='thumbnail'href="/{{substr($image, 6)}}">
-              <img src="{{substr($image, 6)}}"/>
+            <a class='thumbnail'href="/{{substr($image, 5)}}">
+              <img src="/{{substr($image, 5)}}"/>
             </a>
             <button file="{{$image}}" class='deleteImage pull-right btn-warning btn-mini'>Delete</button>
           </li>

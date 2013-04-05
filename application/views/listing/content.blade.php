@@ -1,4 +1,4 @@
-<div class="container-fluid pull-center">
+<div class="container-fluid pull-center well">
   <div class="row-fluid">
     <span class="span6">
       <h1 class="heading">{{ $listing->title }}</h1>
@@ -24,13 +24,14 @@
       @endif
       <a class="btn btn-warning pull-right" href="/listing/flag/{{$listing->id}}">Flag This Post <i class="icon-flag icon-black"></i></a>
 
+
       <div class = "image-collection">
         <ul class="thumbnails">
           @foreach ($images as $image)
           <li class="span5">
             <div class="thumbnail">
-               <a class='thumbnail'href="{{substr($image, 6)}}">
-                <img src="{{substr($image, 6)}}"/>
+               <a class='thumbnail'href="/{{substr($image, 5)}}">
+                <img src="/{{substr($image, 5)}}"/>
               </a>
             </div>
           </li>

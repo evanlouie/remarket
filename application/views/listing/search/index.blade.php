@@ -4,6 +4,7 @@
 @section('header')
   @include('partials.header')
   {{ HTML::style('css/listingSearch.css')}}
+ 
 @endsection
 
 @section('loginbar')

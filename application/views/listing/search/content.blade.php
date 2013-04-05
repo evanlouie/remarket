@@ -11,7 +11,7 @@
 <div class="container-fluid containuer-fluid-2">
   <div>
     <div class="row-fluid">
-      <span class="span12">
+      <span class="span12 well">
         <form class="pull-center" action="/listing" method='GET'>
           <h1 class="heading">Search</h1>
           <input class="textinput span8 textinput-1" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
@@ -31,7 +31,7 @@
     <span></span>
   </div>
   <div class="row-fluid">
-    <span class="span3">
+    <span class="span3 well">
       <div>
         <table class="table">
           <thead>
@@ -60,7 +60,7 @@
         </table>
       </div>
     </span>
-    <span class="span9">
+    <span class="span9 well">
       <div id="tabs">
         <ul>
           <li><a href="#tabs-1">Table View</a></li>
@@ -93,6 +93,7 @@
               @endif
             </tbody>
           </table>
+          @if(sizeof($listings)>0)
           <div id="pager" style='position: relative;' class="pager">
             <form>
               <img class="first icon-fast-backward"/>
@@ -108,7 +109,7 @@
               </select>
             </form>
           </div>
-
+          @endif
         </div>
         <div id="tabs-2" class="span12" style="height:500px">
           <div id="map_canvas" style="width:100%;height:100%"></div>

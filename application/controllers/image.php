@@ -75,11 +75,11 @@ class Image_Controller extends Base_Controller {
 			    array(200 , 200 , 'crop', 'public/images/thumbs/200/', 90 ), 
 			    array(300 , 300 , 'crop', 'public/images/thumbs/300/', 90 ), 
 			);
-			if (!is_dir("public/img/listingImages/$id")) {
-	    		mkdir("public/img/listingImages/$id");
+			if (!is_dir("html/img/$id")) {
+	    		mkdir("html/img/$id");
 			}
 			
-		    $success = Multup::open('file', 'image|max:30000|mimes:jpg,gif,png', "public/img/$id/")
+		    $success = Multup::open('file', 'image|max:30000|mimes:jpg,gif,png', "html/img/$id/")
 	        ->filename_callback(function( $filename ){ 
 	                /* prepend lolcat to our image */
 	                // return 'lolcat_'.basename($filename); 

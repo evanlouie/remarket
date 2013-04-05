@@ -26,7 +26,7 @@
           @endif
         </div>
       </span> 
-      <span class="span9" id="page-body">
+      <span class="span9 well" id="page-body">
         {{$page->body}}
       </span>
     </div>

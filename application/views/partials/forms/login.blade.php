@@ -6,8 +6,7 @@
 <div class='pull-right' style="margin-right: 10px;">
 	<form class="navbar-form pull-left" action="/listing" method="GET">
 		<input class="textinput span5" type="text" name="q" placeholder="eg. Wood, Windows, Plumbing, etc...">
-		<button type="submit" class="btn btn-primary">Search</button>
-		<a href="/listing/" class="btn btn-success" style="margin-right:4px">Browse Listings</a>
+		<button type="submit" style='margin-right:5px;' class="btn btn-primary">Start Browsing!</button>
 	</form>
 	<div class="btn-group">
   <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
@@ -54,4 +53,5 @@ function login() {
 		login();
 		return false;
 	});
-</script>
+
+	</script>
