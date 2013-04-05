@@ -76,12 +76,17 @@ class Account_Controller extends Base_Controller {
 				}
 				else 
 				{
-					echo "email already registered";
+					echo "That email is already registered.";
 				}
 			}
 			else
 			{
-				echo "emails or passwords do not match";
+				if(Input::get('email')!=Input::get('email2')) {
+					echo "Emails do not match.";
+				}
+				if(Input::get('password')!=Input::get('password2')) {
+					echo "Passwords do not match.";
+				}
 			}
 			
 		}

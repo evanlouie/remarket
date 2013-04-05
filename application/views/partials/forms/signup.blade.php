@@ -30,7 +30,12 @@
 		}
 		else
 		{
-			alert('Emails or Passwords do not match');
+			if(signemail1!=signemail2) {
+				alert('Emails do not match.');
+			}
+			if(signpass1!=signpass2) {
+				alert('Passwords do not match.');
+			}
 		}
 		
 
