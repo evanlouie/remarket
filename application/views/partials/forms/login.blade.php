@@ -35,23 +35,41 @@
 	<input class="textinput" type="email" placeholder="Email" name="email" id='email'>
 	<input class="textinput" type="password" placeholder="Password" name="password" id='password'>
 	<button class="btn btn-primary" id='loginButton'>Login</button>
-	<a href="#" class="btn btn-link" style="text-shadow:none">Forgot Password?</a>
+	<a href="#" class="btn btn-link" id='lostPassword' style="text-shadow:none">Forgot Password?</a>
 </form>
 @endif
 
 <script>
-function login() {
-	e = $('#email').val();
-	p = $('#password').val();
-		// alert(e);/
-		path = window.location.pathname;
-		$.post("/account/login/", {email: e, password: p}).done(function() {
-			window.location.reload();
-		});
+	function login() {
+		e = $('#email').val();
+		p = $('#password').val();
+			// alert(e);/
+			path = window.location.pathname;
+			$.post("/account/login/", {email: e, password: p}).done(function() {
+				window.location.reload();
+			});	
 	}
 	$(document).on('click','#loginButton', function() {
 		login();
 		return false;
 	});
 
-	</script>
+	function lostPassword()
+	{
+		var x;
+
+		var useremail=prompt("Please enter your Email:","Your Email");
+
+		if (email!=null)
+		{
+			$.post('/account/lostPassword/', {email : useremail}). done(function(data)
+			{
+				alert(data);
+			})
+		}
+	}
+	$(document).on('click', '#lostPassword', function(e) {
+		e.preventDefault();
+		lostPassword();
+	})
+</script>

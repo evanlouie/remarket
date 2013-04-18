@@ -108,7 +108,7 @@
               $('#postal_code').prop('disabled', false);
             }
           });
-          var start, startyear, startmonth, startday, end, endyear, endmonth, endday;
+          var start, startyear, startmonth, startday, end, endyear, endmonth, endday, dateA, dateU;
         $(document).on('change', '#date_available', function() {
             start = $('#date_available').val();
             // end = $('date_unavailable').val();
@@ -150,7 +150,7 @@
               // buttonImage: "images/calendar.gif",
               // buttonImageOnly: true,
               minDate: '0',
-              maxDate: '+30D',
+              maxDate: '+60D',
               inline: true
           });
         </script>
@@ -213,7 +213,17 @@
                     message += "Please select a valid location\n";
                   }
                 })
-              if(startday>endday || startmonth>endmonth || startyear>endyear)
+                start = $('#date_available').val();
+              startyear = start.substring(0,4);
+              startmonth = start.substring(5,7);
+              startday= start.substring(8,10);
+                end = $('#date_unavailable').val();
+              endyear= end.substring(0,4);
+              endmonth = end.substring(5,7);
+              endday = end.substring(8,10);
+              da = new Date(startyear, startmonth, startday,0,0,0,0);
+              de = new Date(endyear, endmonth, endday, 0,0,0,0);
+              if(da>de)
               {
                 message += "Please select an available date which occures before the expiry date\n";
               }

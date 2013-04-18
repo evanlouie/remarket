@@ -26,9 +26,9 @@ class Location_Controller extends Base_Controller {
 				if(Input::has('address') && Input::has('city') && Input::has('postal_code'))
 				{
 					$location = new Location;
-					$location->address = Input::get('address');
-					$location->city = Input::get('city');
-					$location->postal_code = Input::get('postal_code');
+					$location->address = strip_tags(Input::get('address'));
+					$location->city = strip_tags(Input::get('city'));
+					$location->postal_code = strip_tags(Input::get('postal_code'));
 					if ($location->save())
 					{
 						return true;
@@ -63,13 +63,13 @@ class Location_Controller extends Base_Controller {
 			{
 				if( $account->id == $location->account_id ) {
 					(Input::has('address') ?
-						$location->address = Input::get('address') :
+						$location->address = strip_tags(Input::get('address')) :
 						$location->address = '');
 					(Input::has('city') ? 
-						$location->city = Input::get('city') :
+						$location->city = strip_tags(Input::get('city')) :
 						$location->city = '');
 					(Input::has('postal_code') ? 
-						$location->postal_code=Input::get('postal_code') :
+						$location->postal_code= strip_tags(Input::get('postal_code')) :
 						$location->postal_code='');
 					$location->save();
 					return Redirect::to("/account/myLocations");

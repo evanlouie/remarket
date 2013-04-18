@@ -92,8 +92,7 @@ class Account_Controller extends Base_Controller {
 		}
 		else 
 		{
-			die('Error: Invalid input.');
-			return false;
+			echo 'Error: Invalid input.';
 		}
 	}
 
@@ -446,6 +445,41 @@ class Account_Controller extends Base_Controller {
 				->with('locations', $locations);
 				return $view;
 			}
+		}
+	}
+
+	public function action_lostPassword()
+	{
+
+		if (Input::has('email'))
+		{
+
+			$email = Input::get('email');
+			if (Account::where('email', '=', $email)->count()>0)
+			{
+				$account = Account::where('email', '=', $email)->first();
+				$newPassword = rand();
+				$account->password = Hash::make($newPassword);
+				$account->save();
+				$email = $account->email;
+				$subject = 'REMARKET: Lost Password.';
+				$message = "You recently submitted a lost/forgotten password request:\n\n 
+							Here is your new password: $newPassword\n\n
+							Thanks for your considered patronage,\n 
+							The REMARKET Team";
+				$header="from: REMARKET <no-reply@market.tk>";
+				$sent=mail($email,$subject,$message,$header);
+				echo "Sent! Please check your email for you your new password.";
+			}
+			else
+			{
+				echo "We dont seem to have your email address on record. Please register a new account or if you believe this to be an error, feel free to contact the admin";
+			}
+			
+		}
+		else 
+		{
+			echo "Please provide your email address";
 		}
 	}
 }

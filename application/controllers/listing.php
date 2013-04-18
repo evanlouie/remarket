@@ -87,10 +87,6 @@ class Listing_Controller extends Base_Controller {
 		{
 			$imageArray = array();
 
-			$images = $listing->images()->get();
-			foreach($images as $image) {
-				array_push($imageArray, $image);
-			}
 			$listing->images = $imageArray;
 			$loc = $listing->location()->first();
 			$account = Account::find($loc->account_id);
@@ -169,9 +165,9 @@ class Listing_Controller extends Base_Controller {
 					// $view = View::make('')
 				}
 				$listing = new Listing;
-				$listing->title = Input::get('title');
+				$listing->title = strip_tags(Input::get('title'));
 				$listing->description = (Input::has('description')?
-											Input::get('description'):
+											strip_tags(Input::get('description')):
 											'');	
 				$listing->category_id = Input::get('category_id');
 				$listing->price = Input::get('price');
@@ -304,21 +300,21 @@ class Listing_Controller extends Base_Controller {
 					{
 						$location = new Location;
 						(Input::has('address') ?
-								$location->address = Input::get('address') :
+							$location->address = strip_tags(Input::get('address')) :
 							$location->address = '');
 						(Input::has('city') ? 
 							$location->city = Input::get('city') :
 							$location->city = '');
 						(Input::has('postal_code') ? 
-							$location->postal_code=Input::get('postal_code') :
+							$location->postal_code= strip_tags(Input::get('postal_code')) :
 							$location->postal_code='');
 						$location->account_id = $account->id;
 						$location->save();
 						$location = Location::where_address_and_city_and_postal_code(Input::get('address'), Input::get('city'), Input::get('postal_code'))->first();
 					}
-					$listing->title = Input::get('title');
+					$listing->title = strip_tags(Input::get('title'));
 					$listing->description = (Input::has('description')?
-												Input::get('description'):
+												strip_tags(Input::get('description')):
 												'');	
 					$listing->category_id = Input::get('category_id');
 					$listing->price = Input::get('price');
@@ -400,10 +396,6 @@ class Listing_Controller extends Base_Controller {
 				// Set up view
 				$listing = Listing::find($id);
 				$imageArray = array();
-				$images = $listing->images()->get();
-				foreach($images as $image) {
-					array_push($imageArray, $image);
-				}
 				$listing->images = $imageArray;
 				$loc = $listing->location()->first();
 				$account = Account::find($loc->account_id);
@@ -429,10 +421,6 @@ class Listing_Controller extends Base_Controller {
 		$listing = Listing::find($id);
 		$imageArray = array();
 
-		$images = $listing->images()->get();
-		foreach($images as $image) {
-			array_push($imageArray, $image);
-		}
 		$listing->images = $imageArray;
 		$loc = $listing->location()->first();
 		$account = Account::find($loc->account_id);

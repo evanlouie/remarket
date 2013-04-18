@@ -22,12 +22,12 @@
           </form>
       </span>
       </div>
-  <div class="row-fluid" style=" position: absolute; top: 455px;left: 0;
-">
+  <div class="row-fluid" style=" position: absolute; top: 455px;left: 0;">
     <span class="span9">
       <div class="hero-unit">
-        <p>REMARKET is a part of Vancouver’s “Greenest City 2020” initiative. It functions as a communication hub through which providers and consumers of recyclable de-construction materials can connect and exchange goods. If you’d like to learn more about our site, or the movement behind it, please click “Learn More.”
-</p>
+        <p>
+          REMARKET is a part of Vancouver’s “Greenest City 2020” initiative. It functions as a communication hub through which providers and consumers of recyclable de-construction materials can connect and exchange goods. If you’d like to learn more about our site, or the movement behind it, please click “Learn More.”
+        </p>
         <div class="btns">
           <a href="/about/" class="btn btn-primary btn-large">Learn More</a>
           <a href="/listing/" class="btn btn-success btn-large">Browse Listings</a>

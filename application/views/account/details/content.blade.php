@@ -45,6 +45,28 @@
             <div class="well">
               <label class="checkbox">
                 <?php $checked = '';
+                if ($account->expirationemail) {
+                  $checked="checked";
+                }
+                echo "<input type='checkbox' value='1' name='expirationEmail' $checked >"
+                ?>
+                <span>Notify me if my listing is about to expire.</span>
+              </label>
+            </div>
+            <div class="well">
+              <label class="checkbox">
+                <?php $checked = '';
+                if ($account->flagemail) {
+                  $checked="checked";
+                }
+                echo "<input type='checkbox' value='1' name='flagEmail' $checked >"
+                ?>
+                <span class="cke_focus">Notify me if my listings become flagged.</span>
+              </label>
+            </div>
+            <div class="well">
+              <label class="checkbox">
+                <?php $checked = '';
                 if ($account->wishlistemail) {
                   $checked="checked";
                 }

@@ -25,7 +25,11 @@
 				password : signpass1, 
 				password2 : signpass2
 			}).done(function(data) {
-				alert(data);
+				r = confirm(data)
+				if (r==true)
+				{
+					window.location="/";
+				}
 			})
 		}
 		else
@@ -37,7 +41,6 @@
 				alert('Passwords do not match.');
 			}
 		}
-		
 
 	}) 
 </script>
